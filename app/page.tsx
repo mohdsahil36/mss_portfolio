@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <div>
       <main>
-        <Hero/>
-        {/* <Work/> */}
+        <Hero />
+        <Work />
       </main>
     </div>
   );
