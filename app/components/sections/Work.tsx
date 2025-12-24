@@ -1,39 +1,79 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 import Profile from "@/public/Profile.jpg";
 import { workExperience } from "@/app/data/workExperience";
 
 export default function Work() {
-  return (
-    <section className="mt-5 mb-2 rounded-md border border-zinc-800 p-4">
-      <h1 className="mb-4 text-white text-lg font-semibold">Work Experience</h1>
+  const cardVariants = {
+    hidden: (direction: number) => ({
+      opacity: 0,
+      x: direction,
+    }),
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.35, ease: "easeOut" },
+    },
+  };
 
-      <div className="flex flex-col gap-4">
+  const headingVariants = {
+    hidden: { opacity: 0, y: -16 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.35, ease: "easeOut" },
+    },
+  };
+
+  return (
+    <section className="mt-5 border border-zinc-800 rounded-md p-4 sm:p-6">
+      <motion.h1
+        className="mb-6 text-lg font-semibold text-white"
+        variants={headingVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        Work Experience
+      </motion.h1>
+
+      <div className="relative flex flex-col gap-6 sm:gap-8">
+        <div className="absolute left-5 top-0 h-full w-px bg-zinc-800 hidden sm:block" />
+
         {workExperience.map((item, index) => {
           const isCurrent = item.type === "current";
+          const direction = index % 2 === 0 ? -40 : 40;
 
           return (
-            <article
+            <motion.article
               key={index}
-              className="flex gap-4 border border-zinc-800 p-4 rounded-md"
+              custom={direction}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.25 }}
+              className="relative sm:pl-14"
             >
-              {/* Avatar */}
-              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-zinc-700">
-                <Image
-                  src={Profile}
-                  alt={item.imageAlt}
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <span
+                className={`absolute left-[15px] top-1/2 -translate-y-1/2 h-3 w-3 rounded-full hidden sm:block ${
+                  isCurrent ? "bg-emerald-400" : "bg-amber-400"
+                }`}
+              />
 
-              {/* Content */}
-              <div className="flex flex-col gap-2 flex-1">
-                <header className="flex items-center justify-between">
-                  <h2 className="text-white font-semibold">{item.company}</h2>
+              <div className="flex flex-col gap-3 border border-zinc-800 rounded-md p-4">
+                <div className="flex items-start justify-between">
+                  <div className="relative h-10 w-10 rounded-full overflow-hidden border border-zinc-700 sm:h-12 sm:w-12">
+                    <Image
+                      src={Profile}
+                      alt={item.imageAlt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
 
-                  {/* Status indicator (ONLY color changes) */}
                   <span
-                    className={`flex items-center gap-1 rounded-full px-3 py-0.5 text-xs border ${
+                    className={`flex items-center gap-1 rounded-full px-3 py-0.5 text-xs border whitespace-nowrap ${
                       isCurrent
                         ? "bg-emerald-900/30 text-emerald-400 border-emerald-800"
                         : "bg-amber-900/30 text-amber-400 border-amber-800"
@@ -46,16 +86,18 @@ export default function Work() {
                     />
                     {item.status}
                   </span>
-                </header>
+                </div>
 
-                <p className="text-white text-sm">{item.role}</p>
+                <div>
+                  <h2 className="text-white font-semibold">{item.company}</h2>
+                  <p className="text-sm text-neutral-300">{item.role}</p>
+                </div>
 
-                <p className="text-neutral-400 text-sm leading-relaxed">
+                <p className="text-sm leading-relaxed text-neutral-400">
                   {item.description}
                 </p>
 
-                {/* Tech stack (UNCHANGED colors) */}
-                <div className="flex flex-wrap gap-2 pt-2">
+                <div className="flex flex-wrap gap-2 pt-1">
                   {item.techStack.map((tech, idx) => (
                     <span
                       key={idx}
@@ -66,7 +108,7 @@ export default function Work() {
                   ))}
                 </div>
               </div>
-            </article>
+            </motion.article>
           );
         })}
       </div>

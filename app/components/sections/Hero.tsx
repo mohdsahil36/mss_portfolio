@@ -19,15 +19,17 @@ export default function Hero() {
   return (
     <div className="space-y-6">
       <motion.div
-        className="border border-zinc-800 h-auto rounded-md p-4 mb-2 relative overflow-hidden"
-        initial={{ opacity: 0, y: -50 }}
-        whileInView={{ opacity: 1, y: 0, transition: { duration: 0.7 } }}
+        className="relative border border-zinc-800 rounded-md p-4 overflow-hidden"
+        initial={{ opacity: 0, y: -24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
         viewport={{ once: true }}
       >
         <Meteors
-          number={20}
-          className="absolute inset-0 z-0 opacity-50 pointer-events-none"
+          number={16}
+          className="absolute inset-0 z-0 opacity-40 pointer-events-none hidden sm:block"
         />
+
         <div className="relative z-10 flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <span className="text-sm text-white font-extralight">
@@ -36,83 +38,85 @@ export default function Hero() {
             <ActiveStatus />
           </div>
 
-          <div className="flex items-center gap-4 my-1">
-            <div className="relative w-15 h-15 rounded-full overflow-hidden">
+          <div className="flex items-center gap-3">
+            <div className="relative h-12 w-12 rounded-full overflow-hidden sm:h-14 sm:w-14">
               <Image
                 src={Profile}
-                alt="profile-img"
+                alt="profile image"
                 fill
                 className="object-cover"
               />
             </div>
-            <h1 className="text-2xl md:text-3xl font-light tracking-tight text-neutral-50 ms-3">
+
+            <h1 className="text-xl font-light tracking-tight text-neutral-50 sm:text-2xl md:text-3xl">
               Mohd Sahil Siddiqui
             </h1>
           </div>
 
-          <div className="flex items-center text-sm font-extralight text-white gap-2 flex-wrap">
+          <div className="flex flex-wrap items-center gap-2 text-sm font-extralight text-white">
             <span>26, he/him</span>
             <span className="opacity-50">•</span>
-            <span className="inline-flex w-38 justify-center">
-              <FlipWords words={words} className="text-white text-sm m-0" />
-            </span>
-            <span>from India</span>
+            <FlipWords words={words} className="text-white text-sm" />
+            <span className="opacity-50">•</span>
+            <span>India</span>
           </div>
         </div>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-2">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         <motion.div
-          className="h-full"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0, transition: { duration: 0.7 } }}
+          className="h-30 md:h-full"
+          initial={{ opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
           viewport={{ once: true }}
         >
           <LocationGlobe />
         </motion.div>
 
         <motion.div
-          className="border border-zinc-800 p-6 rounded-md text-white font-extralight flex flex-col gap-3 hover:shadow-lg transition-shadow duration-300 h-full"
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0, transition: { duration: 0.7 } }}
+          className="border border-zinc-800 rounded-md p-4 text-white font-extralight flex flex-col gap-3 sm:p-5"
+          initial={{ opacity: 0, x: 24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
           viewport={{ once: true }}
         >
-          <h3 className="text-lg font-semibold">Currently working with:</h3>
+          <h3 className="text-base font-semibold">Currently working with:</h3>
+
           <div className="flex flex-wrap gap-2">
-            <span className="bg-zinc-800 px-2 py-1 rounded text-xs">
-              React + Redux
-            </span>
-            <span className="bg-zinc-800 px-2 py-1 rounded text-xs">
-              Tailwind CSS
-            </span>
-            <span className="bg-zinc-800 px-2 py-1 rounded text-xs">
-              Node JS
-            </span>
-            <span className="bg-zinc-800 px-2 py-1 rounded text-xs">
-              React Native
-            </span>
+            {["React + Redux", "Tailwind CSS", "Node.js", "React Native"].map(
+              (skill) => (
+                <span
+                  key={skill}
+                  className="bg-zinc-800 px-2 py-1 rounded text-xs"
+                >
+                  {skill}
+                </span>
+              )
+            )}
           </div>
-          <span className="text-xs font-extralight text-zinc-400 italic">
+
+          <span className="text-xs text-zinc-400 italic">
             …and a few more skills up my sleeve!
           </span>
         </motion.div>
       </div>
 
       <motion.div
-        className="relative border border-zinc-800 rounded-md p-6 overflow-hidden"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0, transition: { duration: 0.7 } }}
+        className="border border-zinc-800 rounded-md p-4 sm:p-5"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <p className="relative z-10 text-white leading-6 font-light text-sm italic">
+        <p className="text-sm leading-6 font-light italic text-white">
           Hey! I’m a{" "}
           <span className="bg-sky-500/30 px-1 rounded">
             Full Stack Developer
           </span>{" "}
           who loves building cool stuff with React, Next.js, and Node.js. I also
-          tinker with TypeScript, Tailwind CSS, Zustand and more to make apps
-          faster, cleaner, and fun. And that&apos;s just the tip of the
-          iceberg—there&apos;s plenty more tech I play with!
+          tinker with TypeScript, Tailwind CSS, Zustand, and more to make apps
+          faster, cleaner, and fun.
         </p>
       </motion.div>
     </div>
