@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { easeOut, motion } from "framer-motion";
 import Profile from "@/public/Profile.jpg";
 import { workExperience } from "@/app/data/workExperience";
 
@@ -14,17 +14,13 @@ export default function Work() {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.35, ease: "easeOut" },
+      transition: { duration: 0.35, ease: easeOut },
     },
   };
 
   const headingVariants = {
-    hidden: { opacity: 0, y: -16 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.35, ease: "easeOut" },
-    },
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: easeOut } },
   };
 
   return (
