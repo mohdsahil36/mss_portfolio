@@ -23,5 +23,9 @@ export function IndiaTime() {
     return () => clearInterval(interval);
   }, []);
 
-  return <span className="mt-2 text-sm text-zinc-400">{time} IST</span>;
+  return (
+    <span className="mt-2 text-sm text-black dark:text-muted-foreground">
+      {time} IST
+    </span>
+  );
 }

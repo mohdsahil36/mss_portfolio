@@ -47,12 +47,16 @@
 }
 
 .bg-grid {
-  background-color: #09090b;
+  background-color: var(--background);
   background-image: linear-gradient(
-      rgba(255, 255, 255, 0.04) 1px,
+      oklch(from var(--foreground) l c h / 0.05) 1px,
       transparent 1px
     ),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(
+      90deg,
+      oklch(from var(--foreground) l c h / 0.05) 1px,
+      transparent 1px
+    );
   background-size: 3.5rem 3.5rem;
 }
 
@@ -149,5 +153,16 @@
       transform: rotate(215deg) translateX(-500px);
       opacity: 0;
     }
+  }
+}
+
+@layer utilities {
+  .meteor {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(from var(--foreground) l c h / 0.6),
+      transparent
+    );
   }
 }

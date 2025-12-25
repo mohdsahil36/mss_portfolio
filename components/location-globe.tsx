@@ -3,24 +3,36 @@ import { IndiaTime } from "./time";
 
 export function LocationGlobe() {
   return (
-    <div className="flex items-center gap-5 border border-zinc-800 p-6 rounded-md h-full">
+    <div
+      className="
+        flex items-center gap-5
+        border rounded-md p-6 h-full
+        border-zinc-200 dark:border-zinc-800
+        bg-card dark:bg-neutral-950/40
+        backdrop-blur-sm
+      "
+    >
       <div className="relative flex items-center justify-center">
-        {/* Spinning dotted ring */}
         <div
-          className="absolute rounded-full border-2 border-dashed border-zinc-800 animate-spin"
+          className="
+            absolute rounded-full
+            border-2 border-dashed
+            border-zinc-300 dark:border-zinc-800
+            animate-spin
+          "
           style={{
             width: "4.125rem",
             height: "4.125rem",
             animationDuration: "10s",
           }}
         />
-        {/* Globe emoji */}
         <div className="relative text-5xl">🌍</div>
       </div>
 
-      {/* Location + time */}
       <div className="flex flex-col leading-tight ms-3">
-        <span className="text-sm text-white">Bengaluru, Karnataka, IND</span>
+        <span className="text-sm text-zinc-900 dark:text-muted-foreground">
+          Bengaluru, Karnataka, IND
+        </span>
         <IndiaTime />
       </div>
     </div>
