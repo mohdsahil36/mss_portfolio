@@ -35,17 +35,31 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="px-4 pt-4 md:px-0 ">
-            <div className="md:max-w-xl md:mx-auto ">
-              <Navbar />
+          <div className="sticky top-0 z-50">
+            <div
+              className="
+                h-14
+                bg-background/80
+                backdrop-blur-md
+                border-b border-zinc-200 dark:border-zinc-800
+              "
+            >
+              <div className="h-full px-4 md:px-0">
+                <div className="h-full md:max-w-xl md:mx-auto">
+                  <Navbar />
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="px-4 pb-6 md:px-0">
+          <main className="pt-4 px-4 pb-6 md:px-0">
             <div
               className="
-                mt-3 rounded-2xl border border-zinc-50 dark:border-zinc-800 bg-card dark:bg-neutral-950 p-5
                 md:max-w-xl md:mx-auto
+                rounded-2xl
+                border border-zinc-200 dark:border-zinc-800
+                bg-card dark:bg-neutral-950
+                p-5
                 shadow-sm shadow-black/40
                 ring-1 ring-white/5
                 transition-all duration-300 ease-out
@@ -54,7 +68,7 @@ export default function RootLayout({
             >
               {children}
             </div>
-          </div>
+          </main>
         </ThemeProvider>
       </body>
     </html>
