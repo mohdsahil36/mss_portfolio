@@ -166,3 +166,7 @@
     );
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}

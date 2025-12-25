@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ModeToggle } from "./mode-toggle";
 
 const navItems = [
+  // { label: "home", href: "#home" },
   { label: "experience", href: "#work" },
   //   { label: "projects", href: "#projects" },
   { label: "skills", href: "#skills" },

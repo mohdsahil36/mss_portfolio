@@ -7,6 +7,6 @@ export const heroData = {
     label: "Full Stack Developer",
   },
   description:
-    "who loves building cool stuff with React, Next.js, and Node.js. I also tinker with TypeScript, Tailwind CSS, Zustand, and more to make apps faster, cleaner, and fun.",
+    "from India who loves building efficient, scalable, and user-friendly applications. With experience at Merkle and currently at Simplify3X, I work across web, mobile, and backend projects, creating end-to-end solutions that are both intuitive and fun to use.",
   currentSkills: ["React + Redux", "Tailwind CSS", "Node.js", "React Native"],
 };

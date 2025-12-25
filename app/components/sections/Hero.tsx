@@ -16,7 +16,7 @@ const LocationGlobe = dynamic(
 
 export default function Hero() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" id="home">
       <motion.div
         className="relative rounded-md border border-border p-4 overflow-hidden bg-card dark:bg-neutral-950"
         initial={{ opacity: 0, y: -20 }}
@@ -57,10 +57,7 @@ export default function Hero() {
               {heroData.age}, {heroData.pronouns}
             </span>
             <span className="opacity-40">•</span>
-            <FlipWords
-              words={heroData.roles}
-              className="text-sm text-black dark:text-muted-foreground"
-            />
+            <FlipWords words={heroData.roles} className="text-sm" />
           </div>
         </div>
       </motion.div>
@@ -88,7 +85,7 @@ export default function Hero() {
             {heroData.currentSkills.map((skill) => (
               <span
                 key={skill}
-                className="rounded bg-muted px-2 py-1 text-xs text-black dark:text-muted-foreground"
+                className="rounded bg-muted px-2 py-1 text-xs text-muted-foreground"
               >
                 {skill}
               </span>
@@ -108,9 +105,9 @@ export default function Hero() {
         transition={{ duration: 0.35, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <p className="text-sm leading-6 font-light italic text-black dark:text-muted-foreground">
+        <p className="text-sm leading-6 font-light  text-black dark:text-muted-foreground">
           Hey! I&apos;m a{" "}
-          <span className="rounded bg-accent px-1 text-black dark:text-muted-foreground">
+          <span className="rounded px-1 bg-emerald-100 text-black dark:font-light">
             {heroData.highlights.label}
           </span>{" "}
           {heroData.description}
