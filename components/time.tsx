@@ -24,8 +24,6 @@ export function IndiaTime() {
   }, []);
 
   return (
-    <span className="mt-2 text-sm text-black dark:text-muted-foreground">
-      {time} IST
-    </span>
+    <span className="mt-2 text-sm text-black dark:text-white">{time} IST</span>
   );
 }

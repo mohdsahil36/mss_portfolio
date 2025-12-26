@@ -8,6 +8,10 @@ import { FlipWords } from "@/components/ui/flip-words";
 import { ActiveStatus } from "@/components/ui/active-status";
 import { Meteors } from "@/components/ui/meteors";
 import { heroData } from "@/app/data/hero";
+import { Button } from "@/components/ui/button";
+import { LinkPreview } from "@/components/ui/link-preview";
+import { heroSocials } from "@/app/data/hero";
+import { resumeData } from "@/app/data/hero";
 
 const LocationGlobe = dynamic(
   () => import("@/components/location-globe").then((mod) => mod.LocationGlobe),
@@ -31,7 +35,7 @@ export default function Hero() {
 
         <div className="relative z-10 flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-light dark:font-extralight text-black dark:text-muted-foreground">
+            <span className="text-sm font-light dark:font-extralight text-black dark:text-white">
               greetings, I&apos;m
             </span>
             <ActiveStatus />
@@ -47,17 +51,60 @@ export default function Hero() {
               />
             </div>
 
-            <h1 className="text-xl font-light tracking-tight sm:text-2xl md:text-3xl text-black dark:text-muted-foreground">
+            <h1 className="text-xl font-light tracking-tight sm:text-2xl md:text-3xl text-black dark:text-white">
               {heroData.name}
             </h1>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 text-sm font-extralight text-black dark:text-muted-foreground ">
-            <span>
-              {heroData.age}, {heroData.pronouns}
-            </span>
+          <div className="flex flex-wrap items-center gap-2 text-sm font-extralight text-black dark:text-white ">
+            <div className="flex justify-around">
+              <span>
+                {heroData.age}, {heroData.pronouns}
+              </span>
+            </div>
             <span className="opacity-40">•</span>
             <FlipWords words={heroData.roles} className="text-sm" />
+          </div>
+          <div className="mt-2 flex gap-3">
+            <Button
+              asChild
+              className="cursor-pointer bg-black text-white dark:text-black dark:bg-white rounded-md"
+            >
+              <a
+                href={resumeData.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {" "}
+                Resume
+              </a>
+            </Button>
+            <div className="flex gap-3">
+              {heroSocials.map(({ label, href, icon: Icon, preview }) => {
+                const content = <Icon aria-label={label} />;
+
+                return (
+                  <Button
+                    key={label}
+                    asChild
+                    variant="outline"
+                    className="cursor-pointer dark:bg-black"
+                  >
+                    {preview ? (
+                      <LinkPreview url={href}>{content}</LinkPreview>
+                    ) : (
+                      <a
+                        href={href}
+                        aria-label={label}
+                        className="flex items-center justify-center"
+                      >
+                        {content}
+                      </a>
+                    )}
+                  </Button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </motion.div>
@@ -85,14 +132,14 @@ export default function Hero() {
             {heroData.currentSkills.map((skill) => (
               <span
                 key={skill}
-                className="rounded bg-muted px-2 py-1 text-xs text-muted-foreground"
+                className="rounded bg-muted px-2 py-1 text-xs dark:text-white"
               >
                 {skill}
               </span>
             ))}
           </div>
 
-          <span className="text-xs italic text-black dark:text-muted-foreground">
+          <span className="text-xs italic text-black dark:text-white">
             …and a few more skills up my sleeve!
           </span>
         </motion.div>
@@ -105,7 +152,7 @@ export default function Hero() {
         transition={{ duration: 0.35, ease: "easeOut" }}
         viewport={{ once: true }}
       >
-        <p className="text-sm leading-6 font-light  text-black dark:text-muted-foreground">
+        <p className="text-sm leading-6 font-light  text-black dark:text-white">
           Hey! I&apos;m a{" "}
           <span className="rounded px-1 bg-emerald-100 text-black dark:font-light">
             {heroData.highlights.label}

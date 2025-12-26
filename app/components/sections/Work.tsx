@@ -131,7 +131,7 @@ export default function Work() {
                   </p>
                 </div>
 
-                <p className="text-sm leading-relaxed text-zinc-600 dark:text-neutral-400">
+                <p className="text-sm leading-relaxed text-zinc-600 dark:text-white">
                   {item.description}
                 </p>
 

@@ -30,7 +30,7 @@ export function LocationGlobe() {
       </div>
 
       <div className="flex flex-col leading-tight ms-3">
-        <span className="text-sm text-zinc-900 dark:text-muted-foreground">
+        <span className="text-sm text-zinc-900 dark:text-white">
           Bengaluru, Karnataka, IND
         </span>
         <IndiaTime />

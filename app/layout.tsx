@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import Navbar from "./components/Navbar";
+import { FloatingDockDemo } from "./components/floating-dock";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,6 +70,10 @@ export default function RootLayout({
               {children}
             </div>
           </main>
+
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+            <FloatingDockDemo />
+          </div>
         </ThemeProvider>
       </body>
     </html>
