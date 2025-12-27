@@ -45,7 +45,7 @@ export default function RootLayout({
                 border-b border-zinc-200 dark:border-zinc-800
               "
             >
-              <div className="h-full px-4 md:px-0">
+              <div className="h-full px- md:px-0">
                 <div className="h-full md:max-w-xl md:mx-auto">
                   <Navbar />
                 </div>
@@ -65,15 +65,15 @@ export default function RootLayout({
                 ring-1 ring-white/5
                 transition-all duration-300 ease-out
                 hover:shadow-black/60 hover:-translate-y-px
-    "
+              "
             >
               {children}
             </div>
 
-            <div className="h-24" />
+            <div className="h-14 md:h-24" />
           </main>
 
-          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+          <div className="fixed bottom-9 md:bottom-6 left-1/2 -translate-x-1/2 z-50">
             <FloatingDockDemo />
           </div>
         </ThemeProvider>

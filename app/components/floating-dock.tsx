@@ -13,5 +13,5 @@ export function FloatingDockDemo() {
     ...(external && { target: "_blank", rel: "noopener noreferrer" }),
   }));
 
-  return <FloatingDock mobileClassName="translate-y-20" items={links} />;
+  return <FloatingDock items={links} />;
 }

@@ -7,9 +7,6 @@ import {
   SiReact,
   SiRedux,
   SiNextdotjs,
-  SiBootstrap,
-  SiJquery,
-  SiSass,
   SiExpress,
   SiTailwindcss,
   SiGit,
@@ -21,6 +18,7 @@ import {
   SiVercel,
   SiShadcnui,
   SiAmazon,
+  SiPostman,
 } from "react-icons/si";
 import { VscCode } from "react-icons/vsc";
 
@@ -52,9 +50,6 @@ export const skillsData: SkillCategory[] = [
       { name: "Redux", icon: SiRedux, color: "#9B7BFF" },
       { name: "Zustand", icon: SiReact, color: "#7DD3FC" },
       { name: "Next.js", icon: SiNextdotjs, color: "#E5E7EB" },
-      { name: "Bootstrap", icon: SiBootstrap, color: "#A78BFA" },
-      { name: "jQuery", icon: SiJquery, color: "#5DA9E9" },
-      { name: "SCSS", icon: SiSass, color: "#F472B6" },
       { name: "Express.js", icon: SiExpress, color: "#E5E7EB" },
       { name: "Tailwind CSS", icon: SiTailwindcss, color: "#38E8D6" },
       { name: "Micro Frontend", icon: SiReact, color: "#7DD3FC" },
@@ -88,6 +83,7 @@ export const skillsData: SkillCategory[] = [
         color: "#22C55E",
         icon: VscCode,
       },
+      { name: "Postman", color: "#FF9900", icon: SiPostman },
     ],
   },
 

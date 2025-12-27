@@ -36,7 +36,7 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         variants={fadeLeft}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
       >
         <Meteors
           number={16}
