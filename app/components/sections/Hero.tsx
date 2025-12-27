@@ -19,29 +19,48 @@ const LocationGlobe = dynamic(
 );
 
 export default function Hero() {
+  const fadeLeft = {
+    hidden: { opacity: 0, x: -40 },
+    visible: { opacity: 1, x: 0 },
+  };
+  const fadeRight = {
+    hidden: { opacity: 0, x: 40 },
+    visible: { opacity: 1, x: 0 },
+  };
+
   return (
-    <div className="space-y-6" id="home">
+    <div className="space-y-6 scroll-mt-24" id="home">
+      {/* Hero Card */}
       <motion.div
         className="relative rounded-md border border-border p-4 overflow-hidden bg-card dark:bg-neutral-950"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, ease: "easeOut" }}
-        viewport={{ once: true }}
+        initial="hidden"
+        animate="visible"
+        variants={fadeLeft}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <Meteors
           number={16}
           className="absolute inset-0 z-0 opacity-40 pointer-events-none"
         />
-
         <div className="relative z-10 flex flex-col gap-4">
-          <div className="flex items-center justify-between">
+          <motion.div
+            className="flex items-center justify-between"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+          >
             <span className="text-sm font-light dark:font-extralight text-black dark:text-white">
               greetings, I&apos;m
             </span>
             <ActiveStatus />
-          </div>
+          </motion.div>
 
-          <div className="flex items-center gap-3">
+          <motion.div
+            className="flex items-center gap-3"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
             <div className="relative h-12 w-12 overflow-hidden rounded-full sm:h-14 sm:w-14">
               <Image
                 src={Profile}
@@ -50,13 +69,17 @@ export default function Hero() {
                 className="object-cover"
               />
             </div>
-
             <h1 className="text-xl font-light tracking-tight sm:text-2xl md:text-3xl text-black dark:text-white">
               {heroData.name}
             </h1>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-wrap items-center gap-2 text-sm font-extralight text-black dark:text-white ">
+          <motion.div
+            className="flex flex-wrap items-center gap-2 text-sm font-extralight text-black dark:text-white"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
             <div className="flex justify-around">
               <span>
                 {heroData.age}, {heroData.pronouns}
@@ -64,8 +87,14 @@ export default function Hero() {
             </div>
             <span className="opacity-40">•</span>
             <FlipWords words={heroData.roles} className="text-sm" />
-          </div>
-          <div className="mt-2 flex gap-3">
+          </motion.div>
+
+          <motion.div
+            className="mt-2 flex gap-3"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
             <Button
               asChild
               className="cursor-pointer bg-black text-white dark:text-black dark:bg-white rounded-md"
@@ -75,14 +104,12 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {" "}
                 Resume
               </a>
             </Button>
             <div className="flex gap-3">
               {heroSocials.map(({ label, href, icon: Icon, preview }) => {
                 const content = <Icon aria-label={label} />;
-
                 return (
                   <Button
                     key={label}
@@ -105,29 +132,29 @@ export default function Hero() {
                 );
               })}
             </div>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
 
+      {/* Location & Skills */}
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          viewport={{ once: true }}
+          initial="hidden"
+          animate="visible"
+          variants={fadeLeft}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
           <LocationGlobe />
         </motion.div>
 
         <motion.div
           className="rounded-md border border-border bg-card dark:bg-neutral-950 p-4 sm:p-5 flex flex-col gap-3"
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
-          viewport={{ once: true }}
+          initial="hidden"
+          animate="visible"
+          variants={fadeRight}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           <h3 className="text-base font-semibold">Currently working with:</h3>
-
           <div className="flex flex-wrap gap-2">
             {heroData.currentSkills.map((skill) => (
               <span
@@ -138,21 +165,20 @@ export default function Hero() {
               </span>
             ))}
           </div>
-
           <span className="text-xs italic text-black dark:text-white">
             …and a few more skills up my sleeve!
           </span>
         </motion.div>
       </div>
 
+      {/* Description */}
       <motion.div
         className="rounded-md border border-border bg-card dark:bg-neutral-950 p-4 sm:p-5"
         initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, ease: "easeOut" }}
-        viewport={{ once: true }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <p className="text-sm leading-6 font-light  text-black dark:text-white">
+        <p className="text-sm leading-6 font-light text-black dark:text-white">
           Hey! I&apos;m a{" "}
           <span className="rounded px-1 bg-emerald-100 text-black dark:font-light">
             {heroData.highlights.label}

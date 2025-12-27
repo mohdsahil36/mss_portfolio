@@ -53,7 +53,7 @@ export default function RootLayout({
             </div>
           </div>
 
-          <main className="pt-4 px-4 pb-6 md:px-0">
+          <main className="pt-4 px-4 md:px-0">
             <div
               className="
                 md:max-w-xl md:mx-auto
@@ -65,10 +65,12 @@ export default function RootLayout({
                 ring-1 ring-white/5
                 transition-all duration-300 ease-out
                 hover:shadow-black/60 hover:-translate-y-px
-              "
+    "
             >
               {children}
             </div>
+
+            <div className="h-24" />
           </main>
 
           <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">

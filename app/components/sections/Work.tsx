@@ -33,13 +33,13 @@ export default function Work() {
       className="
         mt-5 rounded-md p-4 sm:p-6
         border border-zinc-200 dark:border-zinc-800
-        bg-white dark:bg-neutral-950
+        bg-white dark:bg-neutral-950 scroll-mt-18
       "
     >
       <motion.h1
         className="
           mb-6 text-lg font-semibold
-          text-zinc-900 dark:text-white
+          text-zinc-900 dark:text-white text-center
         "
         variants={headingVariants}
         initial="hidden"
