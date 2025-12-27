@@ -73,7 +73,7 @@ export default function RootLayout({
             <div className="h-14 md:h-24" />
           </main>
 
-          <div className="fixed bottom-9 md:bottom-6 left-1/2 -translate-x-1/2 z-50">
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
             <FloatingDockDemo />
           </div>
         </ThemeProvider>

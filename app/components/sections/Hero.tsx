@@ -89,12 +89,14 @@ export default function Hero() {
             <FlipWords words={heroData.roles} className="text-sm" />
           </motion.div>
 
+          {/* Buttons: Resume + Socials */}
           <motion.div
-            className="mt-2 flex gap-3"
+            className="mt-2 flex flex-col sm:flex-row sm:items-center sm:gap-3 gap-2"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
+            {/* Resume Button */}
             <Button
               asChild
               className="cursor-pointer bg-black text-white dark:text-black dark:bg-white rounded-md"
@@ -107,7 +109,9 @@ export default function Hero() {
                 Resume
               </a>
             </Button>
-            <div className="flex gap-3">
+
+            {/* Social Buttons */}
+            <div className="flex flex-wrap gap-2 mt-2 sm:flex-row md:mt-0  justify-around">
               {heroSocials.map(({ label, href, icon: Icon, preview }) => {
                 const content = <Icon aria-label={label} />;
                 return (
@@ -115,7 +119,7 @@ export default function Hero() {
                     key={label}
                     asChild
                     variant="outline"
-                    className="cursor-pointer dark:bg-black"
+                    className="cursor-pointer dark:bg-black p-1"
                   >
                     {preview ? (
                       <LinkPreview url={href}>{content}</LinkPreview>
