@@ -1,24 +1,37 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import { skillsData } from "@/app/data/skills";
 
-export default function Skills() {
+export default function Skills({
+  sectionIndex = 2,
+}: {
+  sectionIndex?: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const sectionDirection = sectionIndex % 2 === 0 ? -60 : 60;
+
   return (
-    <section
+    <motion.section
+      ref={ref}
       id="skills"
       className="
         mt-5 relative rounded-md p-4 overflow-hidden
-        border border-zinc-200 dark:border-zinc-800
         bg-white dark:bg-neutral-950 scroll-mt-18
       "
+      initial={{ opacity: 0, x: sectionDirection }}
+      animate={
+        isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: sectionDirection }
+      }
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <motion.h1
         className="mb-3 text-lg font-semibold text-zinc-900 dark:text-white text-center"
         initial={{ opacity: 0, y: -10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-        viewport={{ once: true }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+        transition={{ duration: 0.25, ease: "easeOut", delay: 0.2 }}
       >
         Skills
       </motion.h1>
@@ -31,12 +44,14 @@ export default function Skills() {
             <motion.div
               key={category.title}
               initial={{ opacity: 0, x: fromX }}
-              whileInView={{ opacity: 1, x: 0 }}
+              animate={
+                isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: fromX }
+              }
               transition={{
                 duration: 0.35,
                 ease: "easeOut",
+                delay: 0.3 + categoryIndex * 0.1,
               }}
-              viewport={{ once: true, margin: "-80px" }}
             >
               <h2 className="mb-3 text-sm font-medium text-zinc-600 dark:text-zinc-400">
                 {category.title}
@@ -51,13 +66,16 @@ export default function Skills() {
                     <motion.span
                       key={skill.name}
                       initial={{ opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+                      animate={
+                        isInView
+                          ? { opacity: 1, scale: 1 }
+                          : { opacity: 0, scale: 0.95 }
+                      }
                       transition={{
                         duration: 0.15,
                         ease: "easeOut",
-                        delay: skillIndex * 0.02,
+                        delay: 0.4 + categoryIndex * 0.1 + skillIndex * 0.02,
                       }}
-                      viewport={{ once: true }}
                       className={`
                         group flex items-center gap-2 px-2 py-1 rounded text-xs
                         border transition-all duration-200 cursor-pointer
@@ -96,6 +114,6 @@ export default function Skills() {
           );
         })}
       </div>
-    </section>
+    </motion.section>
   );
 }

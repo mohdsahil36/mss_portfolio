@@ -45,7 +45,7 @@ export function SafeMovingLabels({
                 font-semibold
                 uppercase
                 rounded-md
-                px-4 py-1.5 mt-5    
+                px-4 py-2   
                 border
                 border-zinc-300/70 dark:border-zinc-700
                 bg-white/80 dark:bg-zinc-900/80

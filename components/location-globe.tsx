@@ -6,9 +6,8 @@ export function LocationGlobe() {
     <div
       className="
         flex items-center gap-5
-        border rounded-md p-6 h-full
-        border-zinc-200 dark:border-zinc-800
-        bg-card dark:bg-neutral-950/40
+         rounded-md p-6 h-full
+        bg-card dark:bg-neutral-950
         backdrop-blur-sm
       "
     >

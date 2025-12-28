@@ -4,15 +4,20 @@ import Skills from "./components/sections/Skills";
 import Contact from "./components/sections/Contact";
 import Projects from "./components/sections/Projects";
 import { SafeMovingLabels } from "./components/SafeMovingLabels";
+import { SectionSeparator } from "./components/section-separator";
 
 export default function Home() {
   return (
     <div>
       <main>
         <Hero />
-        <Work />
-        <Projects />
-        <Skills />
+        <SectionSeparator />
+        <Work sectionIndex={0} />
+        <SectionSeparator />
+        <Projects sectionIndex={1} />
+        <SectionSeparator />
+        <Skills sectionIndex={2} />
+        <SectionSeparator />
         <SafeMovingLabels
           labels={[
             "Execution",
@@ -24,7 +29,7 @@ export default function Home() {
           ]}
           speed="fast"
         />
-        <Contact />
+        <Contact sectionIndex={3} />
       </main>
     </div>
   );

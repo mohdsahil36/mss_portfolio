@@ -1,11 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { easeOut, motion } from "framer-motion";
+import { easeOut, motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import Profile from "@/public/Profile.jpg";
 import { workExperience } from "@/app/data/workExperience";
 
-export default function Work() {
+export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const sectionDirection = sectionIndex % 2 === 0 ? -60 : 60;
+
   const cardVariants = {
     hidden: (direction: number) => ({
       opacity: 0,
@@ -27,14 +32,26 @@ export default function Work() {
     },
   };
 
+  const sectionVariants = {
+    hidden: { opacity: 0, x: sectionDirection },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.5, ease: easeOut },
+    },
+  };
+
   return (
-    <section
+    <motion.section
+      ref={ref}
       id="work"
       className="
         mt-5 rounded-md p-4 sm:p-6
-        border border-zinc-200 dark:border-zinc-800
         bg-white dark:bg-neutral-950 scroll-mt-18
       "
+      variants={sectionVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
     >
       <motion.h1
         className="
@@ -43,7 +60,8 @@ export default function Work() {
         "
         variants={headingVariants}
         initial="hidden"
-        animate="visible"
+        animate={isInView ? "visible" : "hidden"}
+        transition={{ delay: 0.2 }}
       >
         Work Experience
       </motion.h1>
@@ -61,8 +79,8 @@ export default function Work() {
               custom={direction}
               variants={cardVariants}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.25 }}
+              animate={isInView ? "visible" : "hidden"}
+              transition={{ delay: 0.3 + index * 0.1 }}
               className="relative sm:pl-14"
             >
               <span
@@ -154,6 +172,6 @@ export default function Work() {
           );
         })}
       </div>
-    </section>
+    </motion.section>
   );
 }

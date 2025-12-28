@@ -89,14 +89,12 @@ export default function Hero() {
             <FlipWords words={heroData.roles} className="text-sm" />
           </motion.div>
 
-          {/* Buttons: Resume + Socials */}
           <motion.div
             className="mt-2 flex flex-col sm:flex-row sm:items-center sm:gap-3 gap-2"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            {/* Resume Button */}
             <Button
               asChild
               className="cursor-pointer bg-black text-white dark:text-black dark:bg-white rounded-md"
@@ -110,7 +108,6 @@ export default function Hero() {
               </a>
             </Button>
 
-            {/* Social Buttons */}
             <div className="flex flex-wrap gap-2 mt-2 sm:flex-row md:mt-0  justify-around">
               {heroSocials.map(({ label, href, icon: Icon, preview }) => {
                 const content = <Icon aria-label={label} />;
@@ -140,8 +137,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Location & Skills */}
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:mb-2">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -152,7 +148,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div
-          className="rounded-md border border-border bg-card dark:bg-neutral-950 p-4 sm:p-5 flex flex-col gap-3"
+          className="rounded-md bg-card dark:bg-neutral-950 p-4 sm:p-5 flex flex-col gap-3"
           initial="hidden"
           animate="visible"
           variants={fadeRight}
@@ -175,9 +171,8 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Description */}
       <motion.div
-        className="rounded-md border border-border bg-card dark:bg-neutral-950 p-4 sm:p-5"
+        className="rounded-md p-4 sm:p-5"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}

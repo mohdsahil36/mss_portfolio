@@ -22,7 +22,7 @@ export default function Navbar() {
     >
       <div
         className="
-          mx-auto md:max-w-xl
+          mx-auto md:max-w-2xl
           flex items-center justify-between
           px-4 pt-4 bv
         "
