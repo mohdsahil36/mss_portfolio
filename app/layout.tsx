@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen w-full bg-background text-foreground m-0 p-0 overflow-x-hidden`}
       >
         <ThemeProvider
           attribute="class"
@@ -49,7 +49,7 @@ export default function RootLayout({
             </div>
 
             <main className="px-4 md:px-0">
-              <div className="md:max-w-2xl md:mx-auto rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black text-zinc-900 dark:text-white p-5 shadow-lg shadow-black/50 dark:shadow-black/50 ring-1 ring-zinc-200/5 dark:ring-white/5 transition-all duration-300 ease-out hover:shadow-black/70 dark:hover:shadow-black/70">
+              <div className="md:max-w-2xl md:mx-auto rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black text-zinc-900 dark:text-white p-5 shadow-lg shadow-black/50 dark:shadow-black/50 ring-1 ring-zinc-200/5 dark:ring-white/5 transition-all duration-300 ease-out hover:shadow-black/70 dark:hover:shadow-black/70 mt-5 md:mt-0">
                 {children}
               </div>
               <div className="h-14 md:h-24" />
