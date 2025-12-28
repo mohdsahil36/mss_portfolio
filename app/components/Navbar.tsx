@@ -24,7 +24,7 @@ export default function Navbar() {
         className="
           mx-auto md:max-w-2xl
           flex items-center justify-between
-          px-4 pt-4 bv
+          px-2 pt-4 bv
         "
       >
         <Link
