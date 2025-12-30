@@ -11,8 +11,7 @@ export default function Skills({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const sectionDirection = sectionIndex % 2 === 0 ? -60 : 60;
-
+  const sectionDirection = -60;
   return (
     <motion.section
       ref={ref}
@@ -29,8 +28,8 @@ export default function Skills({
     >
       <motion.h1
         className="mb-3 text-lg font-semibold text-zinc-900 dark:text-white text-center"
-        initial={{ opacity: 0, y: -10 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+        initial={{ opacity: 0, x: -30 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
         transition={{ duration: 0.25, ease: "easeOut", delay: 0.2 }}
       >
         Skills

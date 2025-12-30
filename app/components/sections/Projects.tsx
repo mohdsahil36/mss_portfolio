@@ -3,10 +3,9 @@ import { easeOut, motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const headingVariants = {
-  hidden: { opacity: 0, y: -20 },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    y: 0,
     transition: { duration: 0.4, ease: easeOut },
   },
 };
