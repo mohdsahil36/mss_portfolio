@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { heroSocials } from "@/app/data/hero";
 import { resumeData } from "@/app/data/hero";
+import { StarsBackground } from "@/components/ui/stars-background";
 
 const LocationGlobe = dynamic(
   () => import("@/components/location-globe").then((mod) => mod.LocationGlobe),
@@ -30,7 +31,6 @@ export default function Hero() {
 
   return (
     <div className="space-y-6 scroll-mt-24" id="home">
-      {/* Hero Card */}
       <motion.div
         className="relative rounded-md border border-border p-4 overflow-hidden bg-card dark:bg-neutral-950"
         initial="hidden"
@@ -42,6 +42,7 @@ export default function Hero() {
           number={16}
           className="absolute inset-0 z-0 opacity-40 pointer-events-none"
         />
+        <StarsBackground />
         <div className="relative z-10 flex flex-col gap-4">
           <motion.div
             className="flex items-center justify-between"
