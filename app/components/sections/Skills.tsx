@@ -57,29 +57,21 @@ export default function Skills({
               </h2>
 
               <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, skillIndex) => {
+                {category.skills.map((skill, index) => {
                   const Icon = skill.icon;
                   const isSoftSkill = !Icon;
-
                   return (
                     <motion.span
                       key={skill.name}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={
-                        isInView
-                          ? { opacity: 1, scale: 1 }
-                          : { opacity: 0, scale: 0.95 }
-                      }
-                      transition={{
-                        duration: 0.15,
-                        ease: "easeOut",
-                        delay: 0.4 + categoryIndex * 0.1 + skillIndex * 0.02,
-                      }}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.25, delay: index * 0.05 }}
+                      whileHover={{ scale: 1.05 }}
                       className={`
                         group flex items-center gap-2 px-2 py-1 rounded text-xs
-                        border transition-all duration-200 cursor-pointer
-                        hover:scale-[1.03]
-
+                        border cursor-pointer transition-all duration-200
+                  
                         ${
                           isSoftSkill
                             ? `
@@ -103,7 +95,6 @@ export default function Skills({
                       ) : (
                         <span className="text-xs">💡</span>
                       )}
-
                       <span className="leading-none">{skill.name}</span>
                     </motion.span>
                   );
