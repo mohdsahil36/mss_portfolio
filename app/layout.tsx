@@ -49,10 +49,37 @@ export default function RootLayout({
             </div>
           </header>
 
-          <main className="px-4 md:px-0 w-full max-w-full overflow-x-hidden">
-            <div className="w-full max-w-full md:max-w-2xl md:mx-auto rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black text-zinc-900 dark:text-white p-4 md:p-5 shadow-lg shadow-black/50 dark:shadow-black/50 ring-1 ring-zinc-200/5 dark:ring-white/5 transition-all duration-300 ease-out hover:shadow-black/70 dark:hover:shadow-black/70 mt-5 md:mt-0">
-              {children}
+          <main className="relative px-4 md:px-0 w-full max-w-full overflow-x-hidden">
+            <div className="relative w-full max-w-full md:max-w-2xl md:mx-auto">
+              <div
+                aria-hidden
+                className="
+        pointer-events-none
+        absolute -left-6 top-0
+        h-full w-px
+        bg-linear-to-b
+        from-transparent via-zinc-300 to-transparent
+        dark:via-zinc-700
+      "
+              />
+
+              <div
+                aria-hidden
+                className="
+        pointer-events-none
+        absolute -right-6 top-0
+        h-full w-px
+        bg-linear-to-b
+        from-transparent via-zinc-300 to-transparent
+        dark:via-zinc-700
+      "
+              />
+
+              <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black text-zinc-900 dark:text-white p-4 md:p-5 shadow-lg shadow-black/50 dark:shadow-black/50 ring-1 ring-zinc-200/5 dark:ring-white/5 transition-all duration-300 ease-out hover:shadow-black/70 dark:hover:shadow-black/70 mt-5 md:mt-0">
+                {children}
+              </div>
             </div>
+
             <div className="h-14 md:h-24" />
           </main>
 
