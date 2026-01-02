@@ -1,57 +1,29 @@
 "use client";
-import { easeOut, motion, useInView } from "framer-motion";
+
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { projects } from "@/app/data/projects";
+import { ProjectCard } from "../ProjectCard";
 
-const headingVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { duration: 0.4, ease: easeOut },
-  },
-};
-
-export default function Projects({
-  sectionIndex = 1,
-}: {
-  sectionIndex?: number;
-}) {
+export default function Projects() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const sectionDirection = sectionIndex % 2 === 0 ? -60 : 60;
-
-  const sectionVariants = {
-    hidden: { opacity: 0, x: sectionDirection },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.5, ease: easeOut },
-    },
-  };
+  const isInView = useInView(ref, { once: true });
 
   return (
     <motion.section
       ref={ref}
-      id="projects"
-      className="
-      mt-5 relative rounded-md p-4
-      bg-white dark:bg-neutral-950
-    "
-      variants={sectionVariants}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5 }}
+      className="mt-10 p-4"
     >
-      <motion.h1
-        className="
-          mb-6 text-lg font-semibold
-          text-zinc-900 dark:text-white text-center
-        "
-        variants={headingVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        transition={{ delay: 0.2 }}
-      >
-        Projects{" "}
-      </motion.h1>
+      <h1 className="mb-8 text-center text-lg font-semibold">Projects</h1>
+
+      <div className="grid gap-6 sm:grid-cols-2 hover:cursor-pointer">
+        {projects.map((project) => (
+          <ProjectCard key={project.title} project={project} />
+        ))}
+      </div>
     </motion.section>
   );
 }
