@@ -40,7 +40,7 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
-          enableSystem
+          enableSystem={false}
           disableTransitionOnChange={false}
         >
           <header className="sticky top-0 z-50 h-14 w-full bg-background/80 backdrop-blur-md border-b border-zinc-500 dark:border-zinc-800 md:mb-3">
