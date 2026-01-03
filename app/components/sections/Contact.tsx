@@ -30,7 +30,6 @@ export default function Contact({
       }
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      {/* Heading */}
       <motion.h1
         className="mb-3 text-lg font-semibold text-zinc-900 dark:text-white text-center"
         initial={{ opacity: 0, x: -20 }}
@@ -40,7 +39,6 @@ export default function Contact({
         Let&apos;s connect
       </motion.h1>
 
-      {/* Main text */}
       <motion.p
         className="text-sm leading-6 font-light text-black dark:text-white text-center"
         initial={{ opacity: 0, x: 20 }}
@@ -52,7 +50,6 @@ export default function Contact({
         reach out. I usually reply within seconds to a day.
       </motion.p>
 
-      {/* Secondary line (casual + rhyming) */}
       <motion.p
         className="mt-2 text-xs text-zinc-600 dark:text-zinc-400 text-center"
         initial={{ opacity: 0, y: 8 }}
@@ -63,7 +60,6 @@ export default function Contact({
         covered. 👀
       </motion.p>
 
-      {/* CTA */}
       <motion.div
         className="mt-4 flex justify-center md:mt-5 cursor-pointer"
         initial={{ opacity: 0, y: 10 }}

@@ -5,11 +5,13 @@ import Contact from "./components/sections/Contact";
 import Projects from "./components/sections/Projects";
 import { SafeMovingLabels } from "./components/SafeMovingLabels";
 import { SectionSeparator } from "./components/section-separator";
+import ScrollManager from "./components/ScrollManager";
 
 export default function Home() {
   return (
     <div>
       <main>
+        <ScrollManager />
         <Hero />
         <SectionSeparator />
         <Work sectionIndex={0} />

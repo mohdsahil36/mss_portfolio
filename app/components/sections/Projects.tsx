@@ -23,7 +23,8 @@ export default function Projects({
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="mt-6 p-4"
+      className="mt-6 p-4 scroll-mt-18"
+      id="projects"
     >
       <h1 className="mb-6 text-center text-lg font-semibold">Side Projects</h1>
 
@@ -40,6 +41,7 @@ export default function Projects({
           <Link
             href="https://github.com/mohdsahil36?tab=repositories"
             className="inline-flex items-center gap-1"
+            target="_blank"
           >
             See all <BiRightArrowAlt />
           </Link>
