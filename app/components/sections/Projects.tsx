@@ -37,7 +37,10 @@ export default function Projects({
       {/* SEE ALL */}
       <div className="text-center mt-6">
         <Button variant="outline" asChild>
-          <Link href="/your-path" className="inline-flex items-center gap-1">
+          <Link
+            href="https://github.com/mohdsahil36?tab=repositories"
+            className="inline-flex items-center gap-1"
+          >
             See all <BiRightArrowAlt />
           </Link>
         </Button>

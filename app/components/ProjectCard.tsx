@@ -50,7 +50,6 @@ export function ProjectCard({
         hover:shadow-md
       "
     >
-      {/* HEADER */}
       <div className="flex items-start justify-between gap-4">
         <h3 className="text-lg font-semibold text-black dark:text-white">
           {project.title}
@@ -75,7 +74,6 @@ export function ProjectCard({
         </div>
       </div>
 
-      {/* DESCRIPTION */}
       <ul className="mt-4 space-y-2 text-sm text-zinc-400 list-disc list-inside">
         {project.description
           .split("•")
@@ -84,7 +82,6 @@ export function ProjectCard({
           )}
       </ul>
 
-      {/* TECH STACK */}
       {project.stack && (
         <div className="mt-4 flex flex-wrap gap-2">
           {project.stack.map((tech) => (
