@@ -1,107 +1,79 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { MdArrowOutward } from "react-icons/md";
 import { Project } from "@/app/data/projects";
 import { Button } from "@/components/ui/button";
-import { BiRightArrowAlt } from "react-icons/bi";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <motion.div
-      whileHover="hover"
-      initial="rest"
-      animate="rest"
+    <div
       className="
-        group relative overflow-hidden rounded-xl
-        border border-zinc-200 dark:border-zinc-800
-        bg-white dark:bg-neutral-900
+        rounded-lg border border-zinc-200 dark:border-zinc-800
+        bg-card dark:bg-neutral-950
+        p-5
+        shadow-sm
         transition-shadow
-        hover:shadow-lg
+        hover:shadow-md
       "
     >
-      {/* Image – moves on CARD hover */}
-      <motion.div
-        variants={{
-          rest: { y: 0 },
-          hover: { y: 6 },
-        }}
-        transition={{ type: "spring", stiffness: 120, damping: 16 }}
-        className="p-3"
-      >
-        <div className="relative h-44 w-full overflow-hidden rounded-lg bg-black">
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover"
-          />
-        </div>
-      </motion.div>
+      <div className="flex items-start justify-between gap-4">
+        <h3 className="text-lg font-semibold text-black dark:text-white">
+          {project.title}
+        </h3>
 
-      {/* Content */}
-      <div className="px-4 pb-4">
-        <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-zinc-900 dark:text-white">
-            {project.title}
-          </h3>
-
-          <span
-            className={`text-xs font-medium
-              ${
-                project.status === "Live"
-                  ? "text-emerald-600"
-                  : "text-orange-500"
-              }`}
-          >
-            ● {project.status}
-          </span>
-        </div>
-
-        {/* Description with subtle background */}
-        <p
-          className="
-            mt-2 text-sm text-zinc-600 dark:text-zinc-400
-            bg-zinc-50 dark:bg-neutral-800/60
-            rounded-md p-2
-            line-clamp-3
-          "
-        >
-          {project.description}
-        </p>
-
-        {/* Actions */}
-        <div className="mt-4 flex gap-4">
-          <Link href={project.github} target="_blank">
-            <Button variant="ghost" size="sm" className="px-0">
-              GitHub
-              <motion.span
-                initial={{ x: 0 }}
-                whileHover={{ x: 5 }}
-                transition={{ type: "spring", stiffness: 300, damping: 22 }}
-              >
-                <BiRightArrowAlt className="ml-1 text-lg" />
-              </motion.span>
-            </Button>
-          </Link>
-
-          {project.status === "Live" && project.live && (
+        <div className="flex gap-2 shrink-0">
+          {project.live && project.status === "Live" && (
             <Link href={project.live} target="_blank">
-              <Button variant="ghost" size="sm" className="px-0">
+              <Button
+                variant="outline"
+                size="sm"
+                className="gap-1 cursor-pointer"
+              >
                 Live
-                <motion.span
-                  initial={{ x: 0 }}
-                  whileHover={{ x: 5 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                >
-                  <BiRightArrowAlt className="ml-1 text-lg" />
-                </motion.span>
+                <MdArrowOutward />
               </Button>
             </Link>
           )}
+
+          <Link href={project.github} target="_blank">
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1 cursor-pointer"
+            >
+              Github
+              <MdArrowOutward />
+            </Button>
+          </Link>
         </div>
       </div>
-    </motion.div>
+
+      <ul className="mt-4 space-y-2 text-sm text-zinc-400 list-disc list-inside">
+        {project.description
+          .split("•")
+          .map((point, idx) =>
+            point.trim() ? <li key={idx}>{point.trim()}</li> : null
+          )}
+      </ul>
+
+      {project.stack && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {project.stack.map((tech) => (
+            <span
+              key={tech}
+              className="
+                rounded-sm
+                bg-zinc-700 dark:bg-zinc-800
+                px-3 py-2
+                text-xs text-zinc-300
+              "
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

@@ -158,7 +158,7 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
                 </div>
 
                 <p
-                  className={`text-sm leading-relaxed text-zinc-600 dark:text-white ${
+                  className={`text-xs leading-relaxed text-zinc-600 dark:text-white ${
                     item.isBlurred ? "blur-sm select-none" : ""
                   }`}
                 >

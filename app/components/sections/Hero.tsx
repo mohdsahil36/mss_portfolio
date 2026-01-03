@@ -109,7 +109,7 @@ export default function Hero() {
               </a>
             </Button>
 
-            <div className="flex flex-wrap gap-2 mt-2 sm:flex-row md:mt-0  justify-around">
+            <div className="flex flex-wrap gap-2 mt-2 sm:flex-row md:mt-0 justify-around">
               {heroSocials.map(({ label, href, icon: Icon, preview }) => {
                 const content = <Icon aria-label={label} />;
                 return (
