@@ -1,4 +1,4 @@
-export type ProjectStatus = "Live" | "Building";
+export type ProjectStatus = "Live" | "Building Now";
 
 export interface Project {
   title: string;
@@ -7,9 +7,8 @@ export interface Project {
   status: ProjectStatus;
   github: string;
   live?: string;
-
+  progress?: number;
   stack: string[];
-
   detailsLink?: string;
 }
 
@@ -19,8 +18,9 @@ export const projects: Project[] = [
     description:
       "A platform for everyone to track their progress, statuses, and goals in a single place.",
     image: "/projects/coming-soon.png",
-    status: "Building",
+    status: "Building Now",
     github: "https://github.com/mohdsahil36/DevFlow",
+    progress: 10,
     stack: ["React", "TypeScript", "TailwindCSS"],
   },
   {
@@ -38,6 +38,7 @@ export const projects: Project[] = [
       "Convex",
       "Clerk",
     ],
+    progress: 100,
     live: "https://note-taking-application-two.vercel.app/",
   },
 ];
