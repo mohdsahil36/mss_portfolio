@@ -8,8 +8,8 @@ import { Project } from "@/app/data/projects";
 import { Button } from "@/components/ui/button";
 
 const cardVariants: Variants = {
-  hiddenLeft: { opacity: 0, x: -40 },
-  hiddenRight: { opacity: 0, x: 40 },
+  hiddenLeft: { opacity: 0, x: -30 },
+  hiddenRight: { opacity: 0, x: 30 },
   visible: {
     opacity: 1,
     x: 0,

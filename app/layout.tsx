@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import { DockWithAnimation } from "./components/dock-with-animation";
 import { QuoteSection } from "./components/QuoteSection";
 import { IconHeart, IconCode } from "@tabler/icons-react";
+import { ViewCount } from "./components/ViewCount";
 import { Roboto_Mono } from "next/font/google";
 
 const geistSans = Geist({
@@ -92,7 +93,7 @@ export default function RootLayout({
               </div>
 
               {/* Footer */}
-              <div className="text-center pb-8 md:pb-0">
+              <div className="text-center pb-8 md:pb-0 space-y-3">
                 <p className="text-sm text-zinc-500 dark:text-zinc-400 flex items-center justify-center gap-1.5">
                   Made with{" "}
                   <IconHeart className="w-3.5 h-3.5 text-red-500 fill-red-500" />{" "}
@@ -100,6 +101,10 @@ export default function RootLayout({
                   <IconCode className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />{" "}
                   code by Sahil
                 </p>
+                <div className="flex items-center justify-between text-xs text-zinc-400 dark:text-zinc-500">
+                  <p>© 2026 All rights reserved</p>
+                  <ViewCount />
+                </div>
               </div>
             </div>
 
