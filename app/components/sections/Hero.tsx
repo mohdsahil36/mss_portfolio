@@ -21,6 +21,31 @@ const LocationGlobe = dynamic(
 );
 
 export default function Hero() {
+  const [videoLoaded, setVideoLoaded] = React.useState(false);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    if (videoRef.current) {
+      const video = videoRef.current;
+      const handleCanPlay = () => {
+        setVideoLoaded(true);
+      };
+
+      if (video.readyState >= 3) {
+        // Video already loaded
+        setVideoLoaded(true);
+      } else {
+        video.addEventListener("canplay", handleCanPlay);
+        video.addEventListener("loadeddata", handleCanPlay);
+      }
+
+      return () => {
+        video.removeEventListener("canplay", handleCanPlay);
+        video.removeEventListener("loadeddata", handleCanPlay);
+      };
+    }
+  }, []);
+
   const fadeLeft = {
     hidden: { opacity: 0, x: -40 },
     visible: { opacity: 1, x: 0 },
@@ -41,13 +66,23 @@ export default function Hero() {
       >
         {/* Static Anime Video Background */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          {/* Gradient placeholder while video loads */}
+          <div
+            className={`absolute inset-0 bg-linear-to-br from-zinc-900 via-zinc-800 to-black transition-opacity duration-1000 ${
+              videoLoaded ? "opacity-0" : "opacity-100"
+            }`}
+          />
+
           <video
+            ref={videoRef}
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
-            className="absolute inset-0 h-full w-full object-cover scale-105"
+            className={`absolute inset-0 h-full w-full object-cover scale-105 transition-opacity duration-1000 ${
+              videoLoaded ? "opacity-100" : "opacity-0"
+            }`}
           >
             <source src={Goal} type="video/mp4" />
           </video>
