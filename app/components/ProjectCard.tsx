@@ -38,21 +38,24 @@ export function ProjectCard({
       className="
         rounded-lg border border-zinc-200 dark:border-zinc-800
         bg-card dark:bg-neutral-950
-        p-5
+        p-4 sm:p-5
         shadow-sm
         transition-shadow
         hover:shadow-md
+        w-full
+        min-w-0
+        overflow-hidden
       "
     >
       {/* Header */}
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <h3 className="text-lg font-semibold text-black dark:text-white">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 min-w-0">
+          <h3 className="text-lg font-semibold text-black dark:text-white break-words min-w-0">
             {project.title}
           </h3>
 
           {/* Status */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <span className="relative flex h-2.5 w-2.5">
               <span
                 className={`
@@ -78,7 +81,7 @@ export function ProjectCard({
 
             <span
               className={`
-                text-xs font-medium
+                text-xs font-medium whitespace-nowrap
                 ${
                   project.status === "Live"
                     ? "text-emerald-400"
@@ -92,13 +95,13 @@ export function ProjectCard({
         </div>
 
         {/* Actions */}
-        <div className="flex gap-2 shrink-0">
+        <div className="flex gap-2 shrink-0 flex-wrap">
           {project.live && project.status === "Live" && (
             <Link href={project.live} target="_blank">
               <Button
                 variant="outline"
                 size="sm"
-                className="gap-1 cursor-pointer"
+                className="gap-1 cursor-pointer text-xs"
               >
                 Live <MdArrowOutward />
               </Button>
@@ -109,7 +112,7 @@ export function ProjectCard({
             <Button
               variant="outline"
               size="sm"
-              className="gap-1 cursor-pointer"
+              className="gap-1 cursor-pointer text-xs"
             >
               GitHub <MdArrowOutward />
             </Button>
@@ -118,12 +121,15 @@ export function ProjectCard({
       </div>
 
       {/* Description */}
-      <ul className="mt-4 space-y-2 text-sm text-zinc-600 dark:text-zinc-400 list-disc list-inside">
-        {project.description
-          .split("•")
-          .map(
-            (point, idx) => point.trim() && <li key={idx}>{point.trim()}</li>
-          )}
+      <ul className="mt-4 space-y-2 text-sm text-zinc-600 dark:text-zinc-400 list-disc list-inside break-words overflow-wrap-anywhere">
+        {project.description.split("•").map(
+          (point, idx) =>
+            point.trim() && (
+              <li key={idx} className="break-words">
+                {point.trim()}
+              </li>
+            )
+        )}
       </ul>
 
       {/* Build Progress */}
