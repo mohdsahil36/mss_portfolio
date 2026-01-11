@@ -92,7 +92,7 @@ export default function RootLayout({
 
                     <div className="flex justify-between text-xs text-zinc-400">
                       <p>© 2026 All rights reserved</p>
-                      <ViewCount />
+                      {/* <ViewCount /> */}
                     </div>
                   </footer>
                 </div>
