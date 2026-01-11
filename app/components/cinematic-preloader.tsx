@@ -20,13 +20,13 @@ export function CinematicPreloader() {
       }}
     >
       {visible && (
-        <motion.div className="fixed inset-0 z-[9999] bg-black overflow-hidden flex items-center justify-center">
+        <motion.div className="fixed inset-0 z-9999 bg-black overflow-hidden flex items-center justify-center">
           {/* FILM GRAIN */}
           <div className="absolute inset-0 opacity-[0.06] bg-[url('/noise.png')] pointer-events-none animate-[grain_0.6s_infinite] " />
 
           {/* CINEMATIC LIGHT SWEEP */}
           <motion.div
-            className="absolute inset-y-0 w-[200%] bg-gradient-to-r from-transparent via-white/10 to-transparent"
+            className="absolute inset-y-0 w-[200%] bg-linear-to-r from-transparent via-white/10 to-transparent"
             initial={{ x: "-150%" }}
             animate={{ x: "150%" }}
             transition={{

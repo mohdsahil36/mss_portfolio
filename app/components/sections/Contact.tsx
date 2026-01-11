@@ -31,7 +31,7 @@ export default function Contact({
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <motion.h1
-        className="mb-3 text-lg font-semibold text-zinc-900 dark:text-white text-center"
+        className="mb-3 text-lg font-semibold text-zinc-900 dark:text-white text-center font-[family-name:var(--font-playfair)] italic"
         initial={{ opacity: 0, x: -30 }}
         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
         transition={{ duration: 0.35, ease: "easeOut", delay: 0.2 }}

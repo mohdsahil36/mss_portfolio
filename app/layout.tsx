@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Roboto_Mono } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Roboto_Mono,
+  Playfair_Display,
+} from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import Navbar from "./components/Navbar";
@@ -26,6 +31,12 @@ const robotoMono = Roboto_Mono({
   subsets: ["latin"],
 });
 
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  style: ["italic", "normal"],
+});
+
 export const metadata: Metadata = {
   title: "Mohd Sahil Siddiqui - Software Engineer",
   description: "Software Engineer",
@@ -44,7 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${robotoMono.variable} ${playfairDisplay.variable} antialiased min-h-screen bg-background text-foreground`}
       >
         <LoadingProvider>
           {/* 🎬 PRELOADER LIVES HERE */}

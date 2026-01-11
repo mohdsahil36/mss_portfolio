@@ -56,6 +56,7 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
         className="
           mb-6 text-lg font-semibold
           text-zinc-900 dark:text-white text-center
+          font-[family-name:var(--font-playfair)] italic
         "
         variants={headingVariants}
         initial="hidden"
