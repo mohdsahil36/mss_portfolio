@@ -1,18 +1,18 @@
 "use client";
 
+import * as React from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import Profile from "@/public/Profile.jpg";
 import { FlipWords } from "@/components/ui/flip-words";
 import { ActiveStatus } from "@/components/ui/active-status";
-import { Meteors } from "@/components/ui/meteors";
 import { heroData } from "@/app/data/hero";
 import { Button } from "@/components/ui/button";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { heroSocials } from "@/app/data/hero";
 import { resumeData } from "@/app/data/hero";
-import { StarsBackground } from "@/components/ui/stars-background";
+const Goal = "/assets/Goal.mp4";
 
 const LocationGlobe = dynamic(
   () => import("@/components/location-globe").then((mod) => mod.LocationGlobe),
@@ -38,11 +38,23 @@ export default function Hero() {
         variants={fadeLeft}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
-        <Meteors
-          number={16}
-          className="absolute inset-0 z-0 opacity-40 pointer-events-none"
-        />
-        <StarsBackground />
+        {/* Static Anime Video Background */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 h-full w-full object-cover scale-105"
+          >
+            <source src={Goal} type="video/mp4" />
+          </video>
+
+          {/* Cinematic readability overlay */}
+          <div className="absolute inset-0 bg-linear-to-b from-black/65 via-black/40 to-black/75" />
+        </div>
+
         <div className="relative z-10 flex flex-col gap-4">
           <motion.div
             className="flex items-center justify-between"
@@ -50,7 +62,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.5 }}
           >
-            <span className="text-sm font-light dark:font-extralight text-black dark:text-white">
+            <span className="text-sm font-light dark:font-extralight text-white">
               greetings, I&apos;m
             </span>
             <ActiveStatus />
@@ -70,13 +82,13 @@ export default function Hero() {
                 className="object-cover"
               />
             </div>
-            <h1 className="text-xl font-light tracking-tight sm:text-2xl md:text-3xl text-black dark:text-white">
+            <h1 className="text-xl font-light tracking-tight sm:text-2xl md:text-3xl text-white">
               {heroData.name}
             </h1>
           </motion.div>
 
           <motion.div
-            className="flex flex-wrap items-center gap-2 text-sm font-extralight text-black dark:text-white"
+            className="flex flex-wrap items-center gap-2 text-sm font-extralight text-white"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
@@ -87,7 +99,7 @@ export default function Hero() {
               </span>
             </div>
             <span className="opacity-40">•</span>
-            <FlipWords words={heroData.roles} className="text-sm" />
+            <FlipWords words={heroData.roles} className="text-sm text-white" />
           </motion.div>
 
           <motion.div
@@ -98,7 +110,7 @@ export default function Hero() {
           >
             <Button
               asChild
-              className="cursor-pointer bg-black text-white dark:text-black dark:bg-white rounded-md"
+              className="cursor-pointer text-black bg-white hover:text-white hover:bg-black rounded-md"
             >
               <a
                 href={resumeData.href}
@@ -110,29 +122,80 @@ export default function Hero() {
             </Button>
 
             <div className="flex flex-wrap gap-2 mt-2 sm:flex-row md:mt-0 justify-around">
-              {heroSocials.map(({ label, href, icon: Icon, preview }) => {
-                const content = <Icon aria-label={label} />;
-                return (
-                  <Button
-                    key={label}
-                    asChild
-                    variant="outline"
-                    className="cursor-pointer dark:bg-black p-1"
-                  >
-                    {preview ? (
-                      <LinkPreview url={href}>{content}</LinkPreview>
-                    ) : (
-                      <a
-                        href={href}
-                        aria-label={label}
-                        className="flex items-center justify-center"
+              {heroSocials.map(({ label, href, icon: Icon, preview }) => (
+                <Button
+                  key={label}
+                  asChild
+                  variant="ghost"
+                  className="
+        group
+        p-0
+        bg-transparent
+        border-0
+        shadow-none
+
+        hover:bg-transparent
+        focus:outline-none
+        focus-visible:ring-0
+      "
+                >
+                  {preview ? (
+                    <LinkPreview url={href} className="bg-transparent">
+                      <span
+                        className="
+              flex items-center justify-center
+              w-10 h-10
+              rounded-md
+
+              transition-all duration-300 ease-out
+
+              /* LIGHT MODE hover */
+              group-hover:bg-black/35
+
+              /* DARK MODE hover */
+              dark:group-hover:bg-white/15
+            "
                       >
-                        {content}
-                      </a>
-                    )}
-                  </Button>
-                );
-              })}
+                        <Icon
+                          aria-label={label}
+                          className="
+                text-white
+                transition-transform duration-300
+                group-hover:scale-110
+              "
+                        />
+                      </span>
+                    </LinkPreview>
+                  ) : (
+                    <a
+                      href={href}
+                      aria-label={label}
+                      className="flex items-center justify-center"
+                    >
+                      <span
+                        className="
+              flex items-center justify-center
+              w-10 h-10
+              rounded-md
+
+              transition-all duration-300 ease-out
+
+              group-hover:bg-black/25
+              dark:group-hover:bg-white/15
+            "
+                      >
+                        <Icon
+                          className="
+                text-white
+                transition-transform duration-300
+                group-hover:scale-110
+              "
+                        />
+                      </span>
+                    </a>
+                  )}
+                </Button>
+              ))}
             </div>
           </motion.div>
         </div>

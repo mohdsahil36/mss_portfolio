@@ -24,6 +24,13 @@ export function IndiaTime() {
   }, []);
 
   return (
-    <span className="mt-2 text-sm text-black dark:text-white">{time} IST</span>
+    <>
+      <span className="text-sm font-mono font-semibold text-zinc-900 dark:text-white tabular-nums">
+        {time}
+      </span>
+      <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+        IST
+      </span>
+    </>
   );
 }
