@@ -95,14 +95,22 @@ export function ProjectCard({
         <div className="flex gap-2 shrink-0">
           {project.live && project.status === "Live" && (
             <Link href={project.live} target="_blank">
-              <Button variant="outline" size="sm" className="gap-1">
+              <Button
+                variant="outline"
+                size="sm"
+                className="gap-1 cursor-pointer"
+              >
                 Live <MdArrowOutward />
               </Button>
             </Link>
           )}
 
           <Link href={project.github} target="_blank">
-            <Button variant="outline" size="sm" className="gap-1">
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1 cursor-pointer"
+            >
               GitHub <MdArrowOutward />
             </Button>
           </Link>
@@ -179,11 +187,16 @@ export function ProjectCard({
             <span
               key={tech}
               className="
-                rounded-sm
-                bg-zinc-700 dark:bg-zinc-800
-                px-3 py-2
-                text-xs text-white
-              "
+          rounded-sm
+          bg-zinc-700 dark:bg-zinc-800
+          px-3 py-2
+          text-xs text-white
+          cursor-pointer
+          transition duration-300 ease-in-out
+          hover:bg-zinc-600 dark:hover:bg-zinc-700
+          hover:brightness-110
+          hover:shadow-md
+        "
             >
               {tech}
             </span>

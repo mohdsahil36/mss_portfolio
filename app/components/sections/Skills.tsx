@@ -32,7 +32,7 @@ export default function Skills({
         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
         transition={{ duration: 0.25, ease: "easeOut", delay: 0.2 }}
       >
-        Skills
+        Stack
       </motion.h1>
 
       <div className="space-y-6">

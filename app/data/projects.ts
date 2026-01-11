@@ -21,7 +21,7 @@ export const projects: Project[] = [
     status: "Building Now",
     github: "https://github.com/mohdsahil36/DevFlow",
     progress: 10,
-    stack: ["React", "TypeScript", "TailwindCSS"],
+    stack: ["React", "TypeScript", "TailwindCSS", "Mongodb", "Express JS"],
   },
   {
     title: "Replica of Notion",

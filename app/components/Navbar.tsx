@@ -6,10 +6,10 @@ import { ModeToggle } from "./mode-toggle";
 import { useEffect } from "react";
 
 const navItems = [
-  { label: "experience", href: "#work" },
-  { label: "projects", href: "#projects" },
-  { label: "skills", href: "#skills" },
-  { label: "contact", href: "#contact" },
+  { label: "career", href: "#work" },
+  { label: "builds", href: "#projects" },
+  { label: "stack", href: "#skills" },
+  { label: "connect", href: "#contact" },
 ];
 
 export function ScrollToTopOnLoad() {

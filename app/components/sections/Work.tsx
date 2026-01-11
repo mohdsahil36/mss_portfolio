@@ -61,7 +61,7 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
         animate={isInView ? "visible" : "hidden"}
         transition={{ delay: 0.2 }}
       >
-        Work Experience
+        Career
       </motion.h1>
 
       <div className="relative flex flex-col gap-6 sm:gap-8">

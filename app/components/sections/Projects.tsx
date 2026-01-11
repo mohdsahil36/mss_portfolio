@@ -26,7 +26,7 @@ export default function Projects({
       className="mt-6 p-4 scroll-mt-18"
       id="projects"
     >
-      <h1 className="mb-6 text-center text-lg font-semibold">Side Projects</h1>
+      <h1 className="mb-6 text-center text-lg font-semibold">Builds</h1>
 
       {/* PROJECT LIST */}
       <div className="grid gap-6">
