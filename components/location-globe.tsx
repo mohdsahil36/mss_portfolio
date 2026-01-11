@@ -1,6 +1,5 @@
 "use client";
 
-import { IndiaTime } from "./time";
 import { Map } from "@/components/ui/map";
 
 export function LocationGlobe() {
@@ -25,26 +24,6 @@ export function LocationGlobe() {
         "
       >
         <Map center={[77.5946, 12.9716]} zoom={11} />
-      </div>
-
-      {/* Overlay info */}
-      <div
-        className="
-    absolute
-    bottom-3 sm:bottom-6
-    left-1/2
-    -translate-x-1/2
-    rounded-lg
-    px-3 py-2 sm:px-4 sm:py-2.5
-    bg-white/90 dark:bg-black/85
-    backdrop-blur-md
-    border border-zinc-200/50 dark:border-zinc-800/50
-    shadow-lg
-  "
-      >
-        <div className="flex items-baseline gap-1.5 text-sm sm:text-base">
-          <IndiaTime />
-        </div>
       </div>
     </div>
   );

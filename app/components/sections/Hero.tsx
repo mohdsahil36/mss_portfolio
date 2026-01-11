@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { heroSocials } from "@/app/data/hero";
 import { resumeData } from "@/app/data/hero";
+import { IndiaTime } from "@/components/time";
 const Goal = "/assets/Goal.mp4";
 
 const LocationGlobe = dynamic(
@@ -65,7 +66,12 @@ export default function Hero() {
             <span className="text-sm font-light dark:font-extralight text-white">
               greetings, I&apos;m
             </span>
-            <ActiveStatus />
+            <div className="flex flex-col items-end gap-1.5">
+              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/15 dark:bg-black/30 backdrop-blur-md border border-white/30 dark:border-white/10">
+                <IndiaTime />
+              </div>
+              <ActiveStatus />
+            </div>
           </motion.div>
 
           <motion.div
@@ -121,28 +127,49 @@ export default function Hero() {
               </a>
             </Button>
 
-            <div className="flex flex-wrap gap-2 mt-2 sm:flex-row md:mt-0 justify-around">
-              {heroSocials.map(({ label, href, icon: Icon, preview }) => (
-                <Button
-                  key={label}
-                  asChild
-                  variant="ghost"
-                  className="
+            <div className="flex flex-wrap items-center gap-2 mt-2 sm:flex-row md:mt-0 justify-around">
+              {heroSocials.map(({ label, href, icon: Icon, preview }) => {
+                const isMailto = href.startsWith("mailto:");
+
+                return (
+                  <Button
+                    key={label}
+                    asChild={!isMailto}
+                    variant="ghost"
+                    className="
         group
         p-0
         bg-transparent
         border-0
         shadow-none
+        cursor-pointer
 
         hover:bg-transparent
         focus:outline-none
         focus-visible:ring-0
       "
-                >
-                  {preview ? (
-                    <LinkPreview url={href} className="bg-transparent">
-                      <span
-                        className="
+                    onClick={
+                      isMailto
+                        ? (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.location.href = href;
+                          }
+                        : undefined
+                    }
+                    style={
+                      isMailto
+                        ? {
+                            touchAction: "manipulation",
+                            WebkitTapHighlightColor: "transparent",
+                          }
+                        : undefined
+                    }
+                  >
+                    {preview ? (
+                      <LinkPreview url={href} className="bg-transparent">
+                        <span
+                          className="
               flex items-center justify-center
               w-10 h-10
               rounded-md
@@ -155,23 +182,18 @@ export default function Hero() {
               /* DARK MODE hover */
               dark:group-hover:bg-white/15
             "
-                      >
-                        <Icon
-                          aria-label={label}
-                          className="
+                        >
+                          <Icon
+                            aria-label={label}
+                            className="
                 text-white
                 transition-transform duration-300
                 group-hover:scale-110
               "
-                        />
-                      </span>
-                    </LinkPreview>
-                  ) : (
-                    <a
-                      href={href}
-                      aria-label={label}
-                      className="flex items-center justify-center"
-                    >
+                          />
+                        </span>
+                      </LinkPreview>
+                    ) : isMailto ? (
                       <span
                         className="
               flex items-center justify-center
@@ -185,6 +207,7 @@ export default function Hero() {
             "
                       >
                         <Icon
+                          aria-label={label}
                           className="
                 text-white
                 transition-transform duration-300
@@ -192,10 +215,37 @@ export default function Hero() {
               "
                         />
                       </span>
-                    </a>
-                  )}
-                </Button>
-              ))}
+                    ) : (
+                      <a
+                        href={href}
+                        aria-label={label}
+                        className="flex items-center justify-center"
+                      >
+                        <span
+                          className="
+              flex items-center justify-center
+              w-10 h-10
+              rounded-md
+
+              transition-all duration-300 ease-out
+
+              group-hover:bg-black/25
+              dark:group-hover:bg-white/15
+            "
+                        >
+                          <Icon
+                            className="
+                text-white
+                transition-transform duration-300
+                group-hover:scale-110
+              "
+                          />
+                        </span>
+                      </a>
+                    )}
+                  </Button>
+                );
+              })}
             </div>
           </motion.div>
         </div>

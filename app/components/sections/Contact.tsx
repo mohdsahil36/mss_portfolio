@@ -61,19 +61,30 @@ export default function Contact({
       </motion.p>
 
       <motion.div
-        className="mt-4 flex justify-center md:mt-5 cursor-pointer"
+        className="mt-4 flex justify-center md:mt-5"
         initial={{ opacity: 0, y: 10 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
         transition={{ duration: 0.25, ease: "easeOut", delay: 0.35 }}
       >
-        <Button asChild className="rounded-md">
-          <a
-            href={`mailto:${EMAIL}?subject=Let’s connect`}
-            aria-label="Send email"
-          >
-            Get in touch
-            <IconMail />
-          </a>
+        <Button
+          className="rounded-md"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const mailtoLink = `mailto:${EMAIL}?subject=${encodeURIComponent(
+              "Let's connect"
+            )}`;
+            // Use window.location for better compatibility across devices
+            window.location.href = mailtoLink;
+          }}
+          aria-label="Send email"
+          style={{
+            touchAction: "manipulation",
+            WebkitTapHighlightColor: "transparent",
+          }}
+        >
+          Get in touch
+          <IconMail />
         </Button>
       </motion.div>
     </motion.section>

@@ -25,10 +25,10 @@ export function IndiaTime() {
 
   return (
     <>
-      <span className="text-sm font-mono font-semibold text-zinc-900 dark:text-white tabular-nums">
+      <span className="text-sm font-mono font-semibold text-white tabular-nums">
         {time}
       </span>
-      <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+      <span className="text-xs font-medium text-white/70 uppercase tracking-wider">
         IST
       </span>
     </>

@@ -3,7 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import Navbar from "./components/Navbar";
-import { FloatingDockDemo } from "./components/floating-dock";
+import { DockWithAnimation } from "./components/dock-with-animation";
+import { QuoteSection } from "./components/QuoteSection";
+import { IconHeart, IconCode } from "@tabler/icons-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -78,14 +80,27 @@ export default function RootLayout({
               <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black text-zinc-900 dark:text-white p-4 md:p-5 shadow-lg shadow-black/50 dark:shadow-black/50 ring-1 ring-zinc-200/5 dark:ring-white/5 transition-all duration-300 ease-out hover:shadow-black/70 dark:hover:shadow-black/70 mt-5 md:mt-0">
                 {children}
               </div>
+
+              <div>
+                <QuoteSection quote='"Don&apos;t worry about failure: you only have to be right once." — Drew Houston' />
+              </div>
+
+              {/* Footer */}
+              <div className="text-center pb-8 md:pb-0">
+                <p className="text-sm text-zinc-500 dark:text-zinc-400 flex items-center justify-center gap-1.5">
+                  Made with{" "}
+                  <IconHeart className="w-3.5 h-3.5 text-red-500 fill-red-500" />{" "}
+                  and{" "}
+                  <IconCode className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />{" "}
+                  code by Sahil
+                </p>
+              </div>
             </div>
 
             <div className="h-14 md:h-24" />
           </main>
 
-          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-            <FloatingDockDemo />
-          </div>
+          <DockWithAnimation />
         </ThemeProvider>
       </body>
     </html>
