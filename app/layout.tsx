@@ -6,9 +6,15 @@ import Navbar from "./components/Navbar";
 import { DockWithAnimation } from "./components/dock-with-animation";
 import { QuoteSection } from "./components/QuoteSection";
 import { IconHeart, IconCode } from "@tabler/icons-react";
+import { Roboto_Mono } from "next/font/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const robotoMono = Roboto_Mono({
+  variable: "--font-roboto-mono",
   subsets: ["latin"],
 });
 
@@ -37,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="w-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen w-full bg-background text-foreground m-0 p-0`}
+        className={`${geistMono.variable} ${geistSans.variable} antialiased min-h-screen w-full bg-background text-foreground m-0 p-0`}
       >
         <ThemeProvider
           attribute="class"

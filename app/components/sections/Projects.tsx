@@ -16,12 +16,15 @@ export default function Projects({
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const sectionDirection = sectionIndex % 2 === 0 ? -60 : 60;
 
   return (
     <motion.section
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      initial={{ opacity: 0, x: sectionDirection }}
+      animate={
+        isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: sectionDirection }
+      }
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="mt-6 p-4 scroll-mt-18"
       id="projects"

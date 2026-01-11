@@ -32,10 +32,11 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
   };
 
   const sectionVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, x: sectionDirection },
     visible: {
       opacity: 1,
-      transition: { duration: 0.4, ease: easeOut },
+      x: 0,
+      transition: { duration: 0.5, ease: easeOut },
     },
   };
 
@@ -69,7 +70,7 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
 
         {workExperience.map((item, index) => {
           const isCurrent = item.type === "current";
-          const direction = index % 2 === 0 ? -40 : 40;
+          const direction = index % 2 === 0 ? -30 : 30;
 
           return (
             <motion.article

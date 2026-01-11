@@ -32,8 +32,8 @@ export default function Contact({
     >
       <motion.h1
         className="mb-3 text-lg font-semibold text-zinc-900 dark:text-white text-center"
-        initial={{ opacity: 0, x: -20 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+        initial={{ opacity: 0, x: -30 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
         transition={{ duration: 0.35, ease: "easeOut", delay: 0.2 }}
       >
         Let&apos;s connect
@@ -41,8 +41,8 @@ export default function Contact({
 
       <motion.p
         className="text-sm leading-6 font-light text-black dark:text-white text-center"
-        initial={{ opacity: 0, x: 20 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+        initial={{ opacity: 0, x: 30 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
         transition={{ duration: 0.35, ease: "easeOut", delay: 0.25 }}
       >
         Always open to new opportunities—especially full-time roles and exciting
@@ -52,8 +52,8 @@ export default function Contact({
 
       <motion.p
         className="mt-2 text-xs text-zinc-600 dark:text-zinc-400 text-center"
-        initial={{ opacity: 0, y: 8 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+        initial={{ opacity: 0, x: -30 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
         transition={{ duration: 0.25, ease: "easeOut", delay: 0.3 }}
       >
         Mail person? Hit the button below. Social person? Dock&apos;s got you
@@ -62,8 +62,8 @@ export default function Contact({
 
       <motion.div
         className="mt-4 flex justify-center md:mt-5"
-        initial={{ opacity: 0, y: 10 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+        initial={{ opacity: 0, x: 30 }}
+        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
         transition={{ duration: 0.25, ease: "easeOut", delay: 0.35 }}
       >
         <Button

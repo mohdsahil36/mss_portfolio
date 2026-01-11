@@ -11,7 +11,7 @@ export default function Skills({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const sectionDirection = -60;
+  const sectionDirection = sectionIndex % 2 === 0 ? -60 : 60;
   return (
     <motion.section
       ref={ref}
