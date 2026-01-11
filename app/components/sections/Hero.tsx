@@ -4,15 +4,14 @@ import * as React from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import Profile from "@/public/Profile.jpg";
+import Profile from "@/public/favicon.png";
 import { FlipWords } from "@/components/ui/flip-words";
 import { ActiveStatus } from "@/components/ui/active-status";
-import { heroData } from "@/app/data/hero";
+import { heroData, heroSocials, resumeData } from "@/app/data/hero";
 import { Button } from "@/components/ui/button";
 import { LinkPreview } from "@/components/ui/link-preview";
-import { heroSocials } from "@/app/data/hero";
-import { resumeData } from "@/app/data/hero";
 import { IndiaTime } from "@/components/time";
+
 const Goal = "/assets/Goal.mp4";
 
 const LocationGlobe = dynamic(
@@ -20,59 +19,53 @@ const LocationGlobe = dynamic(
   { ssr: false }
 );
 
+/* === HORIZONTAL MOTION SETTINGS === */
+const fromLeft = {
+  hidden: { opacity: 0, x: -24 },
+  visible: { opacity: 1, x: 0 },
+};
+const fromRight = {
+  hidden: { opacity: 0, x: 24 },
+  visible: { opacity: 1, x: 0 },
+};
+const fastEase = [0.22, 1, 0.36, 1];
+const fastTransition = { duration: 0.3, ease: fastEase };
+
 export default function Hero() {
   const [videoLoaded, setVideoLoaded] = React.useState(false);
   const videoRef = React.useRef<HTMLVideoElement>(null);
 
   React.useEffect(() => {
-    if (videoRef.current) {
-      const video = videoRef.current;
-      const handleCanPlay = () => {
-        setVideoLoaded(true);
-      };
+    const video = videoRef.current;
+    if (!video) return;
 
-      if (video.readyState >= 3) {
-        // Video already loaded
-        setVideoLoaded(true);
-      } else {
-        video.addEventListener("canplay", handleCanPlay);
-        video.addEventListener("loadeddata", handleCanPlay);
-      }
+    const ready = () => setVideoLoaded(true);
 
-      return () => {
-        video.removeEventListener("canplay", handleCanPlay);
-        video.removeEventListener("loadeddata", handleCanPlay);
-      };
+    if (video.readyState >= 3) {
+      setVideoLoaded(true);
+    } else {
+      video.addEventListener("canplay", ready);
+      video.addEventListener("loadeddata", ready);
     }
-  }, []);
 
-  const fadeLeft = {
-    hidden: { opacity: 0, x: -40 },
-    visible: { opacity: 1, x: 0 },
-  };
-  const fadeRight = {
-    hidden: { opacity: 0, x: 40 },
-    visible: { opacity: 1, x: 0 },
-  };
+    return () => {
+      video.removeEventListener("canplay", ready);
+      video.removeEventListener("loadeddata", ready);
+    };
+  }, []);
 
   return (
     <div className="space-y-6 scroll-mt-24" id="home">
-      <motion.div
-        className="relative rounded-md border border-border p-4 overflow-hidden bg-card dark:bg-neutral-950"
-        initial="hidden"
-        animate="visible"
-        variants={fadeLeft}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-      >
-        {/* Static Anime Video Background */}
+      {/* HERO CARD */}
+      <div className="relative rounded-md border border-border p-4 overflow-hidden bg-card dark:bg-neutral-950">
+        {/* VIDEO BACKGROUND */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          {/* Gradient placeholder while video loads */}
+          {/* Gradient placeholder */}
           <div
-            className={`absolute inset-0 bg-linear-to-br from-zinc-900 via-zinc-800 to-black transition-opacity duration-1000 ${
+            className={`absolute inset-0 bg-linear-to-br from-zinc-900 via-zinc-800 to-black transition-opacity duration-1200 ${
               videoLoaded ? "opacity-0" : "opacity-100"
             }`}
           />
-
           <video
             ref={videoRef}
             autoPlay
@@ -80,40 +73,44 @@ export default function Hero() {
             muted
             playsInline
             preload="auto"
-            className={`absolute inset-0 h-full w-full object-cover scale-105 transition-opacity duration-1000 ${
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1400 ${
               videoLoaded ? "opacity-100" : "opacity-0"
             }`}
           >
             <source src={Goal} type="video/mp4" />
           </video>
-
-          {/* Cinematic readability overlay */}
-          <div className="absolute inset-0 bg-linear-to-b from-black/65 via-black/40 to-black/75" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/40 to-black/80" />
         </div>
 
+        {/* CONTENT */}
         <div className="relative z-10 flex flex-col gap-4">
+          {/* TOP BAR */}
           <motion.div
-            className="flex items-center justify-between"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
+            variants={fromLeft}
+            initial="hidden"
+            animate="visible"
+            transition={{ ...fastTransition, delay: 0, ease: "easeInOut" }}
           >
-            <span className="text-sm font-light dark:font-extralight text-white">
-              greetings, I&apos;m
-            </span>
-            <div className="flex flex-col items-end gap-1.5">
-              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/15 dark:bg-black/30 backdrop-blur-md border border-white/30 dark:border-white/10">
-                <IndiaTime />
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-light text-white">
+                greetings, I&apos;m
+              </span>
+              <div className="flex flex-col items-end gap-1.5">
+                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/15 backdrop-blur-md border border-white/30">
+                  <IndiaTime />
+                </div>
+                <ActiveStatus />
               </div>
-              <ActiveStatus />
             </div>
           </motion.div>
 
+          {/* NAME */}
           <motion.div
+            variants={fromLeft}
+            initial="hidden"
+            animate="visible"
+            transition={{ ...fastTransition, delay: 0.05, ease: "easeInOut" }}
             className="flex items-center gap-3"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
           >
             <div className="relative h-12 w-12 overflow-hidden rounded-full sm:h-14 sm:w-14">
               <Image
@@ -128,30 +125,32 @@ export default function Hero() {
             </h1>
           </motion.div>
 
+          {/* META */}
           <motion.div
+            variants={fromLeft}
+            initial="hidden"
+            animate="visible"
+            transition={{ ...fastTransition, delay: 0.1, ease: "easeInOut" }}
             className="flex flex-wrap items-center gap-2 text-sm font-extralight text-white"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <div className="flex justify-around">
-              <span>
-                {heroData.age}, {heroData.pronouns}
-              </span>
-            </div>
+            <span>
+              {heroData.age}, {heroData.pronouns}
+            </span>
             <span className="opacity-40">•</span>
             <FlipWords words={heroData.roles} className="text-sm text-white" />
           </motion.div>
 
+          {/* CTA + SOCIALS */}
           <motion.div
+            variants={fromLeft}
+            initial="hidden"
+            animate="visible"
+            transition={{ ...fastTransition, delay: 0.15, ease: "easeInOut" }}
             className="mt-2 flex flex-col sm:flex-row sm:items-center sm:gap-3 gap-2"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
           >
             <Button
               asChild
-              className="cursor-pointer text-black bg-white hover:text-white hover:bg-black rounded-md"
+              className="bg-white text-black hover:bg-black hover:text-white rounded-md"
             >
               <a
                 href={resumeData.href}
@@ -162,7 +161,7 @@ export default function Hero() {
               </a>
             </Button>
 
-            <div className="flex flex-wrap items-center gap-2 mt-2 sm:flex-row md:mt-0 justify-around">
+            <div className="flex flex-wrap items-center gap-2">
               {heroSocials.map(({ label, href, icon: Icon, preview }) => {
                 const isMailto = href.startsWith("mailto:");
 
@@ -171,112 +170,26 @@ export default function Hero() {
                     key={label}
                     asChild={!isMailto}
                     variant="ghost"
-                    className="
-        group
-        p-0
-        bg-transparent
-        border-0
-        shadow-none
-        cursor-pointer
-
-        hover:bg-transparent
-        focus:outline-none
-        focus-visible:ring-0
-      "
+                    className="p-0 bg-transparent hover:bg-transparent"
                     onClick={
                       isMailto
                         ? (e) => {
                             e.preventDefault();
-                            e.stopPropagation();
                             window.location.href = href;
-                          }
-                        : undefined
-                    }
-                    style={
-                      isMailto
-                        ? {
-                            touchAction: "manipulation",
-                            WebkitTapHighlightColor: "transparent",
                           }
                         : undefined
                     }
                   >
                     {preview ? (
-                      <LinkPreview url={href} className="bg-transparent">
-                        <span
-                          className="
-              flex items-center justify-center
-              w-10 h-10
-              rounded-md
-
-              transition-all duration-300 ease-out
-
-              /* LIGHT MODE hover */
-              group-hover:bg-black/35
-
-              /* DARK MODE hover */
-              dark:group-hover:bg-white/15
-            "
-                        >
-                          <Icon
-                            aria-label={label}
-                            className="
-                text-white
-                transition-transform duration-300
-                group-hover:scale-110
-              "
-                          />
+                      <LinkPreview url={href}>
+                        <span className="w-10 h-10 flex items-center justify-center rounded-md transition hover:bg-black/35">
+                          <Icon className="text-white transition hover:scale-110" />
                         </span>
                       </LinkPreview>
-                    ) : isMailto ? (
-                      <span
-                        className="
-              flex items-center justify-center
-              w-10 h-10
-              rounded-md
-
-              transition-all duration-300 ease-out
-
-              group-hover:bg-black/25
-              dark:group-hover:bg-white/15
-            "
-                      >
-                        <Icon
-                          aria-label={label}
-                          className="
-                text-white
-                transition-transform duration-300
-                group-hover:scale-110
-              "
-                        />
-                      </span>
                     ) : (
-                      <a
-                        href={href}
-                        aria-label={label}
-                        className="flex items-center justify-center"
-                      >
-                        <span
-                          className="
-              flex items-center justify-center
-              w-10 h-10
-              rounded-md
-
-              transition-all duration-300 ease-out
-
-              group-hover:bg-black/25
-              dark:group-hover:bg-white/15
-            "
-                        >
-                          <Icon
-                            className="
-                text-white
-                transition-transform duration-300
-                group-hover:scale-110
-              "
-                          />
-                        </span>
-                      </a>
+                      <span className="w-10 h-10 flex items-center justify-center rounded-md transition hover:bg-black/25">
+                        <Icon className="text-white transition hover:scale-110" />
+                      </span>
                     )}
                   </Button>
                 );
@@ -284,51 +197,51 @@ export default function Hero() {
             </div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
 
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:mb-2">
+      {/* LOWER GRID */}
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         <motion.div
+          variants={fromLeft}
           initial="hidden"
           animate="visible"
-          variants={fadeLeft}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ ...fastTransition, delay: 0.2, ease: "easeInOut" }}
         >
           <LocationGlobe />
         </motion.div>
 
         <motion.div
-          className="rounded-md bg-card dark:bg-neutral-950 p-4 sm:p-5 flex flex-col gap-3"
+          variants={fromRight}
           initial="hidden"
           animate="visible"
-          variants={fadeRight}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ ...fastTransition, delay: 0.2, ease: "easeInOut" }}
+          className="rounded-md bg-card dark:bg-neutral-950 p-4 sm:p-5 flex flex-col gap-3"
         >
           <h3 className="text-base font-semibold">Currently working with:</h3>
           <div className="flex flex-wrap gap-2">
             {heroData.currentSkills.map((skill) => (
-              <span
-                key={skill}
-                className="rounded bg-muted px-2 py-1 text-xs dark:text-white"
-              >
+              <span key={skill} className="rounded bg-muted px-2 py-1 text-xs">
                 {skill}
               </span>
             ))}
           </div>
-          <span className="text-xs italic text-black dark:text-white">
+          <span className="text-xs italic">
             …and a few more skills up my sleeve!
           </span>
         </motion.div>
       </div>
 
+      {/* DESCRIPTION */}
       <motion.div
+        variants={fromLeft}
+        initial="hidden"
+        animate="visible"
+        transition={{ ...fastTransition, delay: 0.25, ease: "easeInOut" }}
         className="rounded-md p-4 sm:p-5"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <p className="text-sm leading-6 font-light text-black dark:text-white">
+        <p className="text-sm leading-6 font-light">
           Hey! I&apos;m a{" "}
-          <span className="rounded px-1 bg-emerald-100 text-black dark:font-light">
+          <span className="rounded px-1 bg-emerald-100 text-black">
             {heroData.highlights.label}
           </span>{" "}
           {heroData.description}
