@@ -42,3 +42,11 @@ next-env.d.ts
 
 # view count data
 view-count.json
+
+# graphify local/generated files
+.agents/
+.codex/
+AGENTS.md
+graphify-out/
+raw/
+docs/
