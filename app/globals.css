@@ -215,3 +215,71 @@ body {
     transform: translateX(0);
   }
 }
+
+.hero-name-glitch {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  color: hsl(var(--foreground));
+}
+
+.group\/name:hover .hero-name-glitch {
+  opacity: 0.58;
+}
+
+.group\/name:hover .hero-name-glitch-top {
+  animation: heroNameGlitchTop 620ms steps(2, end) both;
+  clip-path: inset(0 0 48% 0);
+  transform: translate(-2px, -1px);
+}
+
+.group\/name:hover .hero-name-glitch-bottom {
+  animation: heroNameGlitchBottom 620ms steps(2, end) both;
+  clip-path: inset(43% 0 0 0);
+  transform: translate(2px, 1px);
+}
+
+@keyframes heroNameGlitchTop {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  18% {
+    transform: translate(-4px, -1px);
+  }
+  36% {
+    transform: translate(3px, 1px);
+  }
+  54% {
+    transform: translate(-3px, 2px);
+  }
+  72% {
+    transform: translate(4px, -2px);
+  }
+  84% {
+    transform: translate(-2px, 0);
+  }
+}
+
+@keyframes heroNameGlitchBottom {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  18% {
+    transform: translate(4px, 1px);
+  }
+  36% {
+    transform: translate(-3px, -1px);
+  }
+  54% {
+    transform: translate(3px, -2px);
+  }
+  72% {
+    transform: translate(-4px, 2px);
+  }
+  84% {
+    transform: translate(2px, 0);
+  }
+}
