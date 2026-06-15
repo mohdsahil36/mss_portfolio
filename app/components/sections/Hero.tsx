@@ -1,9 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FiHome, FiMapPin } from "react-icons/fi";
-import Profile from "@/public/favicon.png";
 import { heroData, heroSocials, resumeData } from "@/app/data/hero";
 import { Button } from "@/components/ui/button";
 
@@ -14,17 +13,50 @@ const fadeUp = {
 
 const transition = { duration: 0.35, ease: "easeOut" as const };
 
-const stack = [
-  "React",
-  "Next.js",
-  "TypeScript",
-  "Tailwind",
-  "Node.js",
-  "Express",
-  "NestJS",
-];
+function getCurrentStatus(schedule: typeof heroData.statusSchedule) {
+  const now = new Date();
+  const currentMinute = now.getHours() * 60 + now.getMinutes();
+
+  return schedule.find(({ startMinute, endMinute }) =>
+    startMinute < endMinute
+      ? currentMinute >= startMinute && currentMinute < endMinute
+      : currentMinute >= startMinute || currentMinute < endMinute,
+  )!;
+}
+
+function formatLocalTime() {
+  const timeParts = new Intl.DateTimeFormat("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+    timeZone: "Asia/Kolkata",
+  }).formatToParts(new Date());
+
+  const getPart = (type: "hour" | "minute" | "second") =>
+    timeParts.find((part) => part.type === type)?.value.padStart(2, "0") ??
+    "00";
+
+  return `${getPart("hour")}:${getPart("minute")}:${getPart("second")}`;
+}
 
 export default function Hero() {
+  const [currentStatus, setCurrentStatus] = useState(() =>
+    getCurrentStatus(heroData.statusSchedule),
+  );
+  const [localTime, setLocalTime] = useState(() => formatLocalTime());
+
+  useEffect(() => {
+    const updateClock = () => {
+      setCurrentStatus(getCurrentStatus(heroData.statusSchedule));
+      setLocalTime(formatLocalTime());
+    };
+
+    const interval = window.setInterval(updateClock, 1000);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
   return (
     <section className="scroll-mt-24" id="home">
       <motion.div
@@ -36,12 +68,22 @@ export default function Hero() {
       >
         <div className="flex items-center justify-between gap-3">
           <span className="relative text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
-            FIG_001 / Portfolio
+            {heroData.eyebrow}
           </span>
 
-          <span className="relative text-[11px] text-muted-foreground">
-            Available
-          </span>
+          {localTime ? (
+            <time
+              dateTime={localTime}
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-sm border border-border bg-background/75 px-2.5 py-1.5 text-xs font-medium leading-none text-foreground shadow-sm backdrop-blur dark:bg-black/30"
+            >
+              <span className="font-mono tabular-nums tracking-normal">
+                {localTime}
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                IST
+              </span>
+            </time>
+          ) : null}
         </div>
 
         <div className="relative mt-5">
@@ -52,17 +94,27 @@ export default function Hero() {
             transition={{ ...transition, delay: 0.05 }}
             className="flow-root"
           >
-            <div className="float-right mb-3 ml-5 w-full max-w-[5.75rem]">
-              <div className="relative aspect-square overflow-hidden rounded-md border border-border bg-muted shadow-sm">
-                <Image
-                  src={Profile}
-                  alt="Mohd Sahil Siddiqui"
-                  fill
-                  priority
-                  sizes="92px"
-                  className="object-cover"
-                />
-                <span className="absolute bottom-2 right-2 h-3.5 w-3.5 rounded-full border-2 border-background bg-emerald-500 dark:border-neutral-950" />
+            <div className="float-left mb-3 mr-5 w-full max-w-19">
+              <div className="relative aspect-square rounded-full">
+                <div className="relative h-full w-full overflow-hidden rounded-full border border-border bg-muted shadow-sm">
+                  <Image
+                    src={heroData.profileImage}
+                    alt={heroData.profileImageAlt}
+                    fill
+                    priority
+                    sizes="76px"
+                    className="object-cover"
+                  />
+                </div>
+                <button
+                  type="button"
+                  aria-label={currentStatus.message}
+                  className={`group/status absolute bottom-1 right-1 h-3.5 w-3.5 rounded-full border-2 border-background ${currentStatus.colorClass} outline-none focus-visible:ring-2 focus-visible:ring-ring dark:border-neutral-950`}
+                >
+                  <span className="pointer-events-none absolute bottom-0 left-full z-20 ml-2 w-max max-w-44 translate-x-1 rounded-md border border-border bg-background/80 px-2.5 py-1.5 text-left text-[11px] font-medium leading-4 text-foreground opacity-0 shadow-sm backdrop-blur-md transition group-hover/status:translate-x-0 group-hover/status:opacity-100 group-focus-visible/status:translate-x-0 group-focus-visible/status:opacity-100 dark:bg-neutral-950/80">
+                    {currentStatus.message}
+                  </span>
+                </button>
               </div>
             </div>
 
@@ -84,53 +136,64 @@ export default function Hero() {
               </h1>
 
               <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                Software Engineer (Frontend)
+                {heroData.role}
               </p>
 
               <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] leading-5 text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5">
-                  <FiMapPin className="h-3 w-3" />
-                  Bangalore, KA
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <FiHome className="h-3 w-3" />
-                  Kanpur, UP
-                </span>
+                {heroData.locations.map(({ label, icon: Icon }) => (
+                  <span
+                    key={label}
+                    className="inline-flex items-center gap-1.5"
+                  >
+                    <Icon className="h-3 w-3" />
+                    {label}
+                  </span>
+                ))}
               </div>
 
               <p className="mt-3 text-xs font-medium leading-5 text-foreground">
-                Frontends that feel clear, fast, and quietly polished.
+                {heroData.headline}
               </p>
 
               <p className="mt-3 text-[13px] leading-6 text-muted-foreground">
-                I build{" "}
-                <span className="font-medium text-foreground">
-                  scalable, high-performance web applications
-                </span>{" "}
-                across the full stack, with a focus on{" "}
-                <span className="font-medium text-foreground">
-                  clean architecture
-                </span>
-                , measurable impact, and interfaces that feel thoughtfully
-                designed.
+                {heroData.introSegments.map(({ text, emphasis }, index) =>
+                  emphasis ? (
+                    <span
+                      key={`${text}-${index}`}
+                      className="font-medium text-foreground"
+                    >
+                      {text}
+                    </span>
+                  ) : (
+                    <span key={`${text}-${index}`}>{text}</span>
+                  ),
+                )}
               </p>
 
               <p className="mt-2.5 text-xs leading-5 text-muted-foreground">
-                Most days, that means working with{" "}
-                {stack.map((item, index) => (
+                {heroData.stackIntro}{" "}
+                {heroData.stack.map((item, index) => (
                   <span key={item}>
                     <span className="font-medium text-foreground">{item}</span>
-                    {index < stack.length - 2
+                    {index < heroData.stack.length - 2
                       ? ", "
-                      : index === stack.length - 2
+                      : index === heroData.stack.length - 2
                         ? ", and "
                         : ""}
                   </span>
                 ))}
-                . The stack matters, but the real goal is{" "}
-                <span className="font-medium text-foreground">clarity</span>,{" "}
-                <span className="font-medium text-foreground">reliability</span>
-                , and a product experience that earns trust.
+                . {heroData.stackOutro}{" "}
+                {heroData.stackGoals.map((goal, index) => (
+                  <span key={goal}>
+                    <span className="font-medium text-foreground">{goal}</span>
+                    {index < heroData.stackGoals.length - 2
+                      ? ", "
+                      : index === heroData.stackGoals.length - 2
+                        ? ", and "
+                        : ""}
+                  </span>
+                ))}
+                , {heroData.stackClosing}
               </p>
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -140,7 +203,7 @@ export default function Hero() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Resume
+                    {resumeData.label}
                   </a>
                 </Button>
 

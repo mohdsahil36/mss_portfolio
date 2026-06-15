@@ -1,17 +1,93 @@
-import { FiMail, FiGithub, FiTwitter, FiLinkedin } from "react-icons/fi";
+import {
+  FiMail,
+  FiGithub,
+  FiTwitter,
+  FiLinkedin,
+  FiHome,
+  FiMapPin,
+} from "react-icons/fi";
+import Profile from "@/public/favicon.png";
 
 export const heroData = {
+  eyebrow: "FIG_001 / Portfolio",
   name: "Mohd Sahil Siddiqui",
-  age: "26",
-  pronouns: "he/him",
-  roles: ["Full Stack Developer", "Software Engineer"],
-  highlights: {
-    label: "Full Stack Developer",
-  },
-  description:
-    "from India who loves building efficient, scalable, and user-friendly applications. With experience at Merkle and currently at Simplify3X, I work across web, mobile, and backend projects, creating end-to-end solutions that are both intuitive and fun to use.",
-  currentSkills: ["React + Redux", "Tailwind CSS", "Node.js", "React Native"],
+  role: "Software Engineer (Frontend)",
+  profileImage: Profile,
+  profileImageAlt: "Mohd Sahil Siddiqui",
+  locations: [
+    {
+      label: "Bangalore, KA",
+      icon: FiMapPin,
+    },
+    {
+      label: "Kanpur, UP",
+      icon: FiHome,
+    },
+  ],
+  headline: "Frontends that feel clear, fast, and quietly polished.",
+  introSegments: [
+    { text: "I build " },
+    {
+      text: "scalable, high-performance web applications",
+      emphasis: true,
+    },
+    { text: " across the full stack, with a focus on " },
+    { text: "clean architecture", emphasis: true },
+    {
+      text: ", measurable impact, and interfaces that feel thoughtfully designed.",
+    },
+  ],
+  stackIntro: "Most days, that means working with",
+  stack: ["React", "Next.js", "TypeScript", "Tailwind", "Node.js", "Express"],
+  stackOutro: "The stack matters, but the real goal is",
+  stackGoals: ["clarity", "reliability"],
+  stackClosing: "and a product experience that earns trust.",
+  statusSchedule: [
+    {
+      startMinute: 7 * 60,
+      endMinute: 10 * 60,
+      colorClass: "bg-sky-500",
+      message: "Morning mode",
+    },
+    {
+      startMinute: 10 * 60,
+      endMinute: 19 * 60,
+      colorClass: "bg-red-500",
+      message: "At work, building things at Simplify3X.",
+    },
+    {
+      startMinute: 19 * 60,
+      endMinute: 19 * 60 + 30,
+      colorClass: "bg-lime-500",
+      message: "Wrap up",
+    },
+    {
+      startMinute: 19 * 60 + 30,
+      endMinute: 21 * 60,
+      colorClass: "bg-amber-500",
+      message: "Lifting weights",
+    },
+    {
+      startMinute: 21 * 60,
+      endMinute: 22 * 60 + 30,
+      colorClass: "bg-orange-500",
+      message: "Recharge Mode",
+    },
+    {
+      startMinute: 22 * 60 + 30,
+      endMinute: 24 * 60,
+      colorClass: "bg-indigo-500",
+      message: "Personal time. Usually tinkering or unwinding.",
+    },
+    {
+      startMinute: 0,
+      endMinute: 7 * 60,
+      colorClass: "bg-zinc-400",
+      message: "Offline..ish",
+    },
+  ],
 };
+
 export const heroSocials = [
   {
     label: "Email",
@@ -40,5 +116,5 @@ export const heroSocials = [
 ];
 export const resumeData = {
   label: "Resume",
-  href: "https://drive.google.com/file/d/1ZZgCsRJL25-lw2lxgIdxRoDTT0f_amxx/view?usp=drive_link",
+  href: "https://drive.google.com/file/d/1UUyN6kmVhCBg6S2zCBR72NMVTvgBuzjO/view?usp=drive_link",
 };
