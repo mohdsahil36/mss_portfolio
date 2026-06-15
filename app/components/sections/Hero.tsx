@@ -1,252 +1,145 @@
 "use client";
 
-import * as React from "react";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import Profile from "@/public/favicon.png";
-import { FlipWords } from "@/components/ui/flip-words";
-import { ActiveStatus } from "@/components/ui/active-status";
 import { heroData, heroSocials, resumeData } from "@/app/data/hero";
 import { Button } from "@/components/ui/button";
-import { LinkPreview } from "@/components/ui/link-preview";
-import { IndiaTime } from "@/components/time";
 
-const Goal = "/assets/Goal.mp4";
-
-const LocationGlobe = dynamic(
-  () => import("@/components/location-globe").then((mod) => mod.LocationGlobe),
-  { ssr: false }
-);
-
-/* === HORIZONTAL MOTION SETTINGS === */
-const fromLeft = {
-  hidden: { opacity: 0, x: -24 },
-  visible: { opacity: 1, x: 0 },
+const fadeUp = {
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0 },
 };
-const fromRight = {
-  hidden: { opacity: 0, x: 24 },
-  visible: { opacity: 1, x: 0 },
-};
-const fastEase = [0.22, 1, 0.36, 1];
-const fastTransition = { duration: 0.3, ease: fastEase };
+
+const transition = { duration: 0.35, ease: "easeOut" as const };
+
+const stack = [
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Tailwind",
+  "Node.js",
+  "Express",
+  "NestJS",
+];
 
 export default function Hero() {
-  const [videoLoaded, setVideoLoaded] = React.useState(false);
-  const videoRef = React.useRef<HTMLVideoElement>(null);
-
-  React.useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const ready = () => setVideoLoaded(true);
-
-    if (video.readyState >= 3) {
-      setVideoLoaded(true);
-    } else {
-      video.addEventListener("canplay", ready);
-      video.addEventListener("loadeddata", ready);
-    }
-
-    return () => {
-      video.removeEventListener("canplay", ready);
-      video.removeEventListener("loadeddata", ready);
-    };
-  }, []);
-
   return (
-    <div className="space-y-6 scroll-mt-24" id="home">
-      {/* HERO CARD */}
-      <div className="relative rounded-md border border-border p-4 overflow-hidden bg-card dark:bg-neutral-950">
-        {/* VIDEO BACKGROUND */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          {/* Gradient placeholder */}
-          <div
-            className={`absolute inset-0 bg-linear-to-br from-zinc-900 via-zinc-800 to-black transition-opacity duration-1200 ${
-              videoLoaded ? "opacity-0" : "opacity-100"
-            }`}
-          />
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1400 ${
-              videoLoaded ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <source src={Goal} type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/40 to-black/80" />
+    <section className="scroll-mt-24" id="home">
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        animate="visible"
+        transition={transition}
+        className="relative overflow-hidden rounded-md px-4 py-5 sm:px-5 sm:py-6"
+      >
+        <div className="flex items-center justify-between gap-3">
+          <span className="relative text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+            FIG_001 / Portfolio
+          </span>
+
+          <span className="relative text-[11px] text-muted-foreground">
+            Available
+          </span>
         </div>
 
-        {/* CONTENT */}
-        <div className="relative z-10 flex flex-col gap-4">
-          {/* TOP BAR */}
+        <div className="relative mt-5">
           <motion.div
-            variants={fromLeft}
+            variants={fadeUp}
             initial="hidden"
             animate="visible"
-            transition={{ ...fastTransition, delay: 0, ease: "easeInOut" }}
+            transition={{ ...transition, delay: 0.05 }}
+            className="grid gap-5 sm:grid-cols-[1fr_5.75rem] sm:items-start"
           >
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-light text-white">
-                greetings, I&apos;m
-              </span>
-              <div className="flex flex-col items-end gap-1.5">
-                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/15 backdrop-blur-md border border-white/30">
-                  <IndiaTime />
+            <div className="min-w-0">
+              <h1 className="text-[1.35rem] font-semibold leading-tight tracking-tight text-foreground sm:text-2xl">
+                {heroData.name}
+              </h1>
+
+              <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                Software Engineer (Frontend)
+              </p>
+
+              <p className="mt-3 text-xs font-medium leading-5 text-foreground">
+                Frontends that feel clear, fast, and quietly polished.
+              </p>
+
+              <p className="mt-3 text-[13px] leading-6 text-muted-foreground">
+                I build scalable, high-performance web applications across the
+                full stack, with a focus on clean architecture, measurable
+                impact, and interfaces that feel thoughtfully designed.
+              </p>
+
+              <p className="mt-2.5 text-xs leading-5 text-muted-foreground">
+                Most days, that means working with{" "}
+                {stack.map((item, index) => (
+                  <span key={item}>
+                    <span className="font-medium text-foreground">{item}</span>
+                    {index < stack.length - 2
+                      ? ", "
+                      : index === stack.length - 2
+                        ? ", and "
+                        : ""}
+                  </span>
+                ))}
+                . The stack matters, but the real goal is clarity, reliability,
+                and a product experience that earns trust.
+              </p>
+
+              <div className="mt-4 flex flex-wrap items-center gap-2">
+                <Button asChild className="rounded-md">
+                  <a
+                    href={resumeData.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Resume
+                  </a>
+                </Button>
+
+                <div className="flex items-center rounded-md border border-border bg-background/60 p-1 dark:bg-black/30">
+                  {heroSocials.map(({ label, href, icon: Icon }) => (
+                    <Button
+                      key={label}
+                      asChild
+                      variant="ghost"
+                      size="icon-sm"
+                      className="rounded-sm"
+                    >
+                      <a
+                        href={href}
+                        target={href.startsWith("http") ? "_blank" : undefined}
+                        rel={
+                          href.startsWith("http")
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
+                        aria-label={label}
+                      >
+                        <Icon />
+                      </a>
+                    </Button>
+                  ))}
                 </div>
-                <ActiveStatus />
+              </div>
+            </div>
+
+            <div className="relative mx-auto w-full max-w-[5.75rem] sm:mx-0">
+              <div className="relative aspect-square overflow-hidden rounded-md border border-border bg-muted shadow-sm">
+                <Image
+                  src={Profile}
+                  alt="Mohd Sahil Siddiqui"
+                  fill
+                  priority
+                  sizes="92px"
+                  className="object-cover"
+                />
+                <span className="absolute bottom-2 right-2 h-3.5 w-3.5 rounded-full border-2 border-background bg-emerald-500 dark:border-neutral-950" />
               </div>
             </div>
           </motion.div>
-
-          {/* NAME */}
-          <motion.div
-            variants={fromLeft}
-            initial="hidden"
-            animate="visible"
-            transition={{ ...fastTransition, delay: 0.05, ease: "easeInOut" }}
-            className="flex items-center gap-3"
-          >
-            <div className="relative h-12 w-12 overflow-hidden rounded-full sm:h-14 sm:w-14">
-              <Image
-                src={Profile}
-                alt="profile image"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <h1 className="text-xl font-light tracking-tight sm:text-2xl md:text-3xl text-white">
-              {heroData.name}
-            </h1>
-          </motion.div>
-
-          {/* META */}
-          <motion.div
-            variants={fromLeft}
-            initial="hidden"
-            animate="visible"
-            transition={{ ...fastTransition, delay: 0.1, ease: "easeInOut" }}
-            className="flex flex-wrap items-center gap-2 text-sm font-extralight text-white"
-          >
-            <span>
-              {heroData.age}, {heroData.pronouns}
-            </span>
-            <span className="opacity-40">•</span>
-            <FlipWords words={heroData.roles} className="text-sm text-white" />
-          </motion.div>
-
-          {/* CTA + SOCIALS */}
-          <motion.div
-            variants={fromLeft}
-            initial="hidden"
-            animate="visible"
-            transition={{ ...fastTransition, delay: 0.15, ease: "easeInOut" }}
-            className="mt-2 flex flex-col sm:flex-row sm:items-center sm:gap-3 gap-2"
-          >
-            <Button
-              asChild
-              className="bg-white text-black hover:bg-black hover:text-white rounded-md"
-            >
-              <a
-                href={resumeData.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Resume
-              </a>
-            </Button>
-
-            <div className="flex flex-wrap items-center gap-2">
-              {heroSocials.map(({ label, href, icon: Icon, preview }) => {
-                const isMailto = href.startsWith("mailto:");
-
-                return (
-                  <Button
-                    key={label}
-                    asChild={!isMailto}
-                    variant="ghost"
-                    className="p-0 bg-transparent hover:bg-transparent"
-                    onClick={
-                      isMailto
-                        ? (e) => {
-                            e.preventDefault();
-                            window.location.href = href;
-                          }
-                        : undefined
-                    }
-                  >
-                    {preview ? (
-                      <LinkPreview url={href}>
-                        <span className="w-10 h-10 flex items-center justify-center rounded-md transition hover:bg-black/35">
-                          <Icon className="text-white transition hover:scale-110" />
-                        </span>
-                      </LinkPreview>
-                    ) : (
-                      <span className="w-10 h-10 flex items-center justify-center rounded-md transition hover:bg-black/25">
-                        <Icon className="text-white transition hover:scale-110" />
-                      </span>
-                    )}
-                  </Button>
-                );
-              })}
-            </div>
-          </motion.div>
         </div>
-      </div>
-
-      {/* LOWER GRID */}
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-        <motion.div
-          variants={fromLeft}
-          initial="hidden"
-          animate="visible"
-          transition={{ ...fastTransition, delay: 0.2, ease: "easeInOut" }}
-        >
-          <LocationGlobe />
-        </motion.div>
-
-        <motion.div
-          variants={fromRight}
-          initial="hidden"
-          animate="visible"
-          transition={{ ...fastTransition, delay: 0.2, ease: "easeInOut" }}
-          className="rounded-md bg-card dark:bg-neutral-950 p-4 sm:p-5 flex flex-col gap-3"
-        >
-          <h3 className="text-base font-semibold">Currently working with:</h3>
-          <div className="flex flex-wrap gap-2">
-            {heroData.currentSkills.map((skill) => (
-              <span key={skill} className="rounded bg-muted px-2 py-1 text-xs">
-                {skill}
-              </span>
-            ))}
-          </div>
-          <span className="text-xs italic">
-            …and a few more skills up my sleeve!
-          </span>
-        </motion.div>
-      </div>
-
-      {/* DESCRIPTION */}
-      <motion.div
-        variants={fromLeft}
-        initial="hidden"
-        animate="visible"
-        transition={{ ...fastTransition, delay: 0.25, ease: "easeInOut" }}
-        className="rounded-md p-4 sm:p-5"
-      >
-        <p className="text-sm leading-6 font-light">
-          Hey! I&apos;m a{" "}
-          <span className="rounded px-1 bg-emerald-100 text-black">
-            {heroData.highlights.label}
-          </span>{" "}
-          {heroData.description}
-        </p>
       </motion.div>
-    </div>
+    </section>
   );
 }
