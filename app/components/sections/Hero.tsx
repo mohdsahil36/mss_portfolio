@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { FiHome, FiMapPin } from "react-icons/fi";
 import Profile from "@/public/favicon.png";
 import { heroData, heroSocials, resumeData } from "@/app/data/hero";
 import { Button } from "@/components/ui/button";
@@ -49,25 +50,69 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             transition={{ ...transition, delay: 0.05 }}
-            className="grid gap-5 sm:grid-cols-[1fr_5.75rem] sm:items-start"
+            className="flow-root"
           >
+            <div className="float-right mb-3 ml-5 w-full max-w-[5.75rem]">
+              <div className="relative aspect-square overflow-hidden rounded-md border border-border bg-muted shadow-sm">
+                <Image
+                  src={Profile}
+                  alt="Mohd Sahil Siddiqui"
+                  fill
+                  priority
+                  sizes="92px"
+                  className="object-cover"
+                />
+                <span className="absolute bottom-2 right-2 h-3.5 w-3.5 rounded-full border-2 border-background bg-emerald-500 dark:border-neutral-950" />
+              </div>
+            </div>
+
             <div className="min-w-0">
-              <h1 className="text-[1.35rem] font-semibold leading-tight tracking-tight text-foreground sm:text-2xl">
-                {heroData.name}
+              <h1 className="group/name relative inline-block text-[1.35rem] font-semibold leading-tight tracking-tight text-foreground sm:text-2xl">
+                <span className="relative z-10">{heroData.name}</span>
+                <span
+                  aria-hidden="true"
+                  className="hero-name-glitch hero-name-glitch-top"
+                >
+                  {heroData.name}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="hero-name-glitch hero-name-glitch-bottom"
+                >
+                  {heroData.name}
+                </span>
               </h1>
 
               <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
                 Software Engineer (Frontend)
               </p>
 
+              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] leading-5 text-muted-foreground">
+                <span className="inline-flex items-center gap-1.5">
+                  <FiMapPin className="h-3 w-3" />
+                  Bangalore, KA
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <FiHome className="h-3 w-3" />
+                  Kanpur, UP
+                </span>
+              </div>
+
               <p className="mt-3 text-xs font-medium leading-5 text-foreground">
                 Frontends that feel clear, fast, and quietly polished.
               </p>
 
               <p className="mt-3 text-[13px] leading-6 text-muted-foreground">
-                I build scalable, high-performance web applications across the
-                full stack, with a focus on clean architecture, measurable
-                impact, and interfaces that feel thoughtfully designed.
+                I build{" "}
+                <span className="font-medium text-foreground">
+                  scalable, high-performance web applications
+                </span>{" "}
+                across the full stack, with a focus on{" "}
+                <span className="font-medium text-foreground">
+                  clean architecture
+                </span>
+                , measurable impact, and interfaces that feel thoughtfully
+                designed.
               </p>
 
               <p className="mt-2.5 text-xs leading-5 text-muted-foreground">
@@ -82,8 +127,10 @@ export default function Hero() {
                         : ""}
                   </span>
                 ))}
-                . The stack matters, but the real goal is clarity, reliability,
-                and a product experience that earns trust.
+                . The stack matters, but the real goal is{" "}
+                <span className="font-medium text-foreground">clarity</span>,{" "}
+                <span className="font-medium text-foreground">reliability</span>
+                , and a product experience that earns trust.
               </p>
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -121,20 +168,6 @@ export default function Hero() {
                     </Button>
                   ))}
                 </div>
-              </div>
-            </div>
-
-            <div className="relative mx-auto w-full max-w-[5.75rem] sm:mx-0">
-              <div className="relative aspect-square overflow-hidden rounded-md border border-border bg-muted shadow-sm">
-                <Image
-                  src={Profile}
-                  alt="Mohd Sahil Siddiqui"
-                  fill
-                  priority
-                  sizes="92px"
-                  className="object-cover"
-                />
-                <span className="absolute bottom-2 right-2 h-3.5 w-3.5 rounded-full border-2 border-background bg-emerald-500 dark:border-neutral-950" />
               </div>
             </div>
           </motion.div>
