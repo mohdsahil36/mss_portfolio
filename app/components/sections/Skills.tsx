@@ -17,7 +17,7 @@ export default function Skills({
       ref={ref}
       id="skills"
       className="
-        mt-5 relative rounded-md py-4 overflow-hidden
+        mt-5 relative rounded-md p-4 overflow-hidden
         bg-white dark:bg-neutral-950 scroll-mt-18
       "
       initial={{ opacity: 0, x: sectionDirection }}
@@ -27,7 +27,7 @@ export default function Skills({
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <motion.h1
-        className="mb-3 text-lg font-semibold text-zinc-900 dark:text-white text-center font-[family-name:var(--font-playfair)] italic"
+        className="mb-3 text-lg font-semibold text-zinc-900 dark:text-white text-center font-(family-name:--font-playfair) italic"
         initial={{ opacity: 0, x: -30 }}
         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
         transition={{ duration: 0.25, ease: "easeOut", delay: 0.2 }}
