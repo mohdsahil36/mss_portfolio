@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { AnimatePresence, easeOut, motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { FiChevronDown } from "react-icons/fi";
+import { FiBriefcase, FiChevronDown } from "react-icons/fi";
 import { workExperience, workSection } from "@/app/data/workExperience";
 
 export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
@@ -24,9 +24,14 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
       transition={{ duration: 0.45, ease: easeOut }}
     >
       <div className="mb-7 border-b border-[#ededed] pb-4 dark:border-zinc-800">
-        <h2 className="text-[1.4rem] font-semibold leading-none sm:text-[1.6rem]">
-          {workSection.title}
-        </h2>
+        <div className="flex items-center gap-3">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ededed] bg-white dark:border-zinc-800 dark:bg-black">
+            <FiBriefcase className="h-4 w-4" />
+          </span>
+          <h2 className="text-[1.4rem] font-semibold leading-none sm:text-[1.6rem]">
+            {workSection.title}
+          </h2>
+        </div>
         <p className="mt-2 max-w-[28rem] text-[0.78rem] font-medium leading-5 text-[#747780] dark:text-zinc-400">
           {workSection.summary}
         </p>

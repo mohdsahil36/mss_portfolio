@@ -5,30 +5,45 @@ export interface Project {
   description: string;
   image: string;
   status: ProjectStatus;
+  type: string;
   github: string;
   live?: string;
   progress?: number;
   stack: string[];
+  highlights: string[];
   detailsLink?: string;
 }
+
+export const projectSection = {
+  eyebrow: "Currently building",
+  title: "Active side projects",
+  summary: "Side projects focused on product ideas and architecture validation",
+};
 
 export const projects: Project[] = [
   {
     title: "Devflow",
     description:
-      "A platform for everyone to track their progress, statuses, and goals in a single place.",
+      "A productivity workspace for tracking goals, progress, and personal operating rhythms. The build focuses on clear state modeling, structured activity flows, and a dashboard experience that stays readable as data grows.",
     image: "/projects/coming-soon.png",
     status: "Building Now",
+    type: "Side project",
     github: "https://github.com/mohdsahil36/DevFlow",
     progress: 10,
     stack: ["React", "TypeScript", "TailwindCSS", "Mongodb", "Express JS"],
+    highlights: [
+      "Status-driven progress tracking",
+      "Goal and activity organization",
+      "React-first product workflow",
+    ],
   },
   {
     title: "Replica of Notion",
     description:
-      "Designed and developed a Notion-inspired SaaS application using the MERN stack. • Built with React, Next.js, TypeScript, and Tailwind CSS for a responsive UI. • Implemented efficient state management using Zustand. • Secured backend operations using Convex and Clerk with authentication and session management.",
+      "A Notion-inspired document workspace built around authenticated collaboration patterns, responsive editing surfaces, and reliable document state. The project explores SaaS-style navigation, protected routes, and polished writing workflows.",
     image: "/projects/coming-soon.png",
     status: "Live",
+    type: "Side project",
     github: "https://github.com/mohdsahil36/Note-Taking-Application",
     stack: [
       "Next.js",
@@ -40,5 +55,10 @@ export const projects: Project[] = [
     ],
     progress: 100,
     live: "https://note-taking-application-two.vercel.app/",
+    highlights: [
+      "Document editing experience",
+      "Auth and backend workflows",
+      "Responsive SaaS interface patterns",
+    ],
   },
 ];

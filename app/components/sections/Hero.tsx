@@ -46,6 +46,7 @@ export default function Hero() {
   );
   const [localTime, setLocalTime] = useState(() => formatLocalTime());
   const EmailIcon = emailData.icon;
+  const StatusIcon = currentStatus.icon;
 
   useEffect(() => {
     const updateClock = () => {
@@ -77,8 +78,18 @@ export default function Hero() {
               <span className="font-mono text-[0.68rem] font-semibold uppercase text-[#151719]">
                 {heroData.availability}
               </span>
-              <span className="pointer-events-none absolute left-0 top-full z-10 mt-2 w-56 border border-[#e7e7e7] bg-white px-3 py-2 text-xs font-medium leading-5 text-[#151719] opacity-0 shadow-sm transition-opacity group-hover/status:opacity-100">
-                {currentStatus.message}
+              <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-3 flex w-72 -translate-x-1/2 items-center gap-4 rounded-[1.35rem] border border-[#e7e7e7] bg-white p-4 text-left opacity-0 shadow-[0_14px_45px_rgba(15,15,15,0.08)] transition-opacity group-hover/status:opacity-100">
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#f4f4f4] text-[#151719]">
+                  <StatusIcon className="h-7 w-7" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[0.75rem] font-bold uppercase text-[#6f3bb2]">
+                    {currentStatus.label}
+                  </span>
+                  <span className="mt-1 block text-[1rem] font-semibold leading-snug text-[#151719]">
+                    {currentStatus.message}
+                  </span>
+                </span>
               </span>
             </div>
 
