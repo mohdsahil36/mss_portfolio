@@ -13,14 +13,23 @@ import {
 import SimplifyIcon from "@/public/assets/Simplify3x.jpeg";
 import MerkleIcon from "@/public/assets/Merkle.jpeg";
 
+export const workSection = {
+  title: "Experience",
+  summary:
+    "A concise overview of roles, teams, and ownership driving the work.",
+};
+
 export const workExperience = [
   {
     company: "Simplify3X",
     role: "Software Engineer",
-    status: "Present",
+    status: "Current role",
     type: "current",
-    description:
-      "Worked on multiple projects focused on web development using React and Zustand, and now contribute across mobile apps, web frontend, backend development, and deployment in an end-to-end role.",
+    points: [
+      "Build production web interfaces with React, state management, and reusable frontend patterns.",
+      "Contribute across frontend, backend, mobile, and deployment workflows when product delivery needs it.",
+      "Focus on performance, maintainability, and shipping UI that feels clean under real usage.",
+    ],
     techStack: [
       { name: "ReactJS", icon: SiReact, color: "#61DAFB" },
       { name: "Redux", icon: SiRedux, color: "#764ABC" },
@@ -32,17 +41,19 @@ export const workExperience = [
     ],
     imageAlt: "Simplify3X profile",
     profile: SimplifyIcon,
-    isBlurred: true,
     location: "Bengaluru, KA, India",
     date: "March 2025 - Present",
   },
   {
     company: "Merkle",
     role: "Associate Frontend Developer",
-    status: "Past",
+    status: "Previous role",
     type: "past",
-    description:
-      "Started as an associate, getting trained on technologies like SFCC and JavaScript, and worked on multiple projects during this phase. Later gained hands-on experience with React, Node.js, and MongoDB, contributing to internal projects using these technologies.",
+    points: [
+      "Built frontend foundations across JavaScript, SCSS, React, and production delivery practices.",
+      "Contributed to internal tools and projects using React, Node.js, and MongoDB.",
+      "Learned team-scale workflows, code reviews, and reliable implementation habits in client-facing environments.",
+    ],
     techStack: [
       { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
       { name: "SCSS", icon: SiSass, color: "#CC6699" },
@@ -52,7 +63,6 @@ export const workExperience = [
     ],
     imageAlt: "Merkle profile",
     profile: MerkleIcon,
-    isBlurred: false,
     location: "Bengaluru, KA, India",
     date: "July 2022 - Feb 2024",
   },

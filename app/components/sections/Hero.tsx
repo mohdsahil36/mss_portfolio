@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { heroData, heroSocials, resumeData } from "@/app/data/hero";
+import { FiFileText } from "react-icons/fi";
+import { emailData, heroData, heroSocials, resumeData } from "@/app/data/hero";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 14 },
@@ -44,6 +45,7 @@ export default function Hero() {
     getCurrentStatus(heroData.statusSchedule),
   );
   const [localTime, setLocalTime] = useState(() => formatLocalTime());
+  const EmailIcon = emailData.icon;
 
   useEffect(() => {
     const updateClock = () => {
@@ -136,9 +138,17 @@ export default function Hero() {
               href={resumeData.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-10 items-center justify-center bg-black px-5 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-85"
+              className="inline-flex min-h-10 items-center justify-center gap-2 bg-black px-5 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-85"
             >
+              <FiFileText className="h-4 w-4" />
               {resumeData.label}
+            </a>
+            <a
+              href={emailData.href}
+              className="inline-flex min-h-10 items-center justify-center gap-2 border border-[#ededed] bg-white px-5 text-sm font-semibold text-[#151719] transition-colors duration-200 hover:bg-[#f7f7f7]"
+            >
+              <EmailIcon className="h-4 w-4" />
+              {emailData.label}
             </a>
             <div className="flex items-center gap-2">
               {heroSocials.map((social) => {

@@ -104,12 +104,6 @@ export const heroData = {
 
 export const heroSocials = [
   {
-    label: "Email",
-    href: "mailto:mohdsahilsiddiqui36@gmail.com",
-    icon: FiMail,
-    preview: false,
-  },
-  {
     label: "GitHub",
     href: "https://github.com/mohdsahil36",
     icon: FiGithub,
@@ -128,7 +122,12 @@ export const heroSocials = [
     preview: true,
   },
 ];
+export const emailData = {
+  label: "Email Me",
+  href: "mailto:mohdsahilsiddiqui36@gmail.com",
+  icon: FiMail,
+};
 export const resumeData = {
-  label: "Resume",
+  label: "View Resume",
   href: "https://drive.google.com/file/d/1UUyN6kmVhCBg6S2zCBR72NMVTvgBuzjO/view?usp=drive_link",
 };
