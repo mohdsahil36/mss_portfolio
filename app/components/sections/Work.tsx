@@ -45,7 +45,7 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
       ref={ref}
       id="work"
       className="
-        mt-5 rounded-md p-4 sm:p-6
+        mt-5 rounded-md py-4 sm:py-6
         bg-white dark:bg-neutral-950 scroll-mt-18
       "
       variants={sectionVariants}

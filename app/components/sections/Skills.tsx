@@ -17,7 +17,7 @@ export default function Skills({
       ref={ref}
       id="skills"
       className="
-        mt-5 relative rounded-md p-4 overflow-hidden
+        mt-5 relative rounded-md py-4 overflow-hidden
         bg-white dark:bg-neutral-950 scroll-mt-18
       "
       initial={{ opacity: 0, x: sectionDirection }}

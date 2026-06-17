@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { heroData, heroSocials, resumeData } from "@/app/data/hero";
-import { Button } from "@/components/ui/button";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 14 },
@@ -58,182 +57,114 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="scroll-mt-24" id="home">
+    <section className="relative w-full scroll-mt-24 overflow-hidden bg-white" id="home">
       <motion.div
         variants={fadeUp}
         initial="hidden"
         animate="visible"
         transition={transition}
-        className="relative overflow-hidden rounded-md px-4 py-5 sm:px-5 sm:py-6"
+        className="relative mx-auto min-h-[24rem] w-full overflow-visible bg-white px-0 py-10 text-[#151719] sm:py-12"
       >
-        <div className="flex items-center justify-between gap-3">
-          <span className="relative text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
-            {heroData.eyebrow}
-          </span>
+        <div className="mx-auto max-w-full">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="group/status relative flex items-center gap-3">
+              <span
+                className={`h-2 w-2 ${currentStatus.colorClass}`}
+                aria-label={currentStatus.message}
+              />
+              <span className="font-mono text-[0.68rem] font-semibold uppercase text-[#151719]">
+                {heroData.availability}
+              </span>
+              <span className="pointer-events-none absolute left-0 top-full z-10 mt-2 w-56 border border-[#e7e7e7] bg-white px-3 py-2 text-xs font-medium leading-5 text-[#151719] opacity-0 shadow-sm transition-opacity group-hover/status:opacity-100">
+                {currentStatus.message}
+              </span>
+            </div>
 
-          {localTime ? (
-            <time
-              dateTime={localTime}
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-sm border border-border bg-background/75 px-2.5 py-1.5 text-xs font-medium leading-none text-foreground shadow-sm backdrop-blur dark:bg-black/30"
+            {localTime ? (
+              <time
+                dateTime={localTime}
+                className="inline-flex items-center gap-1.5 border border-[#e9e9e9] bg-white px-3 py-2 text-xs font-semibold leading-none text-[#151719]"
+              >
+                <span className="font-mono tabular-nums">{localTime}</span>
+                <span className="font-mono text-[0.62rem] uppercase text-[#777b84]">
+                  IST
+                </span>
+              </time>
+            ) : null}
+          </div>
+
+          <h1 className="group/name relative mt-8 flex items-center gap-3 text-[1.82rem] font-semibold leading-[1.06] text-[#151719] sm:gap-4 sm:text-[2.55rem] lg:text-[2.9rem]">
+            <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-md border border-[#e7e7e7] bg-white sm:h-12 sm:w-12">
+              <Image
+                src={heroData.profileImage}
+                alt={heroData.profileImageAlt}
+                fill
+                priority
+                sizes="48px"
+                className="object-cover"
+              />
+            </span>
+            <span className="relative inline-block">
+              <span>{heroData.titleLine}</span>
+              <span className="hero-name-glitch hero-name-glitch-top">
+                {heroData.titleLine}
+              </span>
+              <span className="hero-name-glitch hero-name-glitch-bottom">
+                {heroData.titleLine}
+              </span>
+            </span>
+          </h1>
+
+          <p className="mt-2 text-[0.82rem] font-semibold text-[#777b84]">
+            {heroData.role}
+          </p>
+
+          <p className="mt-6 text-[1.28rem] font-semibold leading-snug text-[#151719] sm:text-[1.45rem]">
+            {heroData.impactLine}
+          </p>
+
+          <p className="mt-4 max-w-[36rem] text-[0.86rem] font-medium leading-7 text-[#62666f] sm:text-[0.88rem]">
+            {heroData.summary}
+          </p>
+
+          <p className="mt-4 max-w-[36rem] text-[0.86rem] font-medium leading-7 text-[#62666f] sm:text-[0.88rem]">
+            {heroData.stackSummary}
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href={resumeData.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-10 items-center justify-center bg-black px-5 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-85"
             >
-              <span className="font-mono tabular-nums tracking-normal">
-                {localTime}
-              </span>
-              <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-                IST
-              </span>
-            </time>
-          ) : null}
-        </div>
+              {resumeData.label}
+            </a>
+            <div className="flex items-center gap-2">
+              {heroSocials.map((social) => {
+                const Icon = social.icon;
 
-        <div className="relative mt-5">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            transition={{ ...transition, delay: 0.05 }}
-            className="flow-root"
-          >
-            <div className="float-left mb-3 mr-5 w-full max-w-19">
-              <div className="relative aspect-square rounded-full">
-                <div className="relative h-full w-full overflow-hidden rounded-full border border-border bg-muted shadow-sm">
-                  <Image
-                    src={heroData.profileImage}
-                    alt={heroData.profileImageAlt}
-                    fill
-                    priority
-                    sizes="76px"
-                    className="object-cover"
-                  />
-                </div>
-                <button
-                  type="button"
-                  aria-label={currentStatus.message}
-                  className={`group/status absolute bottom-1 right-1 h-3.5 w-3.5 rounded-full border-2 border-background ${currentStatus.colorClass} outline-none focus-visible:ring-2 focus-visible:ring-ring dark:border-neutral-950`}
-                >
-                  <span className="pointer-events-none absolute bottom-0 left-full z-20 ml-2 w-max max-w-44 translate-x-1 rounded-md border border-border bg-background/80 px-2.5 py-1.5 text-left text-[11px] font-medium leading-4 text-foreground opacity-0 shadow-sm backdrop-blur-md transition group-hover/status:translate-x-0 group-hover/status:opacity-100 group-focus-visible/status:translate-x-0 group-focus-visible/status:opacity-100 dark:bg-neutral-950/80">
-                    {currentStatus.message}
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            <div className="min-w-0">
-              <h1 className="group/name relative inline-block text-[1.35rem] font-semibold leading-tight tracking-tight text-foreground sm:text-2xl">
-                <span className="relative z-10">{heroData.name}</span>
-                <span
-                  aria-hidden="true"
-                  className="hero-name-glitch hero-name-glitch-top"
-                >
-                  {heroData.name}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="hero-name-glitch hero-name-glitch-bottom"
-                >
-                  {heroData.name}
-                </span>
-              </h1>
-
-              <p className="mt-1.5 text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                {heroData.role}
-              </p>
-
-              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] leading-5 text-muted-foreground">
-                {heroData.locations.map(({ label, icon: Icon }) => (
-                  <span
-                    key={label}
-                    className="inline-flex items-center gap-1.5"
-                  >
-                    <Icon className="h-3 w-3" />
-                    {label}
-                  </span>
-                ))}
-              </div>
-
-              <p className="mt-3 text-xs font-medium leading-5 text-foreground">
-                {heroData.headline}
-              </p>
-
-              <p className="mt-3 text-[13px] leading-6 text-muted-foreground">
-                {heroData.introSegments.map(({ text, emphasis }, index) =>
-                  emphasis ? (
-                    <span
-                      key={`${text}-${index}`}
-                      className="font-medium text-foreground"
-                    >
-                      {text}
-                    </span>
-                  ) : (
-                    <span key={`${text}-${index}`}>{text}</span>
-                  ),
-                )}
-              </p>
-
-              <p className="mt-2.5 text-xs leading-5 text-muted-foreground">
-                {heroData.stackIntro}{" "}
-                {heroData.stack.map((item, index) => (
-                  <span key={item}>
-                    <span className="font-medium text-foreground">{item}</span>
-                    {index < heroData.stack.length - 2
-                      ? ", "
-                      : index === heroData.stack.length - 2
-                        ? ", and "
-                        : ""}
-                  </span>
-                ))}
-                . {heroData.stackOutro}{" "}
-                {heroData.stackGoals.map((goal, index) => (
-                  <span key={goal}>
-                    <span className="font-medium text-foreground">{goal}</span>
-                    {index < heroData.stackGoals.length - 2
-                      ? ", "
-                      : index === heroData.stackGoals.length - 2
-                        ? ", and "
-                        : ""}
-                  </span>
-                ))}
-                , {heroData.stackClosing}
-              </p>
-
-              <div className="mt-4 flex flex-wrap items-center gap-2">
-                <Button asChild className="rounded-md">
+                return (
                   <a
-                    href={resumeData.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    key={social.label}
+                    href={social.href}
+                    target={
+                      social.href.startsWith("mailto:") ? undefined : "_blank"
+                    }
+                    rel={
+                      social.href.startsWith("mailto:")
+                        ? undefined
+                        : "noopener noreferrer"
+                    }
+                    aria-label={social.label}
+                    className="inline-flex h-10 w-10 items-center justify-center border border-[#ededed] bg-white text-[#777b84] transition-colors duration-200 hover:bg-[#f7f7f7] hover:text-[#151719]"
                   >
-                    {resumeData.label}
+                    <Icon className="h-4 w-4" />
                   </a>
-                </Button>
-
-                <div className="flex items-center rounded-md border border-border bg-background/60 p-1 dark:bg-black/30">
-                  {heroSocials.map(({ label, href, icon: Icon }) => (
-                    <Button
-                      key={label}
-                      asChild
-                      variant="ghost"
-                      size="icon-sm"
-                      className="rounded-sm"
-                    >
-                      <a
-                        href={href}
-                        target={href.startsWith("http") ? "_blank" : undefined}
-                        rel={
-                          href.startsWith("http")
-                            ? "noopener noreferrer"
-                            : undefined
-                        }
-                        aria-label={label}
-                      >
-                        <Icon />
-                      </a>
-                    </Button>
-                  ))}
-                </div>
-              </div>
+                );
+              })}
             </div>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
     </section>

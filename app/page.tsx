@@ -4,7 +4,6 @@ import Skills from "./components/sections/Skills";
 import Contact from "./components/sections/Contact";
 import Projects from "./components/sections/Projects";
 import { SafeMovingLabels } from "./components/SafeMovingLabels";
-import { SectionSeparator } from "./components/section-separator";
 import ScrollManager from "./components/ScrollManager";
 
 export default function Home() {
@@ -13,13 +12,9 @@ export default function Home() {
       <main>
         <ScrollManager />
         <Hero />
-        <SectionSeparator />
         <Work sectionIndex={0} />
-        <SectionSeparator />
         <Projects sectionIndex={1} />
-        <SectionSeparator />
         <Skills sectionIndex={2} />
-        <SectionSeparator />
         <SafeMovingLabels
           labels={[
             "Execution",

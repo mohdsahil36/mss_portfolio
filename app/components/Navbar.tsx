@@ -28,7 +28,7 @@ export default function Navbar() {
       transition={{ duration: 0.2, ease: "easeOut" }}
       className="sticky top-0 z-50"
     >
-      <div className="mx-auto md:max-w-2xl flex items-center justify-between px-2 pt-4">
+      <div className="mx-auto flex items-center justify-between px-0 pt-4">
         <button
           onClick={() => {
             history.replaceState(

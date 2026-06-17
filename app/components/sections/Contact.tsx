@@ -21,7 +21,7 @@ export default function Contact({
       ref={ref}
       id="contact"
       className="
-        mt-5 relative rounded-md p-4
+        mt-5 relative rounded-md py-4
         bg-white dark:bg-neutral-950
       "
       initial={{ opacity: 0, x: sectionDirection }}

@@ -12,6 +12,21 @@ export const heroData = {
   eyebrow: "FIG_001 / Portfolio",
   name: "Mohd Sahil Siddiqui",
   role: "Software Engineer (Frontend)",
+  availability: "Eager to contribute to products with purpose",
+  titleLine: "Mohd Sahil Siddiqui",
+  impactLine: "Scale, Ownership, Impact.",
+  summary:
+    "I build scalable, high-performance web applications across the full stack, with a focus on clean architecture, measurable impact, and interfaces that feel thoughtfully designed.",
+  stackSummary:
+    "Most days, that means working with React, Next.js, TypeScript, Tailwind, Node.js, and Express. The stack matters, but the real goal is clarity, and reliability, and a product experience that earns trust.",
+  primaryCta: {
+    label: "View Case Studies",
+    href: "#projects",
+  },
+  secondaryCta: {
+    label: "Get in touch",
+    href: "#contact",
+  },
   profileImage: Profile,
   profileImageAlt: "Mohd Sahil Siddiqui",
   locations: [
@@ -24,7 +39,6 @@ export const heroData = {
       icon: FiHome,
     },
   ],
-  headline: "Frontends that feel clear, fast, and quietly polished.",
   introSegments: [
     { text: "I build " },
     {

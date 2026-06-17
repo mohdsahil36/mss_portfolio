@@ -23,7 +23,7 @@ export function CinematicPreloader() {
     >
       {visible && (
         <motion.div
-          className="fixed inset-0 z-9999 flex items-center justify-center bg-background px-6 text-foreground"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-background px-6 text-foreground"
           initial={{ opacity: 1 }}
           exit={{
             opacity: 0,
@@ -57,7 +57,7 @@ export function CinematicPreloader() {
                   repeatDelay: 0.15,
                 }}
               />
-              <div className="relative h-[4.25rem] w-[4.25rem] overflow-hidden rounded-full bg-muted ring-1 ring-border">
+              <div className="relative h-17 w-17 overflow-hidden rounded-full bg-muted ring-1 ring-border">
                 <Image
                   src={Profile}
                   alt="Mohd Sahil Siddiqui"

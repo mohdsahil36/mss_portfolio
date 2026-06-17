@@ -26,7 +26,7 @@ export default function Projects({
         isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: sectionDirection }
       }
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="mt-6 p-4 scroll-mt-18"
+      className="mt-6 py-4 scroll-mt-18"
       id="projects"
     >
       <h1 className="mb-6 text-center text-lg font-semibold font-[family-name:var(--font-playfair)] italic">
