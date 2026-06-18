@@ -291,7 +291,7 @@ export default function BeyondCode({
     <motion.section
       ref={ref}
       id="beyond-code"
-      className="mt-4 scroll-mt-18 bg-white py-7 text-[#151719] dark:bg-neutral-950 dark:text-white"
+      className="mt-4 scroll-mt-18 bg-background py-7 text-[#151719] dark:text-white"
       initial={{ opacity: 0, x: sectionDirection }}
       animate={
         isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: sectionDirection }
@@ -299,7 +299,7 @@ export default function BeyondCode({
       transition={{ duration: 0.45, ease: easeOut }}
     >
       <div className="mb-6 flex items-center gap-3">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ededed] bg-white dark:border-zinc-800 dark:bg-black">
+        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ededed] bg-white dark:border-zinc-800 dark:bg-background">
           <SectionIcon className="h-4 w-4" />
         </span>
         <h2 className="text-[1.5rem] font-semibold leading-tight sm:text-[1.7rem]">
@@ -311,7 +311,7 @@ export default function BeyondCode({
         {beyondCodeSection.summary}
       </p>
 
-      <div className="mt-6 rounded-[1.25rem] border border-[#e8e8e8] bg-white p-5 dark:border-zinc-800 dark:bg-black sm:p-6">
+      <div className="mt-6 rounded-[1.25rem] border border-[#e8e8e8] bg-white p-5 dark:border-zinc-800 dark:bg-background sm:p-6">
         <div className="flex flex-wrap gap-2">
           {interestsData.map((item) => {
             const Icon = item.icon;
@@ -319,7 +319,7 @@ export default function BeyondCode({
             return (
               <span
                 key={item.label}
-                className="inline-flex min-h-9 items-center gap-2 rounded-full border border-[#ededed] bg-white px-3 text-[0.82rem] font-semibold text-[#565a61] dark:border-zinc-800 dark:bg-black dark:text-zinc-400"
+                className="inline-flex min-h-9 items-center gap-2 rounded-full border border-[#ededed] bg-white px-3 text-[0.82rem] font-semibold text-[#565a61] dark:border-zinc-800 dark:bg-background dark:text-zinc-400"
               >
                 <Icon className="h-4 w-4 text-[#8a8d95]" />
                 {item.label}
@@ -328,9 +328,9 @@ export default function BeyondCode({
           })}
         </div>
 
-        <div className="mt-6 overflow-hidden rounded-[1rem] border border-[#ededed] dark:border-zinc-800">
+        <div className="mt-6 overflow-hidden rounded-[1rem] border border-[#ededed] dark:border-zinc-800 dark:bg-background">
           <div className="flex flex-col gap-4 border-b border-[#ededed] p-3 dark:border-zinc-800 sm:flex-row sm:items-center sm:justify-between">
-            <div className="inline-flex w-fit rounded-xl border border-[#ededed] bg-white p-1 dark:border-zinc-800 dark:bg-black">
+            <div className="inline-flex w-fit rounded-xl border border-[#ededed] bg-white p-1 dark:border-zinc-800 dark:bg-background">
               {codingProfileData.tabs.map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.label;
@@ -363,7 +363,7 @@ export default function BeyondCode({
                 <button
                   type="button"
                   onClick={() => setIsYearMenuOpen((isOpen) => !isOpen)}
-                  className="inline-flex min-h-9 min-w-24 items-center justify-between gap-3 rounded-lg border border-[#ededed] bg-white px-3 text-[0.78rem] font-semibold text-[#151719] transition-colors hover:bg-[#f8f8f8] dark:border-zinc-800 dark:bg-black dark:text-white dark:hover:bg-zinc-900"
+                  className="inline-flex min-h-9 min-w-24 items-center justify-between gap-3 rounded-lg border border-[#ededed] bg-white px-3 text-[0.78rem] font-semibold text-[#151719] transition-colors hover:bg-[#f8f8f8] dark:border-zinc-800 dark:bg-background dark:text-white dark:hover:bg-zinc-900"
                   aria-expanded={isYearMenuOpen}
                   aria-haspopup="listbox"
                 >
@@ -378,7 +378,7 @@ export default function BeyondCode({
                 {isYearMenuOpen ? (
                   <div
                     role="listbox"
-                    className="absolute right-0 top-11 z-20 w-24 overflow-hidden rounded-xl border border-[#ededed] bg-white p-1 shadow-[0_14px_35px_rgba(15,23,42,0.08)] dark:border-zinc-800 dark:bg-black"
+                    className="absolute right-0 top-11 z-20 w-24 overflow-hidden rounded-xl border border-[#ededed] bg-white p-1 shadow-[0_14px_35px_rgba(15,23,42,0.08)] dark:border-zinc-800 dark:bg-background"
                   >
                     {codingProfileData.years.map((item) => (
                       <button
@@ -457,12 +457,12 @@ export default function BeyondCode({
                   })}
                 </div>
 
-                <div className="mt-4 overflow-x-auto rounded-xl border border-[#ededed] bg-[#fbfbfb] p-3 dark:border-zinc-800 dark:bg-zinc-950">
+                <div className="mt-4 overflow-x-auto rounded-xl border border-[#ededed] bg-[#fbfbfb] p-3 dark:border-zinc-800 dark:bg-background">
                   <div className="mb-3 flex items-center justify-between gap-3">
                     <p className="font-mono text-[0.62rem] font-semibold uppercase text-[#9a9da5]">
                       Contribution map
                     </p>
-                    <p className="rounded-lg border border-[#ededed] bg-white px-2.5 py-1 text-[0.7rem] font-semibold text-[#565a61] dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
+                    <p className="rounded-lg border border-[#ededed] bg-white px-2.5 py-1 text-[0.7rem] font-semibold text-[#565a61] dark:border-zinc-800 dark:bg-background dark:text-zinc-300">
                       {activeContributionDay?.date
                         ? activeContributionDay.date
                         : "Hover a day"}
@@ -540,7 +540,7 @@ export default function BeyondCode({
               </>
             ) : (
               <div className="grid gap-3 sm:grid-cols-[0.85fr_1.15fr]">
-                <div className="rounded-xl border border-[#ededed] bg-[#fbfbfb] p-4 dark:border-zinc-800 dark:bg-zinc-950">
+                <div className="rounded-xl border border-[#ededed] bg-[#fbfbfb] p-4 dark:border-zinc-800 dark:bg-background">
                   <p className="font-mono text-[0.62rem] font-semibold uppercase text-[#9a9da5]">
                     Problems solved
                   </p>

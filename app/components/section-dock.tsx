@@ -181,7 +181,7 @@ export function SectionDock() {
               </AnimatePresence>
             </span>
 
-            <span className="relative h-7 min-w-11 shrink-0 overflow-hidden rounded-full bg-white/8 px-2 py-1 font-mono text-[0.64rem] font-semibold text-white/54">
+            <span className="relative flex h-7 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/8 font-mono text-[0.64rem] font-semibold tabular-nums text-white/54">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
                   key={activeIndex}
@@ -189,7 +189,7 @@ export function SectionDock() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.14, ease: "easeOut" }}
-                  className="block"
+                  className="absolute inset-0 flex items-center justify-center"
                 >
                   {activeIndex + 1}/{dockSections.length}
                 </motion.span>

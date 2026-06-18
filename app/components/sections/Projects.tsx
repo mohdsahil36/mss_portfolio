@@ -29,7 +29,7 @@ export default function Projects({
     >
       <div className="mb-7">
         <div className="flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ededed] bg-white dark:border-zinc-800 dark:bg-black">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ededed] bg-white dark:border-zinc-800 dark:bg-background">
             <FiTool className="h-4 w-4" />
           </span>
           <h2 className="text-[1.55rem] font-semibold leading-none sm:text-[1.75rem]">
@@ -53,7 +53,7 @@ export default function Projects({
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               transition={{ duration: 0.34, ease: easeOut, delay: index * 0.08 }}
-              className="border border-[#e8e8e8] bg-white p-5 transition-colors hover:border-[#d8d8d8] dark:border-zinc-800 dark:bg-black"
+              className="border border-[#e8e8e8] bg-white p-5 transition-colors hover:border-[#d8d8d8] dark:border-zinc-800 dark:bg-background"
             >
               <div className="grid gap-5 md:grid-cols-[1.05fr_0.95fr] md:items-start">
                 <div className="min-w-0">
@@ -100,13 +100,13 @@ export default function Projects({
                     {visibleStack.map((tech) => (
                       <span
                         key={tech}
-                        className="border border-[#e7e7e7] bg-white px-2.5 py-1.5 text-[0.72rem] font-medium text-[#747780] dark:border-zinc-800 dark:bg-black dark:text-zinc-400"
+                        className="border border-[#e7e7e7] bg-white px-2.5 py-1.5 text-[0.72rem] font-medium text-[#747780] dark:border-zinc-800 dark:bg-background dark:text-zinc-400"
                       >
                         {tech}
                       </span>
                     ))}
                     {hiddenStackCount > 0 ? (
-                      <span className="border border-[#e7e7e7] bg-white px-2.5 py-1.5 text-[0.72rem] font-medium text-[#747780] dark:border-zinc-800 dark:bg-black dark:text-zinc-400">
+                      <span className="border border-[#e7e7e7] bg-white px-2.5 py-1.5 text-[0.72rem] font-medium text-[#747780] dark:border-zinc-800 dark:bg-background dark:text-zinc-400">
                         +{hiddenStackCount}
                       </span>
                     ) : null}

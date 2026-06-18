@@ -8,7 +8,7 @@ interface QuoteSectionProps {
 export function QuoteSection({ quote, author }: QuoteSectionProps) {
   return (
     <div className="relative w-full py-8">
-      <div className="relative overflow-hidden rounded-[1.25rem] border border-[#e8e8e8] bg-white px-5 py-8 text-center dark:border-zinc-800 dark:bg-black sm:px-8 sm:py-10">
+      <div className="relative overflow-hidden rounded-[1.25rem] border border-[#e8e8e8] bg-white px-5 py-8 text-center dark:border-zinc-800 dark:bg-background sm:px-8 sm:py-10">
         <span className="pointer-events-none absolute left-5 top-2 text-[5rem] font-semibold leading-none text-[#ededed] dark:text-zinc-900">
           “
         </span>

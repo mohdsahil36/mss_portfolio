@@ -16,7 +16,7 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
     <motion.section
       ref={ref}
       id="work"
-      className="mt-5 scroll-mt-18 bg-white py-7 text-[#151719] dark:bg-neutral-950 dark:text-white"
+      className="mt-5 scroll-mt-18 bg-background py-7 text-[#151719] dark:text-white"
       initial={{ opacity: 0, x: sectionDirection }}
       animate={
         isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: sectionDirection }
@@ -25,7 +25,7 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
     >
       <div className="mb-7 border-b border-[#ededed] pb-4 dark:border-zinc-800">
         <div className="flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ededed] bg-white dark:border-zinc-800 dark:bg-black">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ededed] bg-white dark:border-zinc-800 dark:bg-background">
             <FiBriefcase className="h-4 w-4" />
           </span>
           <h2 className="text-[1.4rem] font-semibold leading-none sm:text-[1.6rem]">
@@ -72,7 +72,7 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <div className="flex items-center gap-2.5">
-                      <span className="relative h-7 w-7 shrink-0 overflow-hidden rounded-md border border-[#e7e7e7] bg-white dark:border-zinc-800 dark:bg-black">
+                      <span className="relative h-7 w-7 shrink-0 overflow-hidden rounded-md border border-[#e7e7e7] bg-white dark:border-zinc-800 dark:bg-background">
                         <Image
                           src={item.profile}
                           alt={item.imageAlt}
@@ -147,7 +147,7 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
                           return (
                             <span
                               key={tech.name}
-                              className="inline-flex items-center gap-1.5 border border-[#ededed] bg-white px-2.5 py-1.5 text-[0.68rem] font-semibold text-[#747780] transition-colors hover:border-[#d8d8d8] hover:text-[#151719] dark:border-zinc-800 dark:bg-black dark:text-zinc-400 dark:hover:text-white"
+                              className="inline-flex items-center gap-1.5 border border-[#ededed] bg-white px-2.5 py-1.5 text-[0.68rem] font-semibold text-[#747780] transition-colors hover:border-[#d8d8d8] hover:text-[#151719] dark:border-zinc-800 dark:bg-background dark:text-zinc-400 dark:hover:text-white"
                             >
                               <Icon size={14} style={{ color: tech.color }} />
                               {tech.name}

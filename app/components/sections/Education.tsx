@@ -18,7 +18,7 @@ export default function Education({
     <motion.section
       ref={ref}
       id="education"
-      className="mt-7 scroll-mt-18 bg-white py-7 text-[#151719] dark:bg-neutral-950 dark:text-white"
+      className="mt-7 scroll-mt-18 bg-background py-7 text-[#151719] dark:text-white"
       initial={{ opacity: 0, x: sectionDirection }}
       animate={
         isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: sectionDirection }
@@ -26,7 +26,7 @@ export default function Education({
       transition={{ duration: 0.45, ease: easeOut }}
     >
       <div className="mb-6 flex items-center gap-3">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ededed] bg-white dark:border-zinc-800 dark:bg-black">
+        <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ededed] bg-white dark:border-zinc-800 dark:bg-background">
           <SectionIcon className="h-4 w-4" />
         </span>
         <h2 className="text-[1.5rem] font-semibold leading-tight sm:text-[1.7rem]">
@@ -38,9 +38,9 @@ export default function Education({
         {educationSection.summary}
       </p>
 
-      <div className="mt-6 rounded-[1.25rem] border border-[#e8e8e8] bg-white p-5 dark:border-zinc-800 dark:bg-black sm:p-6">
+      <div className="mt-6 rounded-[1.25rem] border border-[#e8e8e8] bg-white p-5 dark:border-zinc-800 dark:bg-background sm:p-6">
         <div className="flex gap-4">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#ededed] bg-[#fafafa] text-sm font-semibold text-[#151719] dark:border-zinc-800 dark:bg-zinc-950 dark:text-white">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#ededed] bg-[#fafafa] text-sm font-semibold text-[#151719] dark:border-zinc-800 dark:bg-background dark:text-white">
             SRM
           </span>
           <div>

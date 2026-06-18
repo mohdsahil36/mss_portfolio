@@ -63,9 +63,14 @@ export default function RootLayout({
           <CinematicPreloader />
 
           <LoadingGate>
-            <ThemeProvider attribute="class" defaultTheme="light">
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem={false}
+              disableTransitionOnChange
+            >
               <ScrollProgress />
-              <header className="sticky top-0 z-[70] h-16 w-full border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-neutral-950">
+              <header className="sticky top-0 z-[70] isolate h-16 w-full border-b border-zinc-200 bg-[hsl(var(--background))] dark:border-zinc-800">
                 <div className="mx-auto h-full w-full px-3 md:w-[40%] md:px-0">
                   <Navbar />
                 </div>

@@ -60,13 +60,16 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full scroll-mt-24 overflow-hidden bg-white" id="home">
+    <section
+      className="relative w-full scroll-mt-24 overflow-hidden bg-background"
+      id="home"
+    >
       <motion.div
         variants={fadeUp}
         initial="hidden"
         animate="visible"
         transition={transition}
-        className="relative mx-auto min-h-[24rem] w-full overflow-visible bg-white px-0 py-10 text-[#151719] sm:py-12"
+        className="relative mx-auto min-h-[24rem] w-full overflow-visible bg-background px-0 py-10 text-[#151719] dark:text-white sm:py-12"
       >
         <div className="mx-auto max-w-full">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -75,18 +78,18 @@ export default function Hero() {
                 className={`h-2 w-2 ${currentStatus.colorClass}`}
                 aria-label={currentStatus.message}
               />
-              <span className="font-mono text-[0.68rem] font-semibold uppercase text-[#151719]">
+              <span className="font-mono text-[0.68rem] font-semibold uppercase text-[#151719] dark:text-white">
                 {heroData.availability}
               </span>
-              <span className="pointer-events-none absolute left-0 top-full z-10 mt-2 flex w-40 items-center gap-2 rounded-xl border border-[#e7e7e7] bg-white p-2 text-left opacity-0 shadow-[0_10px_28px_rgba(15,15,15,0.08)] transition-opacity group-hover/status:opacity-100">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#f4f4f4] text-[#151719]">
+              <span className="pointer-events-none absolute left-0 top-full z-10 mt-2 flex w-40 items-center gap-2 rounded-xl border border-[#e7e7e7] bg-white p-2 text-left opacity-0 shadow-[0_10px_28px_rgba(15,15,15,0.08)] transition-opacity group-hover/status:opacity-100 dark:border-zinc-800 dark:bg-background dark:shadow-[0_10px_28px_rgba(0,0,0,0.4)]">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#f4f4f4] text-[#151719] dark:bg-zinc-900 dark:text-white">
                   <StatusIcon className="h-4 w-4" />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-[0.58rem] font-bold uppercase text-[#6f3bb2]">
+                  <span className="block text-[0.58rem] font-bold uppercase text-[#6f3bb2] dark:text-violet-300">
                     {currentStatus.label}
                   </span>
-                  <span className="mt-0.5 block text-[0.72rem] font-semibold leading-snug text-[#151719]">
+                  <span className="mt-0.5 block text-[0.72rem] font-semibold leading-snug text-[#151719] dark:text-white">
                     {currentStatus.message}
                   </span>
                 </span>
@@ -96,18 +99,18 @@ export default function Hero() {
             {localTime ? (
               <time
                 dateTime={localTime}
-                className="inline-flex items-center gap-1.5 border border-[#e9e9e9] bg-white px-3 py-2 text-xs font-semibold leading-none text-[#151719]"
+                className="inline-flex items-center gap-1.5 border border-[#e9e9e9] bg-white px-3 py-2 text-xs font-semibold leading-none text-[#151719] dark:border-zinc-800 dark:bg-background dark:text-white"
               >
                 <span className="font-mono tabular-nums">{localTime}</span>
-                <span className="font-mono text-[0.62rem] uppercase text-[#777b84]">
+                <span className="font-mono text-[0.62rem] uppercase text-[#777b84] dark:text-zinc-500">
                   IST
                 </span>
               </time>
             ) : null}
           </div>
 
-          <h1 className="group/name relative mt-8 flex items-center gap-3 text-[1.82rem] font-semibold leading-[1.06] text-[#151719] sm:gap-4 sm:text-[2.55rem] lg:text-[2.9rem]">
-            <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-md border border-[#e7e7e7] bg-white sm:h-12 sm:w-12">
+          <h1 className="group/name relative mt-8 flex items-center gap-3 text-[1.82rem] font-semibold leading-[1.06] text-[#151719] dark:text-white sm:gap-4 sm:text-[2.55rem] lg:text-[2.9rem]">
+            <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-md border border-[#e7e7e7] bg-white dark:border-zinc-800 dark:bg-background sm:h-12 sm:w-12">
               <Image
                 src={heroData.profileImage}
                 alt={heroData.profileImageAlt}
@@ -128,19 +131,19 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="mt-2 text-[0.82rem] font-semibold text-[#777b84]">
+          <p className="mt-2 text-[0.82rem] font-semibold text-[#777b84] dark:text-zinc-400">
             {heroData.role}
           </p>
 
-          <p className="mt-6 text-[1.28rem] font-semibold leading-snug text-[#151719] sm:text-[1.45rem]">
+          <p className="mt-6 text-[1.28rem] font-semibold leading-snug text-[#151719] dark:text-white sm:text-[1.45rem]">
             {heroData.impactLine}
           </p>
 
-          <p className="mt-4 max-w-[36rem] text-[0.86rem] font-medium leading-7 text-[#62666f] sm:text-[0.88rem]">
+          <p className="mt-4 max-w-[36rem] text-[0.86rem] font-medium leading-7 text-[#62666f] dark:text-zinc-400 sm:text-[0.88rem]">
             {heroData.summary}
           </p>
 
-          <p className="mt-4 max-w-[36rem] text-[0.86rem] font-medium leading-7 text-[#62666f] sm:text-[0.88rem]">
+          <p className="mt-4 max-w-[36rem] text-[0.86rem] font-medium leading-7 text-[#62666f] dark:text-zinc-400 sm:text-[0.88rem]">
             {heroData.stackSummary}
           </p>
 
@@ -149,14 +152,14 @@ export default function Hero() {
               href={resumeData.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-10 items-center justify-center gap-2 bg-black px-5 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-85"
+              className="inline-flex min-h-10 items-center justify-center gap-2 bg-black px-5 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-85 dark:bg-white dark:text-black"
             >
               <FiFileText className="h-4 w-4" />
               {resumeData.label}
             </a>
             <a
               href={emailData.href}
-              className="inline-flex min-h-10 items-center justify-center gap-2 border border-[#ededed] bg-white px-5 text-sm font-semibold text-[#151719] transition-colors duration-200 hover:bg-[#f7f7f7]"
+              className="inline-flex min-h-10 items-center justify-center gap-2 border border-[#ededed] bg-white px-5 text-sm font-semibold text-[#151719] transition-colors duration-200 hover:bg-[#f7f7f7] dark:border-zinc-800 dark:bg-background dark:text-white dark:hover:bg-zinc-900"
             >
               <EmailIcon className="h-4 w-4" />
               {emailData.label}
@@ -178,7 +181,7 @@ export default function Hero() {
                         : "noopener noreferrer"
                     }
                     aria-label={social.label}
-                    className="inline-flex h-10 w-10 items-center justify-center border border-[#ededed] bg-white text-[#777b84] transition-colors duration-200 hover:bg-[#f7f7f7] hover:text-[#151719]"
+                    className="inline-flex h-10 w-10 items-center justify-center border border-[#ededed] bg-white text-[#777b84] transition-colors duration-200 hover:bg-[#f7f7f7] hover:text-[#151719] dark:border-zinc-800 dark:bg-background dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-white"
                   >
                     <Icon className="h-4 w-4" />
                   </a>
