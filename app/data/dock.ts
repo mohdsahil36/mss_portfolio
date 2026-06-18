@@ -41,6 +41,7 @@ export const dockItems = [
 export const sectionDockItems = [
   { label: "Home", href: "#home" },
   { label: "Work experience", href: "#work" },
+  { label: "Impact", href: "#impact" },
   { label: "Side projects", href: "#projects" },
   { label: "Tech stack", href: "#skills" },
   { label: "Specialization", href: "#specialization" },
