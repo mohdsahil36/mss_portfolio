@@ -37,3 +37,14 @@ export const dockItems = [
     external: true,
   },
 ];
+
+export const sectionDockItems = [
+  { label: "Home", href: "#home" },
+  { label: "Work experience", href: "#work" },
+  { label: "Side projects", href: "#projects" },
+  { label: "Tech stack", href: "#skills" },
+  { label: "Specialization", href: "#specialization" },
+  { label: "Education", href: "#education" },
+  { label: "Coding profiles", href: "#beyond-code" },
+  { label: "Contact", href: "#contact" },
+];

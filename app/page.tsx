@@ -5,7 +5,7 @@ import Contact from "./components/sections/Contact";
 import Projects from "./components/sections/Projects";
 import Education from "./components/sections/Education";
 import BeyondCode from "./components/sections/BeyondCode";
-import { SafeMovingLabels } from "./components/SafeMovingLabels";
+import Specialization from "./components/sections/Specialization";
 import ScrollManager from "./components/ScrollManager";
 
 export default function Home() {
@@ -17,20 +17,10 @@ export default function Home() {
         <Work sectionIndex={0} />
         <Projects sectionIndex={1} />
         <Skills sectionIndex={2} />
-        <SafeMovingLabels
-          labels={[
-            "Execution",
-            "Ownership",
-            "Stable",
-            "Scalable",
-            "Practical",
-            "Dependable",
-          ]}
-          speed="fast"
-        />
-        <Education sectionIndex={3} />
-        <BeyondCode sectionIndex={4} />
-        <Contact sectionIndex={5} />
+        <Specialization sectionIndex={3} />
+        <Education sectionIndex={4} />
+        <BeyondCode sectionIndex={5} />
+        <Contact sectionIndex={6} />
       </main>
     </div>
   );

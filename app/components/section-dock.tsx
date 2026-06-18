@@ -1,29 +1,20 @@
 "use client";
 
+import { sectionDockItems } from "@/app/data/dock";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, ListTree } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
-const dockSections = [
-  { label: "Home", href: "#home" },
-  { label: "Work experience", href: "#work" },
-  { label: "Side projects", href: "#projects" },
-  { label: "Tech stack", href: "#skills" },
-  { label: "Education", href: "#education" },
-  { label: "Coding profiles", href: "#beyond-code" },
-  { label: "Contact", href: "#contact" },
-];
-
 export function SectionDock() {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeHref, setActiveHref] = useState(dockSections[0].href);
+  const [activeHref, setActiveHref] = useState(sectionDockItems[0].href);
   const activeIndex = Math.max(
-    dockSections.findIndex((item) => item.href === activeHref),
+    sectionDockItems.findIndex((item) => item.href === activeHref),
     0,
   );
-  const activeSection = dockSections[activeIndex];
+  const activeSection = sectionDockItems[activeIndex];
   const sectionIds = useMemo(
-    () => dockSections.map((item) => item.href.replace("#", "")),
+    () => sectionDockItems.map((item) => item.href.replace("#", "")),
     [],
   );
   const springTransition = {
@@ -87,14 +78,14 @@ export function SectionDock() {
                     Sections
                   </p>
                   <span className="font-mono text-[0.62rem] font-semibold text-white/38">
-                    {activeIndex + 1}/{dockSections.length}
+                    {activeIndex + 1}/{sectionDockItems.length}
                   </span>
                 </div>
 
                 <div className="space-y-1">
-                  {dockSections.map((item) => {
+                  {sectionDockItems.map((item) => {
                     const isActive = item.href === activeHref;
-                    const itemIndex = dockSections.findIndex(
+                    const itemIndex = sectionDockItems.findIndex(
                       (section) => section.href === item.href,
                     );
 
@@ -191,7 +182,7 @@ export function SectionDock() {
                   transition={{ duration: 0.14, ease: "easeOut" }}
                   className="absolute inset-0 flex items-center justify-center"
                 >
-                  {activeIndex + 1}/{dockSections.length}
+                  {activeIndex + 1}/{sectionDockItems.length}
                 </motion.span>
               </AnimatePresence>
             </span>
