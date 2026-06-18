@@ -14,8 +14,16 @@ export const workingStyleData = {
       items: ["Transparent", "Dependable"],
     },
     {
-      title: "Growth",
-      items: ["Adaptable", "Continuous Learning"],
+      title: "Technical",
+      items: ["Quality", "Efficient"],
+    },
+    {
+      title: "Leadership",
+      items: ["Mentoring", "Decisive"],
+    },
+    {
+      title: "Product",
+      items: ["Empathetic", "Strategic"],
     },
   ],
 };
