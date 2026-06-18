@@ -14,6 +14,8 @@ import { LoadingProvider } from "./components/loading-context";
 import { LoadingGate } from "./components/loading-gate";
 import { SiteFooter } from "./components/site-footer";
 import PageTransition from "./components/page-transition";
+import { ScrollProgress } from "./components/scroll-progress";
+import { SectionDock } from "./components/section-dock";
 
 const hankenGrotesk = Hanken_Grotesk({
   variable: "--font-hanken-grotesk",
@@ -62,11 +64,13 @@ export default function RootLayout({
 
           <LoadingGate>
             <ThemeProvider attribute="class" defaultTheme="light">
-              <header className="sticky top-0 z-40 h-16 w-full border-b border-zinc-200 bg-background/85 backdrop-blur-md dark:border-zinc-800">
-                <div className="mx-auto h-full w-full px-4 md:w-[56%] md:px-0">
+              <ScrollProgress />
+              <header className="sticky top-0 z-[70] h-16 w-full border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-neutral-950">
+                <div className="mx-auto h-full w-full px-3 md:w-[40%] md:px-0">
                   <Navbar />
                 </div>
               </header>
+              <SectionDock />
 
               <PageTransition>
                 <main className="relative max-w-full overflow-x-hidden px-4 md:px-0">

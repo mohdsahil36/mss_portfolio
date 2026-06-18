@@ -15,6 +15,13 @@ type ContributionDay = {
   level?: number;
 };
 
+type HeatmapCell = {
+  date?: string;
+  count?: number;
+  level?: number;
+  isPlaceholder?: boolean;
+};
+
 type ContributionResponse = {
   source?: string;
   years?: Record<string, ContributionYearData>;
@@ -80,16 +87,44 @@ function getIsoDate(year: string, index: number) {
   return date.toISOString().slice(0, 10);
 }
 
-function getMonthMarkers(days: ContributionDay[]) {
+function getHeatmapCells(days: ContributionDay[]) {
+  const datedDays = days
+    .filter((day): day is Required<Pick<ContributionDay, "date">> & ContributionDay =>
+      Boolean(day.date),
+    )
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  if (!datedDays.length) {
+    return [] as HeatmapCell[];
+  }
+
+  const firstDate = new Date(`${datedDays[0].date}T00:00:00Z`);
+  const firstWeekday = firstDate.getUTCDay();
+  const leadingCells: HeatmapCell[] = Array.from({ length: firstWeekday }, () => ({
+    isPlaceholder: true,
+  }));
+  const cells: HeatmapCell[] = [...leadingCells, ...datedDays];
+  const trailingCount = (7 - (cells.length % 7)) % 7;
+  const trailingCells: HeatmapCell[] = Array.from(
+    { length: trailingCount },
+    () => ({
+      isPlaceholder: true,
+    }),
+  );
+
+  return [...cells, ...trailingCells];
+}
+
+function getMonthMarkers(cells: HeatmapCell[]) {
   const formatter = new Intl.DateTimeFormat("en", { month: "short" });
   const seen = new Set<string>();
 
-  return days.reduce<{ label: string; column: number }[]>(
-    (markers, day, index) => {
-      if (!day.date) return markers;
+  return cells.reduce<{ label: string; column: number }[]>(
+    (markers, cell, index) => {
+      if (!cell.date) return markers;
 
-      const date = new Date(`${day.date}T00:00:00`);
-      const monthKey = `${date.getFullYear()}-${date.getMonth()}`;
+      const date = new Date(`${cell.date}T00:00:00Z`);
+      const monthKey = `${date.getUTCFullYear()}-${date.getUTCMonth()}`;
 
       if (seen.has(monthKey)) return markers;
 
@@ -163,11 +198,9 @@ export default function BeyondCode({
     (tab) => tab.label === activeTab,
   ) ?? codingProfileData.tabs[0];
   const isGithubTab = activeTab === "GitHub";
-  const monthMarkers = getMonthMarkers(visibleContributionDays);
-  const activeContributionDay = hoveredContributionDay ?? {
-    count: todayContribution,
-    date: todayIso,
-  };
+  const heatmapCells = getHeatmapCells(visibleContributionDays);
+  const monthMarkers = getMonthMarkers(heatmapCells);
+  const activeContributionDay = hoveredContributionDay;
   const repositoryStat = selectedYearData.stats.find(
     (stat) => stat.label === "Repositories",
   );
@@ -430,9 +463,9 @@ export default function BeyondCode({
                       Contribution map
                     </p>
                     <p className="rounded-lg border border-[#ededed] bg-white px-2.5 py-1 text-[0.7rem] font-semibold text-[#565a61] dark:border-zinc-800 dark:bg-black dark:text-zinc-300">
-                      {activeContributionDay.date
+                      {activeContributionDay?.date
                         ? activeContributionDay.date
-                        : "Select a day"}
+                        : "Hover a day"}
                     </p>
                   </div>
                   <div className="flex w-max gap-2">
@@ -450,7 +483,7 @@ export default function BeyondCode({
                         className="mb-2 grid gap-1 text-[0.62rem] font-medium text-[#9a9da5]"
                         style={{
                           gridTemplateColumns: `repeat(${Math.ceil(
-                            visibleContributionDays.length / 7,
+                            heatmapCells.length / 7,
                           )}, 0.55rem)`,
                         }}
                         aria-hidden="true"
@@ -473,21 +506,33 @@ export default function BeyondCode({
                         }}
                         aria-label={`GitHub contribution grid for ${selectedYear}`}
                       >
-                        {visibleContributionDays.map((day, index) => (
-                          <span
-                            key={`${selectedYear}-${day.date ?? index}`}
-                            tabIndex={0}
-                            onMouseEnter={() => setHoveredContributionDay(day)}
-                            onMouseLeave={() => setHoveredContributionDay(null)}
-                            onFocus={() => setHoveredContributionDay(day)}
-                            onBlur={() => setHoveredContributionDay(null)}
-                            aria-label={day.date ?? "Contribution day"}
-                            className={`h-2.5 w-2.5 rounded-[0.18rem] ${
-                              levelClasses[Number(day.level ?? 0)] ??
-                              levelClasses[0]
-                            } outline-none ring-black/0 transition-transform hover:scale-125 focus:scale-125 focus:ring-1 dark:focus:ring-white`}
-                          />
-                        ))}
+                        {heatmapCells.map((cell, index) =>
+                          cell.isPlaceholder ? (
+                            <span
+                              key={`${selectedYear}-placeholder-${index}`}
+                              className="h-2.5 w-2.5"
+                              aria-hidden="true"
+                            />
+                          ) : (
+                            <span
+                              key={`${selectedYear}-${cell.date ?? index}`}
+                              tabIndex={0}
+                              onMouseEnter={() =>
+                                setHoveredContributionDay(cell)
+                              }
+                              onMouseLeave={() =>
+                                setHoveredContributionDay(null)
+                              }
+                              onFocus={() => setHoveredContributionDay(cell)}
+                              onBlur={() => setHoveredContributionDay(null)}
+                              aria-label={cell.date ?? "Contribution day"}
+                              className={`h-2.5 w-2.5 rounded-[0.18rem] ${
+                                levelClasses[Number(cell.level ?? 0)] ??
+                                levelClasses[0]
+                              } outline-none ring-black/0 transition-transform hover:scale-125 focus:scale-125 focus:ring-1 dark:focus:ring-white`}
+                            />
+                          ),
+                        )}
                       </div>
                     </div>
                   </div>
