@@ -71,7 +71,7 @@ export default function RootLayout({
             >
               <ScrollProgress />
               <header className="sticky top-0 z-[70] isolate h-16 w-full border-b border-zinc-200 bg-[hsl(var(--background))] dark:border-zinc-800">
-                <div className="mx-auto h-full w-full px-3 md:w-[40%] md:px-0">
+                <div className="mx-auto h-full w-full px-3 md:w-[78%] md:px-0 lg:w-[64%] xl:w-[40%]">
                   <Navbar />
                 </div>
               </header>
@@ -79,7 +79,7 @@ export default function RootLayout({
 
               <PageTransition>
                 <main className="relative max-w-full overflow-x-hidden px-4 md:px-0">
-                  <div className="relative mx-auto w-full md:w-[40%]">
+                  <div className="relative mx-auto w-full md:w-[78%] lg:w-[64%] xl:w-[40%]">
                     <div className="mt-5 p-0">{children}</div>
 
                     <QuoteSection
