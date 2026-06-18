@@ -78,15 +78,15 @@ export default function Hero() {
               <span className="font-mono text-[0.68rem] font-semibold uppercase text-[#151719]">
                 {heroData.availability}
               </span>
-              <span className="pointer-events-none absolute left-1/2 top-full z-10 mt-3 flex w-72 -translate-x-1/2 items-center gap-4 rounded-[1.35rem] border border-[#e7e7e7] bg-white p-4 text-left opacity-0 shadow-[0_14px_45px_rgba(15,15,15,0.08)] transition-opacity group-hover/status:opacity-100">
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#f4f4f4] text-[#151719]">
-                  <StatusIcon className="h-7 w-7" />
+              <span className="pointer-events-none absolute left-0 top-full z-10 mt-2 flex w-40 items-center gap-2 rounded-xl border border-[#e7e7e7] bg-white p-2 text-left opacity-0 shadow-[0_10px_28px_rgba(15,15,15,0.08)] transition-opacity group-hover/status:opacity-100">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#f4f4f4] text-[#151719]">
+                  <StatusIcon className="h-4 w-4" />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-[0.75rem] font-bold uppercase text-[#6f3bb2]">
+                  <span className="block text-[0.58rem] font-bold uppercase text-[#6f3bb2]">
                     {currentStatus.label}
                   </span>
-                  <span className="mt-1 block text-[1rem] font-semibold leading-snug text-[#151719]">
+                  <span className="mt-0.5 block text-[0.72rem] font-semibold leading-snug text-[#151719]">
                     {currentStatus.message}
                   </span>
                 </span>

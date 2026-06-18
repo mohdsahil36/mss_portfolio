@@ -8,13 +8,11 @@ import {
 import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import Navbar from "./components/Navbar";
-import { DockWithAnimation } from "./components/dock-with-animation";
 import { QuoteSection } from "./components/QuoteSection";
-import { IconHeart, IconCode } from "@tabler/icons-react";
-import { ViewCount } from "./components/ViewCount";
 import { CinematicPreloader } from "./components/cinematic-preloader";
 import { LoadingProvider } from "./components/loading-context";
 import { LoadingGate } from "./components/loading-gate";
+import { SiteFooter } from "./components/site-footer";
 import PageTransition from "./components/page-transition";
 
 const hankenGrotesk = Hanken_Grotesk({
@@ -64,8 +62,8 @@ export default function RootLayout({
 
           <LoadingGate>
             <ThemeProvider attribute="class" defaultTheme="light">
-              <header className="sticky top-0 z-40 h-14 w-full bg-background/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800">
-                <div className="mx-auto h-full w-full px-4 md:w-[40%] md:px-0">
+              <header className="sticky top-0 z-40 h-16 w-full border-b border-zinc-200 bg-background/85 backdrop-blur-md dark:border-zinc-800">
+                <div className="mx-auto h-full w-full px-4 md:w-[56%] md:px-0">
                   <Navbar />
                 </div>
               </header>
@@ -80,25 +78,10 @@ export default function RootLayout({
                       author="Drew Houston"
                     />
 
-                    <footer className="py-8 pb-28 text-center md:pb-24 space-y-3">
-                      <p className="text-sm text-zinc-500 dark:text-zinc-400 flex justify-center gap-1.5">
-                        Made with
-                        <IconHeart className="w-3.5 h-3.5 text-red-500 fill-red-500" />
-                        and
-                        <IconCode className="w-3.5 h-3.5 text-blue-500" />
-                        by Sahil
-                      </p>
-
-                      <div className="flex justify-between text-xs text-zinc-400">
-                        <p>© 2026 All rights reserved</p>
-                        {/* <ViewCount /> */}
-                      </div>
-                    </footer>
+                    <SiteFooter />
                   </div>
                 </main>
               </PageTransition>
-
-              <DockWithAnimation />
             </ThemeProvider>
           </LoadingGate>
         </LoadingProvider>

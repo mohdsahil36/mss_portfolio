@@ -3,6 +3,8 @@ import Work from "./components/sections/Work";
 import Skills from "./components/sections/Skills";
 import Contact from "./components/sections/Contact";
 import Projects from "./components/sections/Projects";
+import Education from "./components/sections/Education";
+import BeyondCode from "./components/sections/BeyondCode";
 import { SafeMovingLabels } from "./components/SafeMovingLabels";
 import ScrollManager from "./components/ScrollManager";
 
@@ -26,7 +28,9 @@ export default function Home() {
           ]}
           speed="fast"
         />
-        <Contact sectionIndex={3} />
+        <Education sectionIndex={3} />
+        <BeyondCode sectionIndex={4} />
+        <Contact sectionIndex={5} />
       </main>
     </div>
   );

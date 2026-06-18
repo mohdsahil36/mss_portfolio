@@ -28,17 +28,14 @@ export default function Projects({
       id="projects"
     >
       <div className="mb-7">
-        <div className="mb-5 flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ededed] bg-white dark:border-zinc-800 dark:bg-black">
             <FiTool className="h-4 w-4" />
           </span>
-          <span className="font-mono text-[0.68rem] font-semibold uppercase text-[#9a9da5]">
-            {projectSection.eyebrow}
-          </span>
+          <h2 className="text-[1.55rem] font-semibold leading-none sm:text-[1.75rem]">
+            {projectSection.title}
+          </h2>
         </div>
-        <h2 className="text-[1.55rem] font-semibold leading-none sm:text-[1.75rem]">
-          {projectSection.title}
-        </h2>
         <p className="mt-3 max-w-[32rem] text-[0.82rem] font-medium leading-6 text-[#747780] dark:text-zinc-400">
           {projectSection.summary}
         </p>

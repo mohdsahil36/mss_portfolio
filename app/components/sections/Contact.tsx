@@ -1,11 +1,9 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { easeOut, motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { IconMail } from "@tabler/icons-react";
-
-const EMAIL = "mohdsahilsiddiqui36@gmail.com";
+import { FiMail } from "react-icons/fi";
+import { contactData } from "@/app/data/contact";
 
 export default function Contact({
   sectionIndex = 3,
@@ -13,80 +11,67 @@ export default function Contact({
   sectionIndex?: number;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const sectionDirection = sectionIndex % 2 === 0 ? -60 : 60;
+  const isInView = useInView(ref, { once: true, amount: 0.12 });
+  const sectionDirection = sectionIndex % 2 === 0 ? -40 : 40;
 
   return (
     <motion.section
       ref={ref}
       id="contact"
-      className="
-        mt-5 relative rounded-md py-4
-        bg-white dark:bg-neutral-950
-      "
+      className="mt-7 scroll-mt-18 bg-white py-8 text-[#151719] dark:bg-neutral-950 dark:text-white"
       initial={{ opacity: 0, x: sectionDirection }}
       animate={
         isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: sectionDirection }
       }
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.45, ease: easeOut }}
     >
-      <motion.h1
-        className="mb-3 text-lg font-semibold text-zinc-900 dark:text-white text-center font-[family-name:var(--font-playfair)] italic"
-        initial={{ opacity: 0, x: -30 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-        transition={{ duration: 0.35, ease: "easeOut", delay: 0.2 }}
-      >
-        Let&apos;s connect
-      </motion.h1>
+      <div className="rounded-[1.25rem] border border-[#e8e8e8] bg-white px-5 py-8 dark:border-zinc-800 dark:bg-black sm:px-7 sm:py-9">
+        <div className="max-w-[34rem]">
+          <div className="flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#ededed] bg-white dark:border-zinc-800 dark:bg-black">
+              <FiMail className="h-4 w-4" />
+            </span>
+            <h2 className="text-[1.5rem] font-semibold leading-tight text-[#151719] dark:text-white sm:text-[1.75rem]">
+              {contactData.title}
+            </h2>
+          </div>
+          <p className="mt-4 text-[0.9rem] font-medium leading-7 text-[#747780] dark:text-zinc-400">
+            {contactData.summary}
+          </p>
+        </div>
 
-      <motion.p
-        className="text-sm leading-6 font-light text-black dark:text-white text-center"
-        initial={{ opacity: 0, x: 30 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-        transition={{ duration: 0.35, ease: "easeOut", delay: 0.25 }}
-      >
-        Always open to new opportunities—especially full-time roles and exciting
-        projects. Whether it&apos;s work or a quick tech chat, feel free to
-        reach out. I usually reply within seconds to a day.
-      </motion.p>
+        <div className="mt-7 flex flex-wrap items-center gap-3">
+          {contactData.actions.map((action) => {
+            const Icon = action.icon;
+            const isPrimary = action.variant === "primary";
 
-      <motion.p
-        className="mt-2 text-xs text-zinc-600 dark:text-zinc-400 text-center"
-        initial={{ opacity: 0, x: -30 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-        transition={{ duration: 0.25, ease: "easeOut", delay: 0.3 }}
-      >
-        Mail person? Hit the button below. Social person? Dock&apos;s got you
-        covered. 👀
-      </motion.p>
+            return (
+              <a
+                key={action.label}
+                href={action.href}
+                target={action.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={
+                  action.href.startsWith("mailto:")
+                    ? undefined
+                    : "noopener noreferrer"
+                }
+                className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border px-5 text-sm font-semibold transition-colors duration-200 ${
+                  isPrimary
+                    ? "border-black bg-black text-white hover:opacity-90 dark:border-white dark:bg-white dark:text-black"
+                    : "border-[#ededed] bg-white text-[#151719] hover:bg-[#f8f8f8] dark:border-zinc-800 dark:bg-black dark:text-white dark:hover:bg-zinc-900"
+                }`}
+              >
+                <Icon className="h-4 w-4 shrink-0" />
+                {isPrimary ? action.value : action.label}
+              </a>
+            );
+          })}
+        </div>
 
-      <motion.div
-        className="mt-4 flex justify-center md:mt-5"
-        initial={{ opacity: 0, x: 30 }}
-        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-        transition={{ duration: 0.25, ease: "easeOut", delay: 0.35 }}
-      >
-        <Button
-          className="rounded-md"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const mailtoLink = `mailto:${EMAIL}?subject=${encodeURIComponent(
-              "Let's connect"
-            )}`;
-            // Use window.location for better compatibility across devices
-            window.location.href = mailtoLink;
-          }}
-          aria-label="Send email"
-          style={{
-            touchAction: "manipulation",
-            WebkitTapHighlightColor: "transparent",
-          }}
-        >
-          Get in touch
-          <IconMail />
-        </Button>
-      </motion.div>
+        <p className="mt-5 font-mono text-[0.68rem] font-semibold uppercase text-[#9a9da5]">
+          {contactData.availability}
+        </p>
+      </div>
     </motion.section>
   );
 }

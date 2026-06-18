@@ -6,10 +6,11 @@ import { ModeToggle } from "./mode-toggle";
 import { useEffect } from "react";
 
 const navItems = [
-  { label: "career", href: "#work" },
-  { label: "builds", href: "#projects" },
-  { label: "stack", href: "#skills" },
-  { label: "connect", href: "#contact" },
+  { label: "Home", href: "#home" },
+  { label: "Experience", href: "#work" },
+  { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function ScrollToTopOnLoad() {
@@ -26,9 +27,9 @@ export default function Navbar() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className="sticky top-0 z-50"
+      className="flex h-full items-center"
     >
-      <div className="mx-auto flex items-center justify-between px-0 pt-4">
+      <div className="grid w-full grid-cols-[auto_1fr_auto] items-center gap-4">
         <button
           onClick={() => {
             history.replaceState(
@@ -40,30 +41,35 @@ export default function Navbar() {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
           className="
-    text-md font-semibold tracking-tight
+    text-[1.05rem] font-semibold uppercase
     text-zinc-900 dark:text-zinc-100
     cursor-pointer
   "
         >
-          sahil.
+          sahilworks
         </button>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-center gap-5">
           {navItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
               className="
-                text-sm font-normal
+                relative py-5 text-[0.88rem] font-semibold
                 text-zinc-500 dark:text-zinc-400
                 transition-colors duration-200
                 hover:text-zinc-900 dark:hover:text-zinc-100
+                after:absolute after:bottom-3 after:left-0 after:h-px after:w-full
+                after:origin-left after:scale-x-0 after:bg-zinc-900 after:transition-transform
+                after:duration-200 hover:after:scale-x-100 dark:after:bg-zinc-100
               "
             >
               {item.label}
             </Link>
           ))}
+        </div>
 
+        <div className="flex justify-end">
           <ModeToggle />
         </div>
       </div>
