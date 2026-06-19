@@ -77,22 +77,6 @@ export function SectionDock() {
         className="fixed right-3 top-1/2 z-[65] hidden -translate-y-1/2 md:block"
       >
         <div className="relative rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))]/96 p-1.5 shadow-[0_16px_45px_rgba(15,15,15,0.08)] backdrop-blur dark:border-zinc-800 dark:shadow-[0_16px_45px_rgba(0,0,0,0.28)]">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={activeSection.href}
-              initial={{ opacity: 0, x: 8 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 8 }}
-              transition={{ duration: 0.16, ease: "easeOut" }}
-              className="pointer-events-none absolute right-full top-1/2 mr-2 block -translate-y-1/2 whitespace-nowrap rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))] px-3 py-2 text-[0.72rem] font-semibold text-[#151719] shadow-[0_10px_28px_rgba(15,15,15,0.08)] dark:border-zinc-800 dark:text-white dark:shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
-            >
-              <span className="font-mono text-[0.6rem] text-[#9a9da5]">
-                {String(activeIndex + 1).padStart(2, "0")}
-              </span>{" "}
-              {activeSection.label}
-            </motion.div>
-          </AnimatePresence>
-
           <div className="flex flex-col gap-1">
             {sectionDockItems.map((item, index) => {
               const isActive = item.href === activeHref;
@@ -114,13 +98,24 @@ export function SectionDock() {
                   <span className="font-mono tabular-nums">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span
-                    className={`pointer-events-none absolute right-full mr-2 hidden whitespace-nowrap rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))] px-2.5 py-1.5 text-[0.68rem] font-semibold text-[#151719] opacity-0 shadow-[0_10px_24px_rgba(15,15,15,0.08)] transition-opacity duration-200 group-hover:opacity-100 md:block dark:border-zinc-800 dark:text-white ${
-                      isActive ? "md:hidden" : ""
-                    }`}
-                  >
-                    {item.label}
-                  </span>
+                  <AnimatePresence initial={false}>
+                    {isActive ? (
+                      <motion.span
+                        key={`${item.href}-active-label`}
+                        initial={{ opacity: 0, x: 8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 8 }}
+                        transition={{ duration: 0.16, ease: "easeOut" }}
+                        className="pointer-events-none absolute right-full top-1/2 mr-2 block -translate-y-1/2 whitespace-nowrap rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))] px-3 py-2 text-[0.72rem] font-semibold text-[#151719] shadow-[0_10px_28px_rgba(15,15,15,0.08)] dark:border-zinc-800 dark:text-white dark:shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
+                      >
+                        {item.label}
+                      </motion.span>
+                    ) : (
+                      <span className="pointer-events-none absolute right-full top-1/2 mr-2 hidden -translate-y-1/2 whitespace-nowrap rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))] px-2.5 py-1.5 text-[0.68rem] font-semibold text-[#151719] opacity-0 shadow-[0_10px_24px_rgba(15,15,15,0.08)] transition-opacity duration-200 group-hover:opacity-100 md:block dark:border-zinc-800 dark:text-white">
+                        {item.label}
+                      </span>
+                    )}
+                  </AnimatePresence>
                 </button>
               );
             })}

@@ -1,13 +1,13 @@
 import {
   FiActivity,
   FiBookOpen,
-  FiCamera,
-  FiCode,
   FiGithub,
   FiHeart,
+  FiMapPin,
   FiMusic,
   FiTrendingUp,
 } from "react-icons/fi";
+import { FaDumbbell, FaGamepad } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 
 export const beyondCodeSection = {
@@ -20,11 +20,11 @@ export const beyondCodeSection = {
 
 export const interestsData = [
   // { label: "Design exploration", icon: FiPenTool },
-  { label: "Gaming", icon: FiCamera },
-  { label: "Listening to Music", icon: FiCode },
-  { label: "Gym", icon: FiActivity },
+  { label: "Gaming", icon: FaGamepad },
+  { label: "Listening to Music", icon: FiMusic },
+  { label: "Gym", icon: FaDumbbell },
   { label: "Reading Books and Technical Blogs", icon: FiBookOpen },
-  { label: "Traveling", icon: FiMusic },
+  { label: "Traveling", icon: FiMapPin },
 ];
 
 export const codingProfileData = {
