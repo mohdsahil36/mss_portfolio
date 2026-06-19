@@ -58,17 +58,16 @@ export default function RootLayout({
       <body
         className={`${hankenGrotesk.variable} ${geistMono.variable} ${robotoMono.variable} ${playfairDisplay.variable} antialiased min-h-screen bg-background text-foreground`}
       >
-        <LoadingProvider>
-          {/* 🎬 PRELOADER LIVES HERE */}
-          <CinematicPreloader />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <LoadingProvider>
+            <CinematicPreloader />
 
-          <LoadingGate>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="light"
-              enableSystem={false}
-              disableTransitionOnChange
-            >
+            <LoadingGate>
               <ScrollProgress />
               <header className="sticky top-0 z-[70] isolate h-16 w-full border-b border-zinc-200 bg-[hsl(var(--background))] dark:border-zinc-800">
                 <div className="mx-auto h-full w-full px-3 md:w-[78%] md:px-0 lg:w-[64%] xl:w-[40%]">
@@ -91,9 +90,9 @@ export default function RootLayout({
                   </div>
                 </main>
               </PageTransition>
-            </ThemeProvider>
-          </LoadingGate>
-        </LoadingProvider>
+            </LoadingGate>
+          </LoadingProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

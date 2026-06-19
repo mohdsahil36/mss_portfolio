@@ -19,28 +19,44 @@ export function SectionDock() {
   );
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    let frameId = 0;
 
-        if (visibleEntries[0]?.target.id) {
-          setActiveHref(`#${visibleEntries[0].target.id}`);
+    const updateActiveSection = () => {
+      const anchorLine = window.innerHeight * 0.34;
+      let nextHref = sectionDockItems[0].href;
+
+      for (const id of sectionIds) {
+        const element = document.getElementById(id);
+        if (!element) continue;
+
+        const rect = element.getBoundingClientRect();
+
+        if (rect.top <= anchorLine) {
+          nextHref = `#${id}`;
+        } else {
+          break;
         }
-      },
-      {
-        rootMargin: "-20% 0px -60% 0px",
-        threshold: [0.08, 0.18, 0.32],
-      },
-    );
+      }
 
-    sectionIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
+      setActiveHref((currentHref) =>
+        currentHref === nextHref ? currentHref : nextHref,
+      );
+    };
 
-    return () => observer.disconnect();
+    const requestUpdate = () => {
+      window.cancelAnimationFrame(frameId);
+      frameId = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
   }, [sectionIds]);
 
   const navigateTo = (href: string) => {
@@ -68,7 +84,7 @@ export function SectionDock() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 8 }}
               transition={{ duration: 0.16, ease: "easeOut" }}
-              className="pointer-events-none absolute right-full top-1/2 mr-2 hidden -translate-y-1/2 whitespace-nowrap rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))] px-3 py-2 text-[0.72rem] font-semibold text-[#151719] shadow-[0_10px_28px_rgba(15,15,15,0.08)] lg:block dark:border-zinc-800 dark:text-white dark:shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
+              className="pointer-events-none absolute right-full top-1/2 mr-2 block -translate-y-1/2 whitespace-nowrap rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))] px-3 py-2 text-[0.72rem] font-semibold text-[#151719] shadow-[0_10px_28px_rgba(15,15,15,0.08)] dark:border-zinc-800 dark:text-white dark:shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
             >
               <span className="font-mono text-[0.6rem] text-[#9a9da5]">
                 {String(activeIndex + 1).padStart(2, "0")}
@@ -98,7 +114,11 @@ export function SectionDock() {
                   <span className="font-mono tabular-nums">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="pointer-events-none absolute right-full mr-2 hidden whitespace-nowrap rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))] px-2.5 py-1.5 text-[0.68rem] font-semibold text-[#151719] opacity-0 shadow-[0_10px_24px_rgba(15,15,15,0.08)] transition-opacity duration-200 group-hover:opacity-100 lg:block dark:border-zinc-800 dark:text-white">
+                  <span
+                    className={`pointer-events-none absolute right-full mr-2 hidden whitespace-nowrap rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))] px-2.5 py-1.5 text-[0.68rem] font-semibold text-[#151719] opacity-0 shadow-[0_10px_24px_rgba(15,15,15,0.08)] transition-opacity duration-200 group-hover:opacity-100 md:block dark:border-zinc-800 dark:text-white ${
+                      isActive ? "md:hidden" : ""
+                    }`}
+                  >
                     {item.label}
                   </span>
                 </button>
