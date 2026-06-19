@@ -5,7 +5,6 @@ import {
   FiCheckCircle,
   FiCpu,
   FiGlobe,
-  FiRepeat,
   FiTrendingUp,
 } from "react-icons/fi";
 

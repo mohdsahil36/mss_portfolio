@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FiFileText } from "react-icons/fi";
+import { FiFileText, FiRadio } from "react-icons/fi";
 import { emailData, heroData, heroSocials, resumeData } from "@/app/data/hero";
 
 const fadeUp = {
@@ -46,7 +46,6 @@ export default function Hero() {
   );
   const [localTime, setLocalTime] = useState(() => formatLocalTime());
   const EmailIcon = emailData.icon;
-  const StatusIcon = currentStatus.icon;
 
   useEffect(() => {
     const updateClock = () => {
@@ -72,26 +71,26 @@ export default function Hero() {
         className="relative mx-auto min-h-[24rem] w-full overflow-visible bg-background px-0 py-10 text-[#151719] dark:text-white sm:py-12"
       >
         <div className="mx-auto max-w-full">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="group/status relative flex items-center gap-3">
-              <span
-                className={`h-2 w-2 ${currentStatus.colorClass}`}
-                aria-label={currentStatus.message}
-              />
-              <span className="font-mono text-[0.68rem] font-semibold uppercase text-[#151719] dark:text-white">
-                {heroData.availability}
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="flex max-w-full items-center gap-2.5 rounded-2xl border border-[#e7e7e7] bg-white px-3 py-2 shadow-[0_8px_22px_rgba(15,15,15,0.035)] dark:border-zinc-800 dark:bg-background">
+              <span className="relative flex h-8 w-2.5 shrink-0 items-center">
+                <span
+                  className={`absolute inline-flex h-2.5 w-2.5 animate-ping rounded-full opacity-25 ${currentStatus.colorClass}`}
+                />
+                <span
+                  className={`relative inline-flex h-2.5 w-2.5 rounded-full ${currentStatus.colorClass}`}
+                  aria-label={currentStatus.message}
+                />
               </span>
-              <span className="pointer-events-none absolute left-0 top-full z-10 mt-2 flex w-40 items-center gap-2 rounded-xl border border-[#e7e7e7] bg-white p-2 text-left opacity-0 shadow-[0_10px_28px_rgba(15,15,15,0.08)] transition-opacity group-hover/status:opacity-100 dark:border-zinc-800 dark:bg-background dark:shadow-[0_10px_28px_rgba(0,0,0,0.4)]">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#f4f4f4] text-[#151719] dark:bg-zinc-900 dark:text-white">
-                  <StatusIcon className="h-4 w-4" />
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#f4f4f4] text-[#151719] dark:bg-zinc-900 dark:text-white">
+                <FiRadio className="h-4 w-4" />
+              </span>
+              <span className="min-w-0">
+                <span className="block font-mono text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-[#9a9da5]">
+                  Current rhythm
                 </span>
-                <span className="min-w-0">
-                  <span className="block text-[0.58rem] font-bold uppercase text-[#6f3bb2] dark:text-violet-300">
-                    {currentStatus.label}
-                  </span>
-                  <span className="mt-0.5 block text-[0.72rem] font-semibold leading-snug text-[#151719] dark:text-white">
-                    {currentStatus.message}
-                  </span>
+                <span className="mt-1 block text-[0.78rem] font-semibold leading-5 text-[#151719] dark:text-white">
+                  {currentStatus.label} · {currentStatus.message}
                 </span>
               </span>
             </div>
@@ -109,7 +108,11 @@ export default function Hero() {
             ) : null}
           </div>
 
-          <h1 className="group/name relative mt-8 flex items-center gap-3 text-[1.82rem] font-semibold leading-[1.06] text-[#151719] dark:text-white sm:gap-4 sm:text-[2.55rem] lg:text-[2.9rem]">
+          <p className="mt-8 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.13em] text-[#151719] dark:text-white">
+            {heroData.availability}
+          </p>
+
+          <h1 className="group/name relative mt-3 flex items-center gap-3 text-[1.82rem] font-semibold leading-[1.06] text-[#151719] dark:text-white sm:gap-4 sm:text-[2.55rem] lg:text-[2.9rem]">
             <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-md border border-[#e7e7e7] bg-white dark:border-zinc-800 dark:bg-background sm:h-12 sm:w-12">
               <Image
                 src={heroData.profileImage}
@@ -121,7 +124,7 @@ export default function Hero() {
               />
             </span>
             <span className="relative inline-block">
-              <span>{heroData.titleLine}</span>
+              <span className="hero-name-source">{heroData.titleLine}</span>
               <span className="hero-name-glitch hero-name-glitch-top">
                 {heroData.titleLine}
               </span>

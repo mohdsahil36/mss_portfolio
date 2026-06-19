@@ -6,7 +6,7 @@ import { ChevronDown, ListTree } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 export function SectionDock() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeHref, setActiveHref] = useState(sectionDockItems[0].href);
   const activeIndex = Math.max(
     sectionDockItems.findIndex((item) => item.href === activeHref),
@@ -17,12 +17,6 @@ export function SectionDock() {
     () => sectionDockItems.map((item) => item.href.replace("#", "")),
     [],
   );
-  const springTransition = {
-    type: "spring" as const,
-    stiffness: 420,
-    damping: 34,
-    mass: 0.8,
-  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -56,139 +50,195 @@ export function SectionDock() {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
       history.replaceState(null, "", href);
       setActiveHref(href);
-      setIsOpen(false);
+      setIsMobileOpen(false);
     }
   };
 
   return (
-    <div className="fixed inset-x-0 bottom-4 z-[75] flex justify-center px-4 md:bottom-6">
-      <div className="w-full max-w-[25rem]">
-        <AnimatePresence>
-          {isOpen ? (
+    <>
+      <nav
+        aria-label="Section navigation"
+        className="fixed right-3 top-1/2 z-[65] hidden -translate-y-1/2 md:block"
+      >
+        <div className="relative rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))]/96 p-1.5 shadow-[0_16px_45px_rgba(15,15,15,0.08)] backdrop-blur dark:border-zinc-800 dark:shadow-[0_16px_45px_rgba(0,0,0,0.28)]">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.985 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.985 }}
-              transition={springTransition}
-              className="mb-2 overflow-hidden rounded-[1.65rem] border border-white/10 bg-[#0a0a0a] text-white shadow-[0_24px_70px_rgba(0,0,0,0.25)]"
+              key={activeSection.href}
+              initial={{ opacity: 0, x: 8 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 8 }}
+              transition={{ duration: 0.16, ease: "easeOut" }}
+              className="pointer-events-none absolute right-full top-1/2 mr-2 hidden -translate-y-1/2 whitespace-nowrap rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))] px-3 py-2 text-[0.72rem] font-semibold text-[#151719] shadow-[0_10px_28px_rgba(15,15,15,0.08)] lg:block dark:border-zinc-800 dark:text-white dark:shadow-[0_10px_28px_rgba(0,0,0,0.35)]"
             >
-              <div className="max-h-[min(22rem,60vh)] overflow-y-auto p-2">
-                <div className="flex items-center justify-between px-3 pb-2 pt-1.5">
-                  <p className="font-mono text-[0.56rem] font-semibold uppercase tracking-[0.2em] text-white/40">
-                    Sections
-                  </p>
-                  <span className="font-mono text-[0.62rem] font-semibold text-white/38">
-                    {activeIndex + 1}/{sectionDockItems.length}
+              <span className="font-mono text-[0.6rem] text-[#9a9da5]">
+                {String(activeIndex + 1).padStart(2, "0")}
+              </span>{" "}
+              {activeSection.label}
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="flex flex-col gap-1">
+            {sectionDockItems.map((item, index) => {
+              const isActive = item.href === activeHref;
+
+              return (
+                <button
+                  key={item.href}
+                  type="button"
+                  onClick={() => navigateTo(item.href)}
+                  title={item.label}
+                  aria-label={`Go to ${item.label}`}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`group relative flex h-8 w-8 items-center justify-center rounded-full text-[0.58rem] font-semibold transition-[background-color,color,transform] duration-200 hover:scale-105 ${
+                    isActive
+                      ? "bg-[#151719] text-white dark:bg-white dark:text-black"
+                      : "text-[#9a9da5] hover:bg-[#f4f4f4] hover:text-[#151719] dark:hover:bg-zinc-900 dark:hover:text-white"
+                  }`}
+                >
+                  <span className="font-mono tabular-nums">
+                    {String(index + 1).padStart(2, "0")}
                   </span>
-                </div>
+                  <span className="pointer-events-none absolute right-full mr-2 hidden whitespace-nowrap rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))] px-2.5 py-1.5 text-[0.68rem] font-semibold text-[#151719] opacity-0 shadow-[0_10px_24px_rgba(15,15,15,0.08)] transition-opacity duration-200 group-hover:opacity-100 lg:block dark:border-zinc-800 dark:text-white">
+                    {item.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
 
-                <div className="space-y-1">
-                  {sectionDockItems.map((item) => {
-                    const isActive = item.href === activeHref;
-                    const itemIndex = sectionDockItems.findIndex(
-                      (section) => section.href === item.href,
-                    );
+      <nav
+        aria-label="Mobile section navigation"
+        className="fixed inset-x-3 bottom-3 z-[75] md:hidden"
+      >
+        <div className="w-full">
+          <AnimatePresence>
+            {isMobileOpen ? (
+              <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.985 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 8, scale: 0.985 }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
+                className="mb-2 overflow-hidden rounded-[1.45rem] border border-white/10 bg-[#0a0a0a] text-white shadow-[0_24px_70px_rgba(0,0,0,0.25)]"
+              >
+                <div className="max-h-[min(22rem,58vh)] overflow-y-auto p-2">
+                  <div className="flex items-center justify-between px-3 pb-2 pt-1.5">
+                    <p className="font-mono text-[0.56rem] font-semibold uppercase tracking-[0.2em] text-white/40">
+                      Sections
+                    </p>
+                    <span className="font-mono text-[0.62rem] font-semibold text-white/38">
+                      {activeIndex + 1}/{sectionDockItems.length}
+                    </span>
+                  </div>
 
-                    return (
-                      <button
-                        key={item.href}
-                        type="button"
-                        onClick={() => navigateTo(item.href)}
-                        className={`group flex min-h-9 w-full items-center gap-2.5 rounded-full px-3 text-left text-[0.8rem] font-semibold transition-[background-color,color] duration-200 ${
-                          isActive
-                            ? "bg-white text-[#0a0a0a]"
-                            : "text-white/62 hover:bg-white/8 hover:text-white"
-                        }`}
-                      >
-                        <span
-                          className={`font-mono text-[0.62rem] ${
-                            isActive ? "text-black/45" : "text-white/32"
+                  <div className="space-y-1">
+                    {sectionDockItems.map((item, index) => {
+                      const isActive = item.href === activeHref;
+
+                      return (
+                        <button
+                          key={item.href}
+                          type="button"
+                          onClick={() => navigateTo(item.href)}
+                          className={`group flex min-h-9 w-full items-center gap-2.5 rounded-full px-3 text-left text-[0.8rem] font-semibold transition-[background-color,color] duration-200 ${
+                            isActive
+                              ? "bg-white text-[#0a0a0a]"
+                              : "text-white/62 hover:bg-white/8 hover:text-white"
                           }`}
                         >
-                          {String(itemIndex + 1).padStart(2, "0")}
-                        </span>
-                        <span className="min-w-0 flex-1 truncate">
-                          {item.label}
-                        </span>
-                        <span
-                          className={`h-1.5 w-1.5 rounded-full transition-colors duration-200 ${
-                            isActive
-                              ? "bg-[#0a0a0a]"
-                              : "bg-transparent group-hover:bg-white/35"
-                          }`}
-                        />
-                      </button>
-                    );
-                  })}
+                          <span
+                            className={`font-mono text-[0.62rem] ${
+                              isActive ? "text-black/45" : "text-white/32"
+                            }`}
+                          >
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+                          <span className="min-w-0 flex-1 truncate">
+                            {item.label}
+                          </span>
+                          <span
+                            className={`h-1.5 w-1.5 rounded-full transition-colors duration-200 ${
+                              isActive
+                                ? "bg-[#0a0a0a]"
+                                : "bg-transparent group-hover:bg-white/35"
+                            }`}
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ) : null}
-        </AnimatePresence>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
 
-        <motion.button
-          type="button"
-          onClick={() => setIsOpen((value) => !value)}
-          layout
-          transition={springTransition}
-          className="w-full overflow-hidden rounded-full border border-white/10 bg-[#0a0a0a] text-white shadow-[0_18px_48px_rgba(0,0,0,0.22)]"
-          aria-label={
-            isOpen ? "Close section navigator" : "Open section navigator"
-          }
-          aria-expanded={isOpen}
-        >
-          <div className="flex min-h-13 items-center gap-2.5 px-3">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/8 text-white/72 transition-colors duration-200">
-              <motion.span
-                animate={{ rotate: isOpen ? 180 : 0 }}
-                transition={springTransition}
-                className="flex"
-              >
-                {isOpen ? (
-                  <ChevronDown className="h-3.5 w-3.5" />
-                ) : (
-                  <ListTree className="h-3.5 w-3.5" />
-                )}
-              </motion.span>
-            </span>
-
-            <span className="relative min-w-0 flex-1 overflow-hidden text-left">
-              <AnimatePresence mode="wait" initial={false}>
+          <motion.button
+            type="button"
+            onClick={() => setIsMobileOpen((value) => !value)}
+            layout
+            transition={{ type: "spring", stiffness: 420, damping: 34 }}
+            className="w-full overflow-hidden rounded-full border border-white/10 bg-[#0a0a0a] text-white shadow-[0_18px_48px_rgba(0,0,0,0.22)]"
+            aria-label={
+              isMobileOpen
+                ? "Close section navigator"
+                : "Open section navigator"
+            }
+            aria-expanded={isMobileOpen}
+          >
+            <div className="flex min-h-13 items-center gap-2.5 px-3">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/8 text-white/72 transition-colors duration-200">
                 <motion.span
-                  key={activeSection.href}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.16, ease: "easeOut" }}
-                  className="block"
+                  animate={{ rotate: isMobileOpen ? 180 : 0 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="flex"
                 >
-                  <span className="block truncate text-[0.84rem] font-semibold leading-none">
-                    {activeSection.label}
-                  </span>
-                  <span className="mt-1 block font-mono text-[0.52rem] font-semibold uppercase tracking-[0.18em] text-white/36">
-                    Current section
-                  </span>
+                  {isMobileOpen ? (
+                    <ChevronDown className="h-3.5 w-3.5" />
+                  ) : (
+                    <ListTree className="h-3.5 w-3.5" />
+                  )}
                 </motion.span>
-              </AnimatePresence>
-            </span>
+              </span>
 
-            <span className="relative flex h-7 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/8 font-mono text-[0.64rem] font-semibold tabular-nums text-white/54">
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={activeIndex}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.14, ease: "easeOut" }}
-                  className="absolute inset-0 flex items-center justify-center"
-                >
-                  {activeIndex + 1}/{sectionDockItems.length}
-                </motion.span>
-              </AnimatePresence>
-            </span>
-          </div>
-        </motion.button>
-      </div>
-    </div>
+              <span className="relative min-w-0 flex-1 overflow-hidden text-left">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={activeSection.href}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.16, ease: "easeOut" }}
+                    className="block"
+                  >
+                    <span className="block truncate text-[0.84rem] font-semibold leading-none">
+                      {activeSection.label}
+                    </span>
+                    <span className="mt-1 block font-mono text-[0.52rem] font-semibold uppercase tracking-[0.18em] text-white/36">
+                      Current section
+                    </span>
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+
+              <span className="relative flex h-7 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/8 font-mono text-[0.64rem] font-semibold tabular-nums text-white/54">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={activeIndex}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.14, ease: "easeOut" }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    {activeIndex + 1}/{sectionDockItems.length}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+            </div>
+          </motion.button>
+        </div>
+      </nav>
+    </>
   );
 }
