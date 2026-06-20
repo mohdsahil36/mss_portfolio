@@ -49,3 +49,9 @@ export const sectionDockItems = [
   { label: "Coding profiles", href: "#beyond-code" },
   { label: "Contact", href: "#contact" },
 ];
+
+export const workExperienceDockItems = [
+  { label: "Overview", href: "#work-overview" },
+  { label: "Simplify3X", href: "#simplify3x" },
+  { label: "Merkle", href: "#merkle" },
+];

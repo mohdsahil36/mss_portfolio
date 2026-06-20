@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, easeOut, motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { FiBriefcase, FiChevronDown } from "react-icons/fi";
+import { FiBriefcase, FiChevronDown, FiArrowUpRight } from "react-icons/fi";
 import { workExperience, workSection } from "@/app/data/workExperience";
 
 export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
@@ -131,14 +132,53 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
                     className="overflow-hidden"
                   >
                     <div className="pb-4 pt-1">
-                      <ul className="space-y-1.5 text-[0.75rem] font-medium leading-6 text-[#62666f] dark:text-zinc-400">
-                        {item.points.map((point) => (
-                          <li key={point} className="flex gap-3">
-                            <span className="mt-[0.62rem] h-1 w-1 shrink-0 rounded-full bg-[#9a9da5] dark:bg-zinc-600" />
-                            <span>{point}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      {item.projects ? (
+                        <div className="space-y-3">
+                          <div>
+                            <p className="font-mono text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-[#9a9da5]">
+                              Role summary
+                            </p>
+                            <ul className="mt-1.5 space-y-1.5 text-[0.75rem] font-medium leading-6 text-[#62666f] dark:text-zinc-400">
+                              {item.points.map((point) => (
+                                <li key={point} className="flex gap-3">
+                                  <span className="mt-[0.62rem] h-1 w-1 shrink-0 rounded-full bg-[#9a9da5] dark:bg-zinc-600" />
+                                  <span>{point}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <div className="h-px bg-[#ededed] dark:bg-zinc-800" />
+
+                          {item.projects.map((project) => (
+                            <div key={project.name}>
+                              <p className="text-[0.75rem] font-semibold text-[#151719] dark:text-white">
+                                {project.name}
+                              </p>
+                              <p className="mt-1 text-[0.74rem] font-medium leading-6 text-[#62666f] dark:text-zinc-400">
+                                {project.summary}
+                              </p>
+                              <div className="mt-2 flex flex-wrap gap-2">
+                                <span className="rounded-sm border border-[#ededed] px-2 py-1 font-mono text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-[#8a8d95] dark:border-zinc-800 dark:text-zinc-500">
+                                  Work done · {project.workDone.length}
+                                </span>
+                                <span className="rounded-sm border border-[#ededed] px-2 py-1 font-mono text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-[#8a8d95] dark:border-zinc-800 dark:text-zinc-500">
+                                  Impact made · {project.impactMade.length}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <ul className="space-y-1.5 text-[0.75rem] font-medium leading-6 text-[#62666f] dark:text-zinc-400">
+                          {item.points.map((point) => (
+                            <li key={point} className="flex gap-3">
+                              <span className="mt-[0.62rem] h-1 w-1 shrink-0 rounded-full bg-[#9a9da5] dark:bg-zinc-600" />
+                              <span>{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
 
                       <div className="mt-3.5 flex flex-wrap gap-2">
                         {item.techStack.map((tech) => {
@@ -147,7 +187,7 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
                           return (
                             <span
                               key={tech.name}
-                              className="inline-flex items-center gap-1.5 border border-[#ededed] bg-white px-2.5 py-1.5 text-[0.68rem] font-semibold text-[#747780] transition-colors hover:border-[#d8d8d8] hover:text-[#151719] dark:border-zinc-800 dark:bg-background dark:text-zinc-400 dark:hover:text-white"
+                              className="inline-flex cursor-pointer items-center gap-1.5 border border-[#ededed] bg-white px-2.5 py-1.5 text-[0.68rem] font-semibold text-[#747780] transition-colors hover:border-[#d8d8d8] hover:text-[#151719] dark:border-zinc-800 dark:bg-background dark:text-zinc-400 dark:hover:text-white"
                             >
                               <Icon size={14} style={{ color: tech.color }} />
                               {tech.name}
@@ -162,6 +202,16 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
             </motion.article>
           );
         })}
+      </div>
+
+      <div className="mt-6 flex justify-center">
+        <Link
+          href="/work-experience"
+          className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-[#ededed] bg-white px-4 text-[0.78rem] font-semibold text-[#151719] transition-colors duration-200 hover:bg-[#f7f7f7] dark:border-zinc-800 dark:bg-background dark:text-white dark:hover:bg-zinc-900"
+        >
+          View full work experience
+          <FiArrowUpRight className="h-3.5 w-3.5" />
+        </Link>
       </div>
     </motion.section>
   );

@@ -1,29 +1,46 @@
 "use client";
 
-import { sectionDockItems } from "@/app/data/dock";
+import { sectionDockItems, workExperienceDockItems } from "@/app/data/dock";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, ListTree } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 export function SectionDock() {
+  const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const dockItems = useMemo(() => {
+    if (pathname === "/work-experience") return workExperienceDockItems;
+    if (pathname === "/") return sectionDockItems;
+    return [];
+  }, [pathname]);
   const [activeHref, setActiveHref] = useState(sectionDockItems[0].href);
   const activeIndex = Math.max(
-    sectionDockItems.findIndex((item) => item.href === activeHref),
+    dockItems.findIndex((item) => item.href === activeHref),
     0,
   );
-  const activeSection = sectionDockItems[activeIndex];
+  const activeSection = dockItems[activeIndex] ?? dockItems[0];
   const sectionIds = useMemo(
-    () => sectionDockItems.map((item) => item.href.replace("#", "")),
-    [],
+    () => dockItems.map((item) => item.href.replace("#", "")),
+    [dockItems],
   );
 
+  const shouldShowDock = dockItems.length > 0;
+
   useEffect(() => {
+    if (!shouldShowDock) return;
+
+    setActiveHref(dockItems[0].href);
+  }, [dockItems, shouldShowDock]);
+
+  useEffect(() => {
+    if (!shouldShowDock) return;
+
     let frameId = 0;
 
     const updateActiveSection = () => {
       const anchorLine = window.innerHeight * 0.34;
-      let nextHref = sectionDockItems[0].href;
+      let nextHref = dockItems[0].href;
 
       for (const id of sectionIds) {
         const element = document.getElementById(id);
@@ -57,7 +74,7 @@ export function SectionDock() {
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
     };
-  }, [sectionIds]);
+  }, [dockItems, sectionIds, shouldShowDock]);
 
   const navigateTo = (href: string) => {
     const target = document.querySelector(href);
@@ -72,13 +89,14 @@ export function SectionDock() {
 
   return (
     <>
-      <nav
-        aria-label="Section navigation"
-        className="fixed right-3 top-1/2 z-[65] hidden -translate-y-1/2 md:block"
-      >
+      {shouldShowDock && activeSection ? (
+        <nav
+          aria-label="Section navigation"
+          className="fixed right-3 top-1/2 z-[65] hidden -translate-y-1/2 md:block"
+        >
         <div className="relative rounded-full border border-[#e8e8e8] bg-[hsl(var(--background))]/96 p-1.5 shadow-[0_16px_45px_rgba(15,15,15,0.08)] backdrop-blur dark:border-zinc-800 dark:shadow-[0_16px_45px_rgba(0,0,0,0.28)]">
           <div className="flex flex-col gap-1">
-            {sectionDockItems.map((item, index) => {
+            {dockItems.map((item, index) => {
               const isActive = item.href === activeHref;
 
               return (
@@ -121,12 +139,14 @@ export function SectionDock() {
             })}
           </div>
         </div>
-      </nav>
+        </nav>
+      ) : null}
 
-      <nav
-        aria-label="Mobile section navigation"
-        className="fixed inset-x-3 bottom-3 z-[75] md:hidden"
-      >
+      {shouldShowDock && activeSection ? (
+        <nav
+          aria-label="Mobile section navigation"
+          className="fixed inset-x-3 bottom-3 z-[75] md:hidden"
+        >
         <div className="w-full">
           <AnimatePresence>
             {isMobileOpen ? (
@@ -143,12 +163,12 @@ export function SectionDock() {
                       Sections
                     </p>
                     <span className="font-mono text-[0.62rem] font-semibold text-white/38">
-                      {activeIndex + 1}/{sectionDockItems.length}
+                      {activeIndex + 1}/{dockItems.length}
                     </span>
                   </div>
 
                   <div className="space-y-1">
-                    {sectionDockItems.map((item, index) => {
+                    {dockItems.map((item, index) => {
                       const isActive = item.href === activeHref;
 
                       return (
@@ -246,14 +266,15 @@ export function SectionDock() {
                     transition={{ duration: 0.14, ease: "easeOut" }}
                     className="absolute inset-0 flex items-center justify-center"
                   >
-                    {activeIndex + 1}/{sectionDockItems.length}
+                    {activeIndex + 1}/{dockItems.length}
                   </motion.span>
                 </AnimatePresence>
               </span>
             </div>
           </motion.button>
         </div>
-      </nav>
+        </nav>
+      ) : null}
     </>
   );
 }

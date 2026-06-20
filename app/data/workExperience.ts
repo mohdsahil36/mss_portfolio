@@ -25,10 +25,55 @@ export const workExperience = [
     role: "Software Engineer",
     status: "Current role",
     type: "current",
+    summary:
+      "At Simplify3X, I have worked across a high-traffic real estate platform and an international airline platform, contributing to frontend development, full-stack feature delivery, mobile applications, design systems, and performance optimization. My work focuses on delivering scalable, user-centric, and production-ready solutions.",
+    summaryTags: [
+      "Frontend ownership",
+      "Full-stack support",
+      "Mobile delivery",
+      "Design systems",
+      "Performance work",
+    ],
     points: [
-      "Build production web interfaces with React, state management, and reusable frontend patterns.",
-      "Contribute across frontend, backend, mobile, and deployment workflows when product delivery needs it.",
-      "Focus on performance, maintainability, and shipping UI that feels clean under real usage.",
+      "Owned product-facing engineering across two domains: a transaction-heavy real estate platform and an international airline platform.",
+      "Worked across React, React Native, Node.js, Redux, Zustand, Storybook, AWS, and Azure DevOps depending on what the product needed.",
+      "Focused on shipping reliable interfaces, reusable systems, and measurable performance improvements without losing design consistency.",
+    ],
+    projects: [
+      {
+        name: "Large-scale real estate platform",
+        summary:
+          "Full-stack delivery across web, Android, and iOS for a transaction-driven real estate platform.",
+        workDone: [
+          "Maintained and enhanced cross-platform React Native applications for Android and iOS while keeping web and mobile experiences consistent.",
+          "Developed and optimized React.js web applications with Redux for predictable state management and smoother high-traffic workflows.",
+          "Worked on a Node.js backend across large-scale codebases, including modules exceeding 10,000 lines of code.",
+          "Designed and shipped new features across web and mobile platforms with a focus on consistency, reliability, and user experience quality.",
+          "Supported AWS deployment, infrastructure management, and production issue handling in collaboration with cross-functional teams.",
+        ],
+        impactMade: [
+          "Supported a business network of 5,000+ partner agents and 13,000+ property transactions.",
+          "Optimized backend APIs and reduced response/load times by up to 93% for critical workflows.",
+          "Improved frontend performance by 50%+ through rendering improvements, code optimization, and more efficient state management.",
+        ],
+      },
+      {
+        name: "International airlines platform",
+        summary:
+          "Frontend delivery for an international airline platform with globally distributed teams working across countries and time zones.",
+        workDone: [
+          "Developed and launched new application pages and user workflows to improve platform functionality and user experience.",
+          "Built, optimized, and maintained reusable React components to reduce duplication and improve maintainability.",
+          "Worked extensively on the administration portal using React, Next.js, Zustand, Prettier, and Husky.",
+          "Established and expanded a centralized Storybook component library for consistent UI implementation across teams.",
+          "Used Azure DevOps Boards for sprint planning, task tracking, and cross-functional collaboration across distributed teams.",
+        ],
+        impactMade: [
+          "Improved frontend consistency by standardizing reusable components through Storybook.",
+          "Enhanced application performance and maintainability through component optimization and reusable architecture.",
+          "Increased development efficiency for multiple teams through a centralized component library and code quality standards.",
+        ],
+      },
     ],
     techStack: [
       { name: "ReactJS", icon: SiReact, color: "#61DAFB" },

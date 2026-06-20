@@ -63,7 +63,7 @@ export default function Skills({
                 return (
                   <span
                     key={skill.name}
-                    className="group inline-flex min-h-7 items-center gap-1.5 rounded-md border border-dashed border-[#dedede] bg-white px-2.5 py-1.5 text-[0.74rem] font-semibold text-[#7a7d84] transition-[border-color,background-color,color,box-shadow] duration-300 ease-out hover:border-[#bfc1c5] hover:bg-[#fbfbfb] hover:text-[#151719] hover:shadow-[inset_0_0_0_1px_rgba(21,23,25,0.04),0_6px_18px_rgba(15,15,15,0.045)] dark:border-zinc-800 dark:bg-background dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:bg-zinc-950 dark:hover:text-white"
+                    className="group inline-flex min-h-7 cursor-pointer items-center gap-1.5 rounded-md border border-dashed border-[#dedede] bg-white px-2.5 py-1.5 text-[0.74rem] font-semibold text-[#7a7d84] transition-[border-color,background-color,color,box-shadow] duration-300 ease-out hover:border-[#bfc1c5] hover:bg-[#fbfbfb] hover:text-[#151719] hover:shadow-[inset_0_0_0_1px_rgba(21,23,25,0.04),0_6px_18px_rgba(15,15,15,0.045)] dark:border-zinc-800 dark:bg-background dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:bg-zinc-950 dark:hover:text-white"
                   >
                     {Icon ? (
                       <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-sm bg-transparent transition-colors duration-300 ease-out group-hover:bg-[#f1f1f1] dark:group-hover:bg-zinc-900">

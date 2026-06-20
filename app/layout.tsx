@@ -8,7 +8,7 @@ import {
 import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import Navbar from "./components/Navbar";
-import { QuoteSection } from "./components/QuoteSection";
+import { RouteQuote } from "./components/route-quote";
 import { CinematicPreloader } from "./components/cinematic-preloader";
 import { LoadingProvider } from "./components/loading-context";
 import { LoadingGate } from "./components/loading-gate";
@@ -81,10 +81,7 @@ export default function RootLayout({
                   <div className="relative mx-auto w-full md:w-[78%] lg:w-[64%] xl:w-[40%]">
                     <div className="mt-5 p-0">{children}</div>
 
-                    <QuoteSection
-                      quote="Don't worry about failure: you only have to be right once."
-                      author="Drew Houston"
-                    />
+                    <RouteQuote />
 
                     <SiteFooter />
                   </div>
