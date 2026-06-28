@@ -14,6 +14,39 @@ export default function Skills({
   const sectionDirection = sectionIndex % 2 === 0 ? -40 : 40;
   const SectionIcon = skillsSection.icon;
 
+  const renderSkillCategory = (category: (typeof skillsData)[number]) => (
+    <div className="grid gap-3 sm:grid-cols-[9rem_1fr]">
+      <div>
+        <h3 className="pt-1 font-mono text-[0.7rem] font-semibold uppercase text-[#8a8d95]">
+          {category.title}
+        </h3>
+      </div>
+
+      <div className="flex flex-wrap gap-1.5 sm:border-l sm:border-[#eeeeee] sm:pl-4 dark:sm:border-zinc-800">
+        {category.skills.map((skill) => {
+          const Icon = skill.icon;
+
+          return (
+            <span
+              key={skill.name}
+              className="group inline-flex min-h-7 cursor-pointer items-center gap-1.5 rounded-md border border-dashed border-[#dedede] bg-white px-2.5 py-1.5 text-[0.74rem] font-semibold text-[#7a7d84] transition-[border-color,background-color,color,box-shadow] duration-300 ease-out hover:border-[#bfc1c5] hover:bg-[#fbfbfb] hover:text-[#151719] hover:shadow-[inset_0_0_0_1px_rgba(21,23,25,0.04),0_6px_18px_rgba(15,15,15,0.045)] dark:border-zinc-800 dark:bg-background dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:bg-zinc-950 dark:hover:text-white"
+            >
+              {Icon ? (
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-sm bg-transparent transition-colors duration-300 ease-out group-hover:bg-[#f1f1f1] dark:group-hover:bg-zinc-900">
+                  <Icon
+                    className="h-3.5 w-3.5 transition-opacity duration-300 ease-out group-hover:opacity-95"
+                    style={{ color: skill.color }}
+                  />
+                </span>
+              ) : null}
+              <span>{skill.name}</span>
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  );
+
   return (
     <motion.section
       ref={ref}
@@ -50,34 +83,9 @@ export default function Skills({
               ease: easeOut,
               delay: categoryIndex * 0.06,
             }}
-            className="grid gap-3 border-t border-[#f0f0f0] pt-5 first:border-t-0 first:pt-0 sm:grid-cols-[9rem_1fr] dark:border-zinc-900"
+            className="border-t border-[#f0f0f0] pt-5 first:border-t-0 first:pt-0 dark:border-zinc-900"
           >
-            <h3 className="pt-1 font-mono text-[0.7rem] font-semibold uppercase text-[#8a8d95]">
-              {category.title}
-            </h3>
-
-            <div className="flex flex-wrap gap-1.5">
-              {category.skills.map((skill) => {
-                const Icon = skill.icon;
-
-                return (
-                  <span
-                    key={skill.name}
-                    className="group inline-flex min-h-7 cursor-pointer items-center gap-1.5 rounded-md border border-dashed border-[#dedede] bg-white px-2.5 py-1.5 text-[0.74rem] font-semibold text-[#7a7d84] transition-[border-color,background-color,color,box-shadow] duration-300 ease-out hover:border-[#bfc1c5] hover:bg-[#fbfbfb] hover:text-[#151719] hover:shadow-[inset_0_0_0_1px_rgba(21,23,25,0.04),0_6px_18px_rgba(15,15,15,0.045)] dark:border-zinc-800 dark:bg-background dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:bg-zinc-950 dark:hover:text-white"
-                  >
-                    {Icon ? (
-                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-sm bg-transparent transition-colors duration-300 ease-out group-hover:bg-[#f1f1f1] dark:group-hover:bg-zinc-900">
-                        <Icon
-                          className="h-3.5 w-3.5 transition-opacity duration-300 ease-out group-hover:opacity-95"
-                          style={{ color: skill.color }}
-                        />
-                      </span>
-                    ) : null}
-                    <span>{skill.name}</span>
-                  </span>
-                );
-              })}
-            </div>
+            {renderSkillCategory(category)}
           </motion.div>
         ))}
       </div>
