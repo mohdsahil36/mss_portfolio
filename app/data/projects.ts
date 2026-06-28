@@ -16,8 +16,9 @@ export interface Project {
 
 export const projectSection = {
   eyebrow: "Currently building",
-  title: "Active side projects",
-  summary: "Side projects focused on product ideas and architecture validation",
+  title: "Side Quests",
+  summary:
+    "Experimental builds where I test product ideas, architecture choices, and interaction patterns.",
 };
 
 export const projects: Project[] = [

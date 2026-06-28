@@ -18,7 +18,7 @@ export const heroData = {
   eyebrow: "FIG_001 / Portfolio",
   name: "Mohd Sahil Siddiqui",
   role: "Software Engineer (Frontend)",
-  availability: "Eager to contribute to products with purpose",
+  availability: "Ready for purposeful product quests",
   titleLine: "Mohd Sahil Siddiqui",
   impactLine: "Scale, Ownership, Impact.",
   summary:

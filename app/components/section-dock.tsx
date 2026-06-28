@@ -160,7 +160,7 @@ export function SectionDock() {
                 <div className="max-h-[min(22rem,58vh)] overflow-y-auto p-2">
                   <div className="flex items-center justify-between px-3 pb-2 pt-1.5">
                     <p className="font-mono text-[0.56rem] font-semibold uppercase tracking-[0.2em] text-white/40">
-                      Sections
+                      Quest map
                     </p>
                     <span className="font-mono text-[0.62rem] font-semibold text-white/38">
                       {activeIndex + 1}/{dockItems.length}
@@ -250,7 +250,7 @@ export function SectionDock() {
                       {activeSection.label}
                     </span>
                     <span className="mt-1 block font-mono text-[0.52rem] font-semibold uppercase tracking-[0.18em] text-white/36">
-                      Current section
+                      Active checkpoint
                     </span>
                   </motion.span>
                 </AnimatePresence>

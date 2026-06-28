@@ -1,7 +1,7 @@
 import { FiLinkedin, FiMail } from "react-icons/fi";
 
 export const contactData = {
-  eyebrow: "Contact",
+  eyebrow: "Party up",
   title: "Let's build products users love to use.",
   summary:
     "Open to frontend and full-stack opportunities where performance, scalability, and thoughtful product development make a measurable impact.",

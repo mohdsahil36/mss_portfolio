@@ -2,7 +2,7 @@ import { FiAward } from "react-icons/fi";
 
 export const educationSection = {
   eyebrow: "Education",
-  title: "Academic Background",
+  title: "Origin Story",
   summary:
     "Computer science background forming the foundation of my engineering work.",
   icon: FiAward,

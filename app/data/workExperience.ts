@@ -14,9 +14,9 @@ import SimplifyIcon from "@/public/assets/Simplify3x.jpeg";
 import MerkleIcon from "@/public/assets/Merkle.jpeg";
 
 export const workSection = {
-  title: "Experience",
+  title: "Career Quest",
   summary:
-    "A concise overview of roles, teams, and ownership driving the work.",
+    "Role progression, team context, and the ownership picked up along the way.",
 };
 
 export const workExperience = [

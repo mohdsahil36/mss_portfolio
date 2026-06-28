@@ -26,7 +26,7 @@ export default function Projects({
         <div className="min-w-0">
           <div className="mb-4 flex items-center justify-between border-b border-[#ededed] pb-3 dark:border-zinc-800">
             <span className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-[#9a9da5]">
-              Build {String(index + 1).padStart(2, "0")}
+              Quest {String(index + 1).padStart(2, "0")}
             </span>
             <span className="font-mono text-[0.6rem] font-semibold text-[#b0b2b8]">
               {String(index + 1).padStart(2, "0")} /{" "}
@@ -52,7 +52,7 @@ export default function Projects({
                       isLive ? "bg-emerald-500" : "bg-[#5f6368]"
                     }`}
                   />
-                  {isLive ? "Live" : "In progress"}
+                  {isLive ? "Unlocked" : "In progress"}
                 </span>
               </div>
               <p className="mt-3 text-[0.86rem] font-medium leading-7 text-[#747780] dark:text-zinc-400">
@@ -92,7 +92,7 @@ export default function Projects({
 
         <div className="border-t border-[#ededed] pt-5 md:border-l md:border-t-0 md:pl-5 md:pt-0 dark:border-zinc-800">
           <p className="font-mono text-[0.68rem] font-semibold uppercase text-[#151719] dark:text-white">
-            Technical notes
+            Quest notes
           </p>
           <ul className="mt-3 space-y-2 text-[0.78rem] font-medium leading-6 text-[#747780] dark:text-zinc-400">
             {project.highlights.map((highlight) => (
@@ -159,8 +159,10 @@ export default function Projects({
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               transition={{ duration: 0.34, ease: easeOut, delay: index * 0.08 }}
-              className="border border-[#e8e8e8] bg-white p-5 transition-colors hover:border-[#d8d8d8] dark:border-zinc-800 dark:bg-background"
+              className="relative border border-[#e8e8e8] bg-white p-5 transition-[border-color,box-shadow] duration-300 hover:border-[#cfcfcf] hover:shadow-[0_12px_34px_rgba(15,15,15,0.045)] dark:border-zinc-800 dark:bg-background dark:hover:border-zinc-700 dark:hover:shadow-[0_16px_40px_rgba(0,0,0,0.22)]"
             >
+              <span className="pointer-events-none absolute right-3 top-3 h-2 w-2 border-r border-t border-[#d5d5d5] dark:border-zinc-700" />
+              <span className="pointer-events-none absolute bottom-3 left-3 h-2 w-2 border-b border-l border-[#d5d5d5] dark:border-zinc-700" />
               {renderProjectCard(project, index)}
             </motion.article>
           );

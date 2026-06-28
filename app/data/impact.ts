@@ -16,7 +16,7 @@ export type ImpactMetric = {
 };
 
 export const impactSection = {
-  title: "Meaningful impact",
+  title: "Impact Log",
   summary:
     "A few numbers from products I have worked on. Not trophy-wall energy, just useful proof that the work held up outside the local machine.",
   icon: FiTrendingUp,

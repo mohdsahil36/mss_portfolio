@@ -83,6 +83,9 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
                         />
                       </span>
                       <div className="min-w-0">
+                        <p className="mb-1 font-mono text-[0.54rem] font-semibold uppercase tracking-[0.15em] text-[#9a9da5]">
+                          Mission {String(index + 1).padStart(2, "0")}
+                        </p>
                         <h3 className="text-[0.9rem] font-semibold leading-tight text-[#151719] dark:text-white sm:text-[0.98rem]">
                           {item.role} @ {item.company}
                         </h3>
@@ -168,9 +171,9 @@ export default function Work({ sectionIndex = 0 }: { sectionIndex?: number }) {
       <div className="mt-6 flex justify-center">
         <Link
           href="/work-experience"
-          className="inline-flex min-h-10 items-center justify-center gap-2 border border-[#ededed] bg-white px-4 text-[0.78rem] font-semibold text-[#151719] transition-colors duration-200 hover:bg-[#f7f7f7] dark:border-zinc-800 dark:bg-background dark:text-white dark:hover:bg-zinc-900"
+          className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-[#ededed] bg-white px-4 text-[0.78rem] font-semibold text-[#151719] transition-[background-color,border-color,box-shadow] duration-200 hover:border-[#d8d8d8] hover:bg-[#f7f7f7] hover:shadow-[0_10px_28px_rgba(15,15,15,0.04)] dark:border-zinc-800 dark:bg-background dark:text-white dark:hover:bg-zinc-900"
         >
-          View detailed experience
+          Open full quest log
           <FiArrowUpRight className="h-3.5 w-3.5" />
         </Link>
       </div>

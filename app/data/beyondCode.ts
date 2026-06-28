@@ -12,7 +12,7 @@ import { SiLeetcode } from "react-icons/si";
 
 export const beyondCodeSection = {
   eyebrow: "Beyond code",
-  title: "Interests & profiles",
+  title: "Player Stats",
   summary:
     "A small look at what keeps me curious outside tickets, deadlines, and deploy logs.",
   icon: FiHeart,

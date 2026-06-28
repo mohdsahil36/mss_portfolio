@@ -39,15 +39,15 @@ export const dockItems = [
 ];
 
 export const sectionDockItems = [
-  { label: "Home", href: "#home" },
-  { label: "Work experience", href: "#work" },
-  { label: "Impact", href: "#impact" },
-  { label: "Side projects", href: "#projects" },
-  { label: "Tech stack", href: "#skills" },
-  { label: "Specialization", href: "#specialization" },
-  { label: "Education", href: "#education" },
-  { label: "Coding profiles", href: "#beyond-code" },
-  { label: "Contact", href: "#contact" },
+  { label: "Player profile", href: "#home" },
+  { label: "Career quest", href: "#work" },
+  { label: "Impact log", href: "#impact" },
+  { label: "Side quests", href: "#projects" },
+  { label: "Skill tree", href: "#skills" },
+  { label: "Class perks", href: "#specialization" },
+  { label: "Origin story", href: "#education" },
+  { label: "Player stats", href: "#beyond-code" },
+  { label: "Party up", href: "#contact" },
 ];
 
 export const workExperienceDockItems = [

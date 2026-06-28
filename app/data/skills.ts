@@ -52,7 +52,7 @@ export type SkillCategory = {
 
 export const skillsSection = {
   eyebrow: "Tech stack",
-  title: "What I build with",
+  title: "Skill Tree",
   summary:
     "A practical stack centered on frontend systems, product UI, API integration, and reliable delivery workflows.",
   icon: FiPackage,

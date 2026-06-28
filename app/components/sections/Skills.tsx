@@ -20,6 +20,9 @@ export default function Skills({
         <h3 className="pt-1 font-mono text-[0.7rem] font-semibold uppercase text-[#8a8d95]">
           {category.title}
         </h3>
+        <p className="mt-1 hidden font-mono text-[0.54rem] font-semibold uppercase tracking-[0.14em] text-[#b0b2b8] sm:block">
+          unlocked
+        </p>
       </div>
 
       <div className="flex flex-wrap gap-1.5 sm:border-l sm:border-[#eeeeee] sm:pl-4 dark:sm:border-zinc-800">

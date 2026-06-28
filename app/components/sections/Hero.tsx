@@ -109,9 +109,15 @@ export default function Hero() {
             ) : null}
           </div>
 
-          <p className="mt-8 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.13em] text-[#151719] dark:text-white">
-            {heroData.availability}
-          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-2.5">
+            <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.13em] text-[#151719] dark:text-white">
+              {heroData.availability}
+            </p>
+            <span className="h-px w-8 bg-[#d9d9d9] dark:bg-zinc-800" />
+            <span className="font-mono text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-[#9a9da5]">
+              Player profile / frontend
+            </span>
+          </div>
 
           <h1 className="group/name relative mt-3 flex items-center gap-3 text-[1.82rem] font-semibold leading-[1.06] text-[#151719] dark:text-white sm:gap-4 sm:text-[2.55rem] lg:text-[2.9rem]">
             <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-md border border-[#e7e7e7] bg-white dark:border-zinc-800 dark:bg-background sm:h-12 sm:w-12">
@@ -135,9 +141,14 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="mt-2 text-[0.82rem] font-semibold text-[#777b84] dark:text-zinc-400">
-            {heroData.role}
-          </p>
+          <div className="mt-2 flex flex-wrap items-center gap-2.5">
+            <p className="text-[0.82rem] font-semibold text-[#777b84] dark:text-zinc-400">
+              {heroData.role}
+            </p>
+            <span className="rounded-sm border border-[#ededed] bg-white px-2 py-1 font-mono text-[0.56rem] font-semibold uppercase tracking-[0.14em] text-[#8a8d95] dark:border-zinc-800 dark:bg-background">
+              Loadout: React / Next / Node
+            </span>
+          </div>
 
           <p className="mt-6 text-[1.28rem] font-semibold leading-snug text-[#151719] dark:text-white sm:text-[1.45rem]">
             {heroData.impactLine}

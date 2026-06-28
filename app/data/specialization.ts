@@ -14,7 +14,7 @@ export type SpecializationItem = {
 };
 
 export const specializationSection = {
-  title: "Areas of Expertise",
+  title: "Class Perks",
   summary:
     "I build high-quality digital products by combining user-centered design, modern engineering practices, and scalable technical solutions.",
   icon: FiTarget,
