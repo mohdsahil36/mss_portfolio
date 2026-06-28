@@ -53,7 +53,7 @@ export function SiteFooter() {
           </div>
 
           <p className="font-mono text-[0.7rem] font-semibold uppercase text-[#8a8d95]">
-            © 2026 Mohd Sahil Siddiqui · Built with precision.
+            © 2026 Mohd Sahil Siddiqui · Quest log built with precision.
           </p>
         </div>
 
@@ -65,7 +65,7 @@ export function SiteFooter() {
             onClick={scrollToTop}
             className="inline-flex h-9 items-center justify-center gap-2 rounded-xl border border-[#ededed] bg-white px-3.5 text-[0.74rem] font-semibold text-[#8a8d95] transition-colors duration-200 hover:border-[#d8d8d8] hover:bg-[#f8f8f8] hover:text-[#151719] dark:border-zinc-800 dark:bg-black dark:text-zinc-500 dark:hover:text-white"
           >
-            Back to top
+            Return to spawn
             <FiArrowUp className="h-3.5 w-3.5" />
           </button>
         </div>

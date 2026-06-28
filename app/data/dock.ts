@@ -51,7 +51,7 @@ export const sectionDockItems = [
 ];
 
 export const workExperienceDockItems = [
-  { label: "Overview", href: "#work-overview" },
-  { label: "Simplify3X", href: "#simplify3x" },
-  { label: "Merkle", href: "#merkle" },
+  { label: "Mission briefing", href: "#work-overview" },
+  { label: "Current campaign", href: "#simplify3x" },
+  { label: "Origin mission", href: "#merkle" },
 ];

@@ -26,7 +26,7 @@ export function ViewCount() {
   return (
     <div className="flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400">
       <IconEye className="w-3.5 h-3.5" />
-      <span>View Count: {viewCount.toLocaleString()}</span>
+      <span>Visitors unlocked: {viewCount.toLocaleString()}</span>
     </div>
   );
 }
