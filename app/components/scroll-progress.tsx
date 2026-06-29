@@ -1,6 +1,10 @@
 "use client";
 
-import { sectionDockItems, workExperienceDockItems } from "@/app/data/dock";
+import {
+  impactLogDockItems,
+  sectionDockItems,
+  workExperienceDockItems,
+} from "@/app/data/dock";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
@@ -25,7 +29,11 @@ export function ScrollProgress() {
   const [rail, setRail] = useState<Rail | null>(null);
   const sectionIds = useMemo(() => {
     const items =
-      pathname === "/work-experience" ? workExperienceDockItems : sectionDockItems;
+      pathname === "/work-experience"
+        ? workExperienceDockItems
+        : pathname === "/impact-log"
+          ? impactLogDockItems
+          : sectionDockItems;
 
     return items.map((item) => item.href.replace("#", ""));
   }, [pathname]);

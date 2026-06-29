@@ -55,3 +55,9 @@ export const workExperienceDockItems = [
   { label: "Current campaign", href: "#simplify3x" },
   { label: "Origin mission", href: "#merkle" },
 ];
+
+export const impactLogDockItems = [
+  { label: "Impact briefing", href: "#impact-overview" },
+  { label: "Impact unlocked", href: "#impact-signals" },
+  { label: "Proof notes", href: "#impact-proof" },
+];

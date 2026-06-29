@@ -1,6 +1,10 @@
 "use client";
 
-import { sectionDockItems, workExperienceDockItems } from "@/app/data/dock";
+import {
+  impactLogDockItems,
+  sectionDockItems,
+  workExperienceDockItems,
+} from "@/app/data/dock";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, ListTree } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -11,6 +15,7 @@ export function SectionDock() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const dockItems = useMemo(() => {
     if (pathname === "/work-experience") return workExperienceDockItems;
+    if (pathname === "/impact-log") return impactLogDockItems;
     if (pathname === "/") return sectionDockItems;
     return [];
   }, [pathname]);

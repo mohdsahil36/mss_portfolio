@@ -2,6 +2,8 @@
 
 import { easeOut, motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
+import { FiArrowUpRight } from "react-icons/fi";
 import { impactMetrics, impactSection } from "@/app/data/impact";
 
 export default function Impact({
@@ -91,6 +93,16 @@ export default function Impact({
             );
           })}
         </div>
+      </div>
+
+      <div className="mt-5 flex justify-center">
+        <Link
+          href="/impact-log"
+          className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-[#ededed] bg-white px-4 text-[0.78rem] font-semibold text-[#151719] transition-[background-color,border-color,box-shadow] duration-200 hover:border-[#d8d8d8] hover:bg-[#f7f7f7] hover:shadow-[0_10px_28px_rgba(15,15,15,0.04)] dark:border-zinc-800 dark:bg-background dark:text-white dark:hover:bg-zinc-900"
+        >
+          Open full impact log
+          <FiArrowUpRight className="h-3.5 w-3.5" />
+        </Link>
       </div>
     </motion.section>
   );
