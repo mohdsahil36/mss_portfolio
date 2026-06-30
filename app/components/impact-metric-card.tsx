@@ -2,6 +2,7 @@
 
 import { easeOut, motion, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { FiArrowUpRight } from "react-icons/fi";
 import type { ImpactMetric } from "@/app/data/impact";
 
 function splitMetricValue(value: string) {
@@ -55,9 +56,11 @@ function CountUpValue({ value, active }: { value: string; active: boolean }) {
 export function ImpactMetricCard({
   metric,
   index,
+  onOpen,
 }: {
   metric: ImpactMetric;
   index: number;
+  onOpen: () => void;
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const isInView = useInView(ref, { once: true, amount: 0.45 });
@@ -68,10 +71,20 @@ export function ImpactMetricCard({
   return (
     <motion.article
       ref={ref}
+      role="button"
+      tabIndex={0}
+      aria-label={`View details for ${metric.label}`}
+      onClick={onOpen}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          onOpen();
+        }
+      }}
       initial={{ opacity: 0, y: 12 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
       transition={{ duration: 0.36, ease: easeOut, delay: index * 0.045 }}
-      className="group relative flex min-h-[13.5rem] flex-col overflow-hidden rounded-xl border border-[#e4e4e4] bg-white p-3.5 transition-[background-color,border-color,box-shadow] duration-300 hover:border-[#d4d4d4] hover:bg-[#fbfbfb] hover:shadow-[0_12px_30px_rgba(15,15,15,0.035)] dark:border-zinc-800 dark:bg-background dark:hover:border-zinc-700 dark:hover:bg-zinc-950/35 dark:hover:shadow-[0_14px_32px_rgba(0,0,0,0.16)]"
+      className="group relative flex min-h-[13.5rem] cursor-pointer flex-col overflow-hidden rounded-xl border border-[#e4e4e4] bg-white p-3.5 outline-none transition-[background-color,border-color,box-shadow] duration-300 hover:border-[#d4d4d4] hover:bg-[#fbfbfb] hover:shadow-[0_12px_30px_rgba(15,15,15,0.035)] focus-visible:border-[#151719] focus-visible:ring-2 focus-visible:ring-[#151719]/10 dark:border-zinc-800 dark:bg-background dark:hover:border-zinc-700 dark:hover:bg-zinc-950/35 dark:hover:shadow-[0_14px_32px_rgba(0,0,0,0.16)] dark:focus-visible:border-white dark:focus-visible:ring-white/10"
     >
       <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-[#151719]/0 transition-colors duration-300 group-hover:bg-[#151719]/18 dark:group-hover:bg-white/18" />
 
@@ -104,6 +117,15 @@ export function ImpactMetricCard({
           transition={{ duration: 0.7, ease: easeOut, delay: index * 0.04 }}
           className="block h-full rounded-full bg-[#151719]/45 dark:bg-white/45"
         />
+      </div>
+
+      <div className="mt-3 flex items-center justify-between border-t border-[#eeeeee] pt-2 dark:border-zinc-800">
+        <span className="font-mono text-[0.55rem] font-semibold uppercase tracking-[0.16em] text-[#a6a8af]">
+          View details
+        </span>
+        <span className="flex h-6 w-6 items-center justify-center rounded-md border border-[#eeeeee] text-[#787b83] transition-colors duration-300 group-hover:text-[#151719] dark:border-zinc-800 dark:text-zinc-500 dark:group-hover:text-white">
+          <FiArrowUpRight className="h-3.5 w-3.5" />
+        </span>
       </div>
     </motion.article>
   );
