@@ -30,7 +30,7 @@ export function ImpactMetricGrid() {
 
   return (
     <>
-      <div className="grid auto-rows-fr gap-3 sm:grid-cols-2">
+      <div className="grid gap-3">
         {impactMetrics.map((metric, index) => (
           <ImpactMetricCard
             key={`${metric.value}-${metric.label}`}

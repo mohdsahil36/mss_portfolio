@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ModeToggle } from "./mode-toggle";
 import { useEffect } from "react";
+import { CommandPalette } from "./command-palette";
 
 export function ScrollToTopOnLoad() {
   useEffect(() => {
@@ -42,7 +43,8 @@ export default function Navbar() {
           sahilworks
         </button>
 
-        <div className="flex justify-end">
+        <div className="flex items-center justify-end gap-2">
+          <CommandPalette />
           <ModeToggle />
         </div>
       </div>
