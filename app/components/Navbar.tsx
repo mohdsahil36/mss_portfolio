@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { usePathname, useRouter } from "next/navigation";
 import { ModeToggle } from "./mode-toggle";
 import { useEffect } from "react";
 import { CommandPalette } from "./command-palette";
@@ -14,7 +15,15 @@ export function ScrollToTopOnLoad() {
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const router = useRouter();
+
   const scrollHome = () => {
+    if (pathname !== "/") {
+      router.push("/");
+      return;
+    }
+
     history.replaceState(
       null,
       "",

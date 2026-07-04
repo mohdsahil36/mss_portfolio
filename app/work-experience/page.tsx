@@ -7,9 +7,13 @@ import {
   FiLayers,
   FiTarget,
 } from "react-icons/fi";
+import { PageSiblingNav } from "@/app/components/page-sibling-nav";
+import { standalonePageNavigation } from "@/app/data/pageNavigation";
 import { workExperience, workSection } from "@/app/data/workExperience";
 
 export default function WorkExperiencePage() {
+  const pageNavigation = standalonePageNavigation["/work-experience"];
+
   return (
     <section
       id="work-overview"
@@ -181,10 +185,10 @@ export default function WorkExperiencePage() {
                       {item.projects?.map((project, projectIndex) => (
                         <section
                           key={project.name}
-                          className="relative rounded-xl border border-[#ededed] bg-white p-4 dark:border-zinc-800 dark:bg-background"
+                          className="relative rounded-xl border border-[#ededed] bg-white p-5 dark:border-zinc-800 dark:bg-background sm:p-6"
                         >
-                          <span className="pointer-events-none absolute right-3 top-3 h-2 w-2 border-r border-t border-[#d5d5d5] dark:border-zinc-700" />
-                          <span className="pointer-events-none absolute bottom-3 left-3 h-2 w-2 border-b border-l border-[#d5d5d5] dark:border-zinc-700" />
+                          <span className="pointer-events-none absolute right-4 top-4 h-2 w-2 border-r border-t border-[#d5d5d5] dark:border-zinc-700" />
+                          <span className="pointer-events-none absolute bottom-4 left-4 h-2 w-2 border-b border-l border-[#d5d5d5] dark:border-zinc-700" />
                           <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                             <div>
                               <p className="font-mono text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-[#9a9da5]">
@@ -215,11 +219,11 @@ export default function WorkExperiencePage() {
                           </div>
 
                           <details className="group mt-5 rounded-lg border border-dashed border-[#e2e2e2] bg-[#fbfbfb] dark:border-zinc-800 dark:bg-zinc-950/30">
-                            <summary className="flex cursor-pointer list-none items-center justify-center gap-2 px-4 py-3 text-[0.76rem] font-semibold text-[#151719] marker:hidden dark:text-white">
+                            <summary className="flex cursor-pointer list-none items-center justify-center gap-2 px-5 py-3.5 text-[0.76rem] font-semibold text-[#151719] marker:hidden dark:text-white">
                               Reveal impact unlocked
                               <FiChevronDown className="h-3.5 w-3.5 transition-transform duration-200 group-open:rotate-180" />
                             </summary>
-                            <div className="border-t border-[#ededed] px-4 pb-4 pt-3 dark:border-zinc-800">
+                            <div className="border-t border-[#ededed] px-5 pb-5 pt-4 dark:border-zinc-800">
                               <ul className="space-y-2 text-[0.78rem] font-medium leading-7 text-[#62666f] dark:text-zinc-400">
                                 {project.impactMade.map((point) => (
                                   <li key={point} className="flex gap-3">
@@ -240,6 +244,8 @@ export default function WorkExperiencePage() {
           );
         })}
       </div>
+
+      <PageSiblingNav navigation={pageNavigation} />
     </section>
   );
 }

@@ -16,6 +16,8 @@ import { SiteFooter } from "./components/site-footer";
 import PageTransition from "./components/page-transition";
 import { ScrollProgress } from "./components/scroll-progress";
 import { SectionDock } from "./components/section-dock";
+import { CardHoverBridge } from "./components/card-hover-bridge";
+import { SmoothAnchorScroll } from "./components/smooth-anchor-scroll";
 
 const hankenGrotesk = Hanken_Grotesk({
   variable: "--font-hanken-grotesk",
@@ -69,6 +71,8 @@ export default function RootLayout({
 
             <LoadingGate>
               <ScrollProgress />
+              <CardHoverBridge />
+              <SmoothAnchorScroll />
               <header className="sticky top-0 z-[70] isolate h-16 w-full border-b border-zinc-200 bg-[hsl(var(--background))] dark:border-zinc-800">
                 <div className="mx-auto h-full w-full px-3 md:w-[78%] md:px-0 lg:w-[64%] xl:w-[40%]">
                   <Navbar />

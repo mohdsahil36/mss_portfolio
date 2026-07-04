@@ -2,7 +2,7 @@
 
 import { easeOut, motion, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { FiArrowUpRight, FiTrendingUp } from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi";
 import type { ImpactMetric } from "@/app/data/impact";
 
 function splitMetricValue(value: string) {
@@ -56,11 +56,9 @@ function CountUpValue({ value, active }: { value: string; active: boolean }) {
 function TrendSurface({
   metric,
   active,
-  index,
 }: {
   metric: ImpactMetric;
   active: boolean;
-  index: number;
 }) {
   const gaugeValue = metric.visual === "performance" ? 74 : 88;
   const sparkline =
@@ -75,11 +73,12 @@ function TrendSurface({
   ];
 
   return (
-    <div className="relative min-h-[8.75rem] overflow-hidden border-t border-[#eeeeee] bg-[linear-gradient(90deg,rgba(255,255,255,0),rgba(20,140,92,0.075))] dark:border-zinc-800 dark:bg-[linear-gradient(90deg,rgba(0,0,0,0),rgba(80,200,140,0.075))] md:min-h-full md:border-l md:border-t-0">
-      <div className="absolute inset-0 opacity-[0.35] [background-image:radial-gradient(circle_at_center,rgba(20,140,92,0.32)_1px,transparent_1.4px)] [background-size:10px_10px] [mask-image:linear-gradient(to_left,black,transparent_82%)] dark:opacity-[0.24]" />
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="absolute inset-y-0 right-0 w-full bg-[radial-gradient(circle_at_78%_45%,rgba(20,140,92,0.1),transparent_42%)] opacity-85 dark:bg-[radial-gradient(circle_at_78%_45%,rgba(110,231,183,0.085),transparent_44%)]" />
+      <div className="absolute inset-y-0 right-0 hidden w-[58%] opacity-[0.26] [background-image:radial-gradient(circle_at_center,rgba(20,140,92,0.24)_1px,transparent_1.35px)] [background-size:10px_10px] [mask-image:linear-gradient(to_left,black,transparent_86%)] dark:opacity-[0.14] sm:block" />
 
       {metric.visual === "reach" ? (
-        <div className="absolute inset-0">
+        <div className="absolute inset-y-6 right-4 hidden w-[42%] sm:block">
           <svg className="h-full w-full" viewBox="0 0 300 170" aria-hidden="true">
             {nodes.map(([x, y], nodeIndex) =>
               nodes.slice(nodeIndex + 1).map(([targetX, targetY]) => (
@@ -122,7 +121,7 @@ function TrendSurface({
       ) : null}
 
       {metric.visual === "speed" ? (
-        <div className="absolute inset-x-4 bottom-6 space-y-2.5">
+        <div className="absolute bottom-12 right-6 hidden w-[38%] space-y-2.5 sm:block">
           {[82, 68, 54, 36].map((width, lineIndex) => (
             <motion.span
               key={width}
@@ -143,7 +142,7 @@ function TrendSurface({
       ) : null}
 
       {metric.visual === "latency" ? (
-        <div className="absolute inset-x-5 bottom-8 flex items-center justify-between">
+        <div className="absolute bottom-12 right-6 hidden w-[40%] items-center justify-between sm:flex">
           {[0, 1, 2, 3].map((step) => (
             <div key={step} className="flex items-center">
               <motion.span
@@ -160,7 +159,7 @@ function TrendSurface({
               </motion.span>
               {step < 3 ? (
                 <motion.span
-                  className="mx-1 h-px w-7 bg-[#15945f]/25"
+                  className="mx-1 h-px w-5 bg-[#15945f]/25 lg:w-7"
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: active ? 1 : 0 }}
                   transition={{
@@ -176,11 +175,11 @@ function TrendSurface({
       ) : null}
 
       {metric.visual === "quality" ? (
-        <div className="absolute inset-x-5 bottom-6 grid grid-cols-3 gap-2">
+        <div className="absolute bottom-10 right-6 hidden w-[38%] grid-cols-3 gap-2 sm:grid">
           {Array.from({ length: 9 }, (_, itemIndex) => (
             <motion.span
               key={itemIndex}
-              className="flex h-8 items-center justify-center rounded-lg border border-[#15945f]/16 bg-white/60 text-[#127a50] dark:bg-background/60 dark:text-emerald-300"
+              className="flex h-7 items-center justify-center rounded-lg border border-[#15945f]/16 bg-white/60 text-[#127a50] dark:bg-background/60 dark:text-emerald-300 lg:h-8"
               initial={{ opacity: 0, scale: 0.92 }}
               animate={{
                 opacity: active ? 1 : 0,
@@ -199,7 +198,7 @@ function TrendSurface({
       ) : null}
 
       {metric.visual === "performance" ? (
-        <div className="absolute bottom-5 left-1/2 flex h-25 w-25 -translate-x-1/2 items-center justify-center">
+        <div className="absolute bottom-8 right-10 hidden h-24 w-24 items-center justify-center sm:flex">
           <div className="absolute inset-0 rounded-full border border-[#d9eee5] bg-white/45 dark:border-emerald-300/15 dark:bg-background/35" />
           <svg className="relative h-22 w-22 -rotate-90" viewBox="0 0 100 100" aria-hidden="true">
             <circle
@@ -236,7 +235,7 @@ function TrendSurface({
 
       {metric.visual === "engagement" ? (
         <svg
-          className="absolute inset-0 h-full w-full"
+          className="absolute inset-y-6 right-4 hidden h-[calc(100%-3rem)] w-[46%] sm:block"
           viewBox="0 0 300 170"
           preserveAspectRatio="none"
           aria-hidden="true"
@@ -272,23 +271,7 @@ function TrendSurface({
         </svg>
       ) : null}
 
-      <div className="absolute right-4 top-4 flex items-center gap-2">
-        <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-[#15945f]/12 text-[#127a50] dark:bg-emerald-400/10 dark:text-emerald-300">
-          <FiTrendingUp className="h-4 w-4" />
-        </span>
-        <span className="text-[0.78rem] font-semibold text-[#127a50] dark:text-emerald-300">
-          {metric.delta}
-        </span>
-      </div>
-
-      <div className="absolute bottom-4 left-4 rounded-lg border border-[#e9e9e9] bg-white/82 px-3 py-2 shadow-[0_12px_30px_rgba(15,15,15,0.06)] backdrop-blur dark:border-zinc-800 dark:bg-background/82">
-        <p className="text-[0.78rem] font-semibold leading-none text-[#151719] dark:text-white">
-          {metric.marker}
-        </p>
-        <p className="mt-1 text-[0.68rem] font-medium text-[#858585] dark:text-zinc-400">
-          {metric.period}
-        </p>
-      </div>
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#15945f]/20 to-transparent dark:via-emerald-300/14" />
     </div>
   );
 }
@@ -322,37 +305,38 @@ export function ImpactMetricCard({
       initial={{ opacity: 0, y: 12 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
       transition={{ duration: 0.36, ease: easeOut, delay: index * 0.045 }}
-      className="group relative grid min-h-[14.25rem] cursor-pointer overflow-hidden rounded-xl border border-[#e4e4e4] bg-white outline-none transition-[background-color,border-color,box-shadow] duration-300 hover:border-[#d4d4d4] hover:shadow-[0_14px_36px_rgba(15,15,15,0.05)] focus-visible:border-[#151719] focus-visible:ring-2 focus-visible:ring-[#151719]/10 dark:border-zinc-800 dark:bg-background dark:hover:border-zinc-700 dark:hover:shadow-[0_16px_42px_rgba(0,0,0,0.2)] dark:focus-visible:border-white dark:focus-visible:ring-white/10 md:grid-cols-[1fr_0.95fr]"
+      className="group relative min-h-[12.75rem] cursor-pointer overflow-hidden rounded-xl border border-[#e4e4e4] bg-white outline-none transition-[background-color,border-color,box-shadow] duration-300 hover:border-[#d4d4d4] hover:shadow-[0_14px_36px_rgba(15,15,15,0.05)] focus-visible:border-[#151719] focus-visible:ring-2 focus-visible:ring-[#151719]/10 dark:border-zinc-800 dark:bg-background dark:hover:border-zinc-700 dark:hover:shadow-[0_16px_42px_rgba(0,0,0,0.2)] dark:focus-visible:border-white dark:focus-visible:ring-white/10"
     >
-      <div className="flex min-h-[13.5rem] flex-col p-4">
+      <TrendSurface metric={metric} active={isInView} />
+
+      <div className="relative z-10 flex min-h-[12.75rem] max-w-full flex-col p-4 sm:max-w-[55%] lg:max-w-[52%]">
         <div className="flex items-start justify-between gap-3">
-          <h2 className="text-[0.94rem] font-semibold leading-5 text-[#151719] dark:text-white">
-            {metric.label}
-          </h2>
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#eeeeee] bg-[#fafafa] text-[#787b83] transition-[background-color,border-color,color] duration-300 group-hover:border-[#dddddd] group-hover:bg-white group-hover:text-[#151719] dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-500 dark:group-hover:border-zinc-700 dark:group-hover:bg-zinc-900 dark:group-hover:text-white">
-            <Icon className="h-4 w-4" />
+          <span className="inline-flex items-center gap-2 rounded-lg border border-[#eeeeee] bg-white/82 px-2.5 py-2 text-[0.7rem] font-semibold text-[#676a72] backdrop-blur transition-[background-color,border-color,color] duration-300 group-hover:border-[#dddddd] group-hover:text-[#151719] dark:border-zinc-800 dark:bg-background/82 dark:text-zinc-400 dark:group-hover:border-zinc-700 dark:group-hover:text-white">
+            <Icon className="h-3.5 w-3.5" />
+            {metric.period}
           </span>
         </div>
 
-        <div className="mt-auto">
+        <div className="mt-12 sm:mt-14">
           <CountUpValue value={metric.value} active={isInView} />
-          <p className="mt-2.5 max-w-72 text-[0.73rem] font-medium leading-5 text-[#747780] dark:text-zinc-400">
+          <h2 className="mt-3 text-[0.96rem] font-semibold leading-5 text-[#151719] dark:text-white">
+            {metric.label}
+          </h2>
+          <p className="mt-2 text-[0.73rem] font-medium leading-5 text-[#747780] dark:text-zinc-400">
             {metric.note}
           </p>
         </div>
 
-        <div className="mt-4 flex items-center justify-between border-t border-[#eeeeee] pt-3 dark:border-zinc-800">
+        <div className="mt-4 flex items-center justify-between border-t border-[#eeeeee]/80 pt-3 dark:border-zinc-800">
           <span className="font-mono text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-[#a6a8af]">
-            signal {String(index + 1).padStart(2, "0")}
+            {metric.marker}
           </span>
           <span className="inline-flex items-center gap-1.5 text-[0.72rem] font-semibold text-[#127a50] dark:text-emerald-300">
-            View details
+            Open signal
             <FiArrowUpRight className="h-3.5 w-3.5" />
           </span>
         </div>
       </div>
-
-      <TrendSurface metric={metric} active={isInView} index={index} />
     </motion.article>
   );
 }

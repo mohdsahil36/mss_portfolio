@@ -1,21 +1,26 @@
 import Link from "next/link";
 import {
   FiArrowLeft,
-  FiArrowUpRight,
   FiBarChart2,
   FiCheckCircle,
 } from "react-icons/fi";
+import { ImpactLogToast } from "@/app/components/impact-log-toast";
 import { ImpactMetricGrid } from "@/app/components/impact-metric-grid";
+import { PageSiblingNav } from "@/app/components/page-sibling-nav";
 import { impactMetrics, impactSection } from "@/app/data/impact";
+import { standalonePageNavigation } from "@/app/data/pageNavigation";
 
 export default function ImpactLogPage() {
   const SectionIcon = impactSection.icon;
+  const pageNavigation = standalonePageNavigation["/impact-log"];
 
   return (
     <section
       id="impact-overview"
       className="bg-background py-10 text-[#151719] dark:text-white sm:py-12"
     >
+      <ImpactLogToast />
+
       <div className="border-b border-[#ededed] pb-6 dark:border-zinc-800">
         <Link
           href="/#impact"
@@ -60,10 +65,12 @@ export default function ImpactLogPage() {
         id="impact-signals"
         className="mt-8 scroll-mt-24"
       >
-        <p className="mb-5 text-[0.82rem] font-medium leading-6 text-[#747780] dark:text-zinc-400">
-          The first-pass proof: performance wins, scale, reliability, and
-          product engagement.
-        </p>
+        <div className="mb-5">
+          <p className="text-[0.82rem] font-medium leading-6 text-[#747780] dark:text-zinc-400">
+            The first-pass proof: performance wins, scale, reliability, and
+            product engagement.
+          </p>
+        </div>
 
         <ImpactMetricGrid />
       </div>
@@ -94,15 +101,7 @@ export default function ImpactLogPage() {
         </div>
       </div>
 
-      <div className="mt-7 flex justify-center">
-        <Link
-          href="/work-experience"
-          className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md border border-[#ededed] bg-white px-4 text-[0.78rem] font-semibold text-[#151719] transition-[background-color,border-color,box-shadow] duration-200 hover:border-[#d8d8d8] hover:bg-[#f7f7f7] hover:shadow-[0_10px_28px_rgba(15,15,15,0.04)] dark:border-zinc-800 dark:bg-background dark:text-white dark:hover:bg-zinc-900"
-        >
-          Open full quest log
-          <FiArrowUpRight className="h-3.5 w-3.5" />
-        </Link>
-      </div>
+      <PageSiblingNav navigation={pageNavigation} />
     </section>
   );
 }
