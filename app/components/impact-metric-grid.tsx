@@ -17,14 +17,14 @@ const detailTone: Record<
       "This number is about building interfaces that stay usable when traffic and product complexity are not small anymore.",
   },
   speed: {
-    title: "Frontend speed pass",
+    title: "Frontend performance lift",
     summary:
-      "This came from tightening render paths, loading behavior, and the small interaction details that make screens feel immediate.",
+      "This came from cleaner React state boundaries, lazy loading, reduced re-renders, and component architecture that made screens feel more immediate.",
   },
   latency: {
-    title: "API wait-time cleanup",
+    title: "API response optimization",
     summary:
-      "This was backend-facing optimization work where slow workflows were reduced without making the product behavior unpredictable.",
+      "This came from optimizing Node.js services, MongoDB aggregation paths, controller logic, and data-fetching patterns around critical workflows.",
   },
   quality: {
     title: "Issue reduction loop",
@@ -32,9 +32,9 @@ const detailTone: Record<
       "This is the quieter side of product work: fixing repeated rough edges until support noise and user friction both drop.",
   },
   performance: {
-    title: "Performance lift",
+    title: "Performance & scalability",
     summary:
-      "This signal connects frontend architecture, state boundaries, and production readiness into a measurable improvement.",
+      "This signal connects reusable component architecture, rendering discipline, and scalable frontend practices into production-ready delivery.",
   },
   engagement: {
     title: "Interaction lift",
