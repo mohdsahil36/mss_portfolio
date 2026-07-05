@@ -7,7 +7,11 @@ import { FiArrowUpRight, FiCommand, FiSearch, FiX } from "react-icons/fi";
 import { commandPaletteItems } from "@/app/data/commandPalette";
 
 function normalize(value: string) {
-  return value.toLowerCase().trim();
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9+#.]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function scrollToHash(hash: string) {
@@ -34,11 +38,15 @@ export function CommandPalette() {
       return commandPaletteItems;
     }
 
-    return commandPaletteItems.filter((item) =>
-      normalize(`${item.title} ${item.description} ${item.group}`).includes(
-        cleanQuery,
-      ),
-    );
+    const queryParts = cleanQuery.split(" ").filter(Boolean);
+
+    return commandPaletteItems.filter((item) => {
+      const searchableText = normalize(
+        `${item.title} ${item.description} ${item.group} ${(item.keywords ?? []).join(" ")}`,
+      );
+
+      return queryParts.every((part) => searchableText.includes(part));
+    });
   }, [query]);
 
   const groupedItems = useMemo(() => {

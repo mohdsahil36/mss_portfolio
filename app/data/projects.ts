@@ -23,13 +23,13 @@ export const projectSection = {
 
 export const projects: Project[] = [
   {
-    title: "Devflow",
+    title: "Productivity Suite 1.0",
     description:
       "A productivity workspace for tracking goals, progress, and personal operating rhythms. The build focuses on clear state modeling, structured activity flows, and a dashboard experience that stays readable as data grows.",
     image: "/projects/coming-soon.png",
     status: "Building Now",
     type: "Side project",
-    github: "https://github.com/mohdsahil36/DevFlow",
+    github: "https://github.com/mohdsahil36/Productivity-Suite-1.0",
     progress: 10,
     stack: ["React", "TypeScript", "TailwindCSS", "Mongodb", "Express JS"],
     highlights: [
